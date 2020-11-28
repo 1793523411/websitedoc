@@ -118,6 +118,11 @@ module.exports = {
             ["/mian/base/html2", "HTML"],
             ["/mian/base/css", "CSS"],
             ["/mian/base/js", "Javascript"],
+            ["/mian/base/vue", "vue"],
+            ["/mian/base/project", "工程化"],
+            ["/mian/base/network", "计算机网络"],
+            ["/mian/base/design", "设计模式"],
+            ["/mian/base/safe", "安全"],
           ]
         },
         {
