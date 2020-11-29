@@ -684,4 +684,1308 @@ function getJSON(url) {
 
 首先是创建一个 XMLHttpRequest 对象。然后在这个对象上使用 open 方法创建一个 http 请求，open 方法所需要的参数是请求的方法、请求的地址、是否异步和用户的认证信息。在发起请求前，我们可以为这个对象添加一些信息和监听函数。比如说我们可以通过 setRequestHeader 方法来为请求添加头信息。我们还可以为这个对象添加一个状态监听函数。一个 XMLHttpRequest 对象一共有 **5 个状态**，当它的状态变化时会触发 onreadystatechange 事件，我们可以通过设置监听函数，来处理请求成功后的结果。当对象的 readyState 变为 4 的时候，代表服务器返回的数据接收完成，这个时候我们可以通过判断请求的状态，如果状态是 2xx 或者 304 的话则代表返回正常。这个时候我们就可以通过 response 中的数据来对页面进行更新了。当对象的属性和监听函数设置完成后，最后我们调用 sent 方法来向服务器发起请求，可以传入参数作为发送的数据体。
 
+
 ## 谈一谈浏览器的缓存机制
+
+浏览器的缓存机制指的是通过在一段时间内保留已接收到的 web 资源的一个副本，如果在资源的有效时间内，发起了对这个资源的再一次请求，那么浏览器会直接使用缓存的副本，而不是向服务器发起请求。使用 web 缓存可以有效地提高页面的打开速度，减少不必要的网络带宽的消耗。web 资源的缓存策略一般由服务器来指定，可以分为两种，分别是强缓存策略和协商缓存策略。使用强缓存策略时，如果缓存资源有效，则直接使用缓存资源，不必再向服务器发起请求。**强缓存策略可以通过两种方式来设置**，分别是 http 头信息中的 **Expires 属性**和**Cache-Control 属性**。服务器通过在响应头中添加 Expires 属性，来指定资源的过期时间。在过期时间以内，该资源可以被缓存使用，不必再向服务器发送请求。这个时间是一个绝对时间，它是服务器的时间，因此可能存在这样的问题，就是客户端的时间和服务器端的时间不一致，或者用户可以对客户端时间进行修改的情况，这样就可能会影响缓存命中的结果。Expires 是 http1.0 中的方式，因为它的一些缺点，在 http 1.1 中提出了一个新的头部属性就是 Cache-Control 属性，它提供了对资源的缓存的更精确的控制。它有很多不同的值，常用的比如我们可以通过**设置 max-age 来指定资源能够被缓存的时间的大小**，这是一个相对的时间，它会根据这个时间的大小和资源第一次请求时的时间来计算出资源过期的时间，因此相对于 Expires 来说，这种方式更加有效一些。常用的还有比如 **private** ，用来规定资源只能被客户端缓存，不能够代理服务器所缓存。还有如 **no-store** ，用来指定资源不能够被缓存，**no-cache**代表该资源能够被缓存，但是立即失效，每次都需要向服务器发起请求。一般来说只需要设置其中一种方式就可以实现强缓存策略，当两种方式一起使用时，**Cache-Control 的优先级要高于 Expires** 。
+
+使用协商缓存策略时，会先向服务器发送一个请求，如果资源没有发生修改，则返回一个 304 状态，让浏览器使用本地的缓存副本。如果资源发生了修改，则返回修改后的资源。协商缓存也可以通过两种方式来设置，分别是 http 头信息中的 Etag 和 Last-Modified 属性。
+
+服务器通过在响应头中添加 Last-Modified 属性来指出资源最后一次修改的时间**Last-Modified 属性来指出资源最后一次修改的时间**，当浏览器下一次发起请求时，会在请求头中添加一个 **If-Modified-Since 的属性，属性值为上一次资源返回时的 Last-Modified 的值**。当请求发送到服务器后服务器会通过这个属性来和资源的最后一次的修改时间来进行比较，以此来判断资源是否做了修改。如果资源没有修改，那么返回 304 状态，让客户端使用本地的缓存。如果资源已经被修改了，则返回修改后的资源。使用这种方法有一个缺点，就是 **Last-Modified 标注的最后修改时间只能精确到秒级**，如果某些文件在 1 秒钟以内，被修改多次的话，那么文件已将改变了但是 Last-Modified 却没有改变，这样会造成缓存命中的不准确。因为 **Last-Modified 的这种可能发生的不准确性**，http 中提供了另外一种方式，那就是 **Etag 属性**。服务器在返回资源的时候，在头信息中添加了 Etag 属性，这个属性是资源生成的唯一标识符，当资源发生改变的时候，这个值也会发生改变。在下一次资源请求时，浏览器会在请求头中添加一个 **If-None-Match 属性，这个属性的值就是上次返回的资源的 Etag 的值**。服务接收到请求后会根据这个值来和资源当前的 Etag 的值来进行比较，以此来判断资源是否发生改变，是否需要返回资源。通过这种方式，**比 Last-Modified 的方式更加精确**。
+
+当 Last-Modified 和 Etag 属性同时出现的时候，**Etag 的优先级更高**。使用协商缓存的时候，服务器需要考虑负载平衡的问题，因此多个服务器上资源的 Last-Modified 应该保持一致，因为每个服务器上 Etag 的值都不一样，因此**在考虑负载平衡时，最好不要设置 Etag 属性**。**强缓存策略和协商缓存策略在缓存命中时都会直接使用本地的缓存副本，区别只在于协商缓存会向服务器发送一次请求**。它们缓存不命中时，都会向服务器发送请求来获取资源。在实际的缓存机制中，强缓存策略和协商缓存策略是一起合作使用的。浏览器首先会根据请求的信息判断，强缓存是否命中，如果命中则直接使用资源。如果不命中则根据头信息向服务器发起请求，使用协商缓存，如果协商缓存命中的话，则服务器不返回资源，浏览器直接使用本地资源的副本，如果协商缓存不命中，则浏览器返回最新的资源给浏览器。
+
+## Ajax 解决浏览器缓存问题
+
+- 在 ajax 发送请求前加上 `anyAjaxObj.setRequestHeader("If-Modified-Since","0")。`
+- 在 ajax 发送请求前加上 `anyAjaxObj.setRequestHeader("Cache-Control","no-cache")`
+- 在 URL 后面加上一个随机数：` "fresh=" + Math.random();`
+- 在 URL 后面加上时间戳：`"nowtime=" + new Date().getTime()`
+- 如果是使用 jQuery，直接这样就可以了`$.ajaxSetup({cache:false})`。这样页面的所有 ajax 都会执行这条语句就是不需要保存缓存记录。
+
+## 同步和异步的区别？
+
+相关知识点：
+
+同步，可以理解为在执行完一个函数或方法之后，一直等待系统返回值或消息，这时程序是处于阻塞的，只有接收到返回的值或消息后才往下执行其他的命令。 异步，执行完函数或方法后，不必阻塞性地等待返回值或消息，只需要向系统委托一个异步过程，那么当系统接收到返回值或消息时，系统会自动触发委托的异步过程，从而完成一个完整的流程。
+
+回答：
+
+同步指的是当一个进程在执行某个请求的时候，如果这个请求需要等待一段时间才能返回，那么这个进程会一直等待下去，直到消息返回为止再继续向下执行。异步指的是当一个进程在执行某个请求的时候，如果这个请求需要等待一段时间才能返回，这个时候进程会继续往下执行，不会阻塞等待消息的返回，当消息返回时系统再通知进程进行处理。
+
+## 什么是浏览器的同源政策
+
+我对浏览器的同源政策的理解是，一个域下的 js 脚本在未经允许的情况下，不能够访问另一个域的内容。这里的同源的指的是两个域的协议、域名、端口号必须相同，否则则不属于同一个域。同源政策主要限制了三个方面:
+
+- 第一个是当前域下的 js 脚本不能够访问其他域下的 cookie、localStorage 和 indexDB。
+- 第二个是当前域下的 js 脚本不能够操作访问操作其他域下的 DOM。
+- 第三个是当前域下 ajax 无法发送跨域请求。
+
+同源政策的目的主要是为了保证用户的信息安全，它只是对 js 脚本的一种限制，并不是对浏览器的限制，**对于一般的 img、或者 script 脚本请求都不会有跨域的限制，这是因为这些操作都不会通过响应结果来进行可能出现安全问题的操作**。
+
+## 如何解决跨域问题？
+
+相关知识点：
+
+- 通过 jsonp 跨域
+- document.domain + iframe 跨域
+- location.hash + iframe
+- window.name + iframe 跨域
+- postMessage 跨域
+- 跨域资源共享（CORS)
+- nginx 代理跨域
+- nodejs 中间件代理跨域
+- WebSocket 协议跨域
+
+回答：
+
+解决跨域的方法我们可以根据我们想要实现的目的来划分。
+
+首先我们如果只是想要实现**主域名下的不同子域名的跨域操作**，我们可以使用设置 document.domain 来解决。
+
+（1）将 document.domain 设置为主域名，来实现相同子域名的跨域操作，这个时候主域名下的 cookie 就能够被子域名所访问。同时如果文档中含有主域名相同，子域名不同的 iframe 的话，我们也可以对这个 iframe 进行操作。
+
+如果是想要解决**不同跨域窗口间的通信问题**，比如说一个页面想要和页面的中的不同源的 iframe 进行通信的问题，我们可以使用 location.hash 或者 window.name 或者 postMessage 来解决。
+
+（2）使用 location.hash 的方法，我们可以在主页面动态的修改 iframe 窗口的 hash 值，然后在 iframe 窗口里实现监听函数来实现这样一个单向的通信。因为在 iframe 是没有办法访问到不同源的父级窗口的，所以我们不能直接修改父级窗口的 hash 值来实现通信，我们可以在 iframe 中再加入一个 iframe ，这个 iframe 的内容是和父级页面同源的，所以我们可以 window.parent.parent 来修改最顶级页面的 src，以此来实现双向通信。
+
+（3）使用 window.name 的方法，主要是基于同一个窗口中设置了 window.name 后不同源的页面也可以访问，所以不同源的子页面可以首先在 window.name 中写入数据，然后跳转到一个和父级同源的页面。这个时候级页面就可以访问同源的子页面中 window.name 中的数据了，这种方式的好处是可以传输的数据量大。
+
+（4）使用 postMessage 来解决的方法，这是一个 h5 中新增的一个 api。通过它我们可以实现多窗口间的信息传递，通过获取到指定窗口的引用，然后调用 postMessage 来发送信息，在窗口中我们通过对 message 信息的监听来接收信息，以此来实现不同源间的信息交换。如果是像解决 ajax 无法提交跨域请求的问题，我们可以使用 jsonp、cors、websocket 协议、服务器代理来解决问题。
+
+（5）使用 jsonp 来实现跨域请求，它的主要原理是通过动态构建 script 标签来实现跨域请求，因为浏览器对 script 标签的引入没有跨域的访问限制 。通过在请求的 url 后指定一个回调函数，然后服务器在返回数据的时候，构建一个 json 数据的包装，这个包装就是回调函数，然后返回给前端，前端接收到数据后，因为请求的是脚本文件，所以会直接执行，这样我们先前定义好的回调函数就可以被调用，从而实现了跨域请求的处理。这种方式只能用于 get 请求。
+
+（6）使用 CORS 的方式，CORS 是一个 W3C 标准，全称是"跨域资源共享"。CORS 需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，因此我们只需要在服务器端配置就行。浏览器将 CORS 请求分成两类：简单请求和非简单请求。对于简单请求，浏览器直接发出 CORS 请求。具体来说，就是会在头信息之中，增加一个 Origin 字段。Origin 字段用来说明本次请求来自哪个源。服务器根据这个值，决定是否同意这次请求。对于如果 Origin 指定的源，不在许可范围内，服务器会返回一个正常的 HTTP 回应。浏览器发现，这个回应的头信息没有包含 Access-Control-Allow-Origin 字段，就知道出错了，从而抛出一个错误，ajax 不会收到响应信息。如果成功的话会包含一些以 Access-Control- 开头的字段。非简单请求，浏览器会先发出一次预检请求，来判断该域名是否在服务器的白名单中，如果收到肯定回复后才会发起请求。
+
+（7）使用 websocket 协议，这个协议没有同源限制。
+
+（8）使用服务器来代理跨域的访问请求，就是有跨域的请求操作时发送请求给后端，让后端代为请求，然后最后将获取的结果发返回。
+
+## 简单谈一下 cookie
+
+我的理解是 cookie 是服务器提供的一种用于维护会话状态信息的数据，通过服务器发送到浏览器，浏览器保存在本地，当下一次有同源的请求时，将保存的 cookie 值添加到请求头部，发送给服务端。这可以用来实现记录用户登录状态等功能。cookie 一般可以存储 4k 大小的数据，并且只能够被同源的网页所共享访问。
+
+服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。一条 cookie 包括了 5 个属性值 **expires、domain、path、secure、HttpOnly**。其中 expires 指定了 cookie 失效的时间，domain 是域名、path 是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。**secure 规定了 cookie 只能在确保安全的情况下传输**，**HttpOnly 规定了这个 cookie 只能被服务器访问**，不能使用 js 脚本访问。在发生 xhr 的跨域请求的时候，即使是同源下的 cookie，也不会被自动添加到请求头部，除非显示地规定。
+
+## 模块化开发怎么做？
+
+我对模块的理解是，一个模块是实现一个特定功能的一组方法。在最开始的时候，js 只实现一些简单的功能，所以并没有模块的概念，但随着程序越来越复杂，代码的模块化开发变得越来越重要。由于函数具有独立作用域的特点，最原始的写法是使用函数来作为模块，几个函数作为一个模块，但是这种方式容易造成全局变量的污染，并且模块间没有联系。
+
+后面提出了对象写法，通过将函数作为一个对象的方法来实现，这样解决了直接使用函数作为模块的一些缺点，但是这种办法会暴露所有的所有的模块成员，外部代码可以修改内部属性的值。现在最常用的是立即执行函数的写法，通过利用闭包来实现模块私有作用域的建立，同时不会对全局作用域造成污染。
+
+## js 的几种模块规范
+
+js 中现在比较成熟的有四种模块加载方案。
+
+第一种是 **CommonJS** 方案，它通过 require 来引入模块，通过 module.exports 定义模块的输出接口。这种模块加载方案是服务器端的解决方案，它是以同步的方式来引入模块的，因为在服务端文件都存储在本地磁盘，所以读取非常快，所以以同步的方式加载没有问题。但如果是在浏览器端，由于模块的加载是使用网络请求，因此使用异步加载的方式更加合适。
+
+第二种是 **AMD** 方案，这种方案采用**异步加载的方式来加载模块**，模块的加载不影响后面语句的执行，所有依赖这个模块的语句都定义在一个回调函数里，等到加载完成后再执行回调函数。require.js 实现了 AMD 规范。
+
+第三种是 **CMD** 方案，这种方案和 AMD 方案都是为了解决异步模块加载的问题，sea.js 实现了 CMD 规范。**它和 require.js 的区别在于模块定义时对依赖的处理不同和对依赖模块的执行时机的处理不同**。
+
+第四种方案是 **ES6 提出的方案**，使用 import 和 export 的形式来导入导出模块。这种方案和上面三种方案都不同。
+
+## AMD 和 和 CMD 规范的区别
+
+它们之间的主要区别有两个方面。
+
+（1）第一个方面是在模块定义时对依赖的处理不同。AMD 推崇**依赖前置**，在定义模块的时候就要声明其依赖的模块。而 CMD 推崇 **就近依赖**，只有在用到某个模块的时候再去 require。
+
+（2）第二个方面是对依赖模块的执行时机处理不同。首先 AMD 和 CMD 对于模块的加载方式都是异步加载，不过它们的区别在于 模块的执行时机，**AMD 在依赖模块加载完成后就直接执行依赖模块**，依赖模块的执行顺序和我们书写的**顺序不一定一致**。而 **CMD 在依赖模块加载完成后并不执行**，只是下载而已，等**到所有的依赖模块都加载好后，进入回调函数逻辑**，遇到 require 语句 的时候才执行对应的模块，这样模块的执行顺序就和我们书写的**顺序保持一致**了。
+
+```js
+// CMDdefine(function(require, exports, module) {
+var a = require("./a");
+a.doSomething();
+// 此处略去 100 行
+var b = require("./b"); // 依赖可以就近书写
+b.doSomething();
+// ...});
+// AMD 默认推荐 define(["./a", "./b"], function(a, b) {
+// 依赖必须一开始就写好
+a.doSomething();
+// 此处略去 100 行
+b.doSomething();
+// ...});
+```
+
+## ES6 与 模块与 CommonJS 模块、AMD 、CMD 的差异
+
+CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用,CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值。ES6 模块的运行机制与 CommonJS 不一样。JS 引擎对脚本静态分析的时候，遇到模块加载命令 import，就会生成一个只读引用。等到脚本真正执行时，再根据这个只读引用，到被加载的那个模块里面去取值。
+
+CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。CommonJS 模块就是对象，即在输入时是先加载整个模块，生成一个对象，然后再从这个对象上面读取方法，这种加载称为“**运行时加载**”。而 **ES6 模块不是对象，它的对外接口只是一种静态定义**，**在代码静态解析阶段就会生成**。
+
+## requireJS 的核心原理是什么？（如何动态加载的？如何避免多次加载 的核心原理是什么？)
+
+require.js 的核心原理是通过动态创建 script 脚本来异步引入模块，然后对每个脚本的 load 事件进行监听，如果每个脚本都加载完成了，再调用回调函数。
+
+## ECMAScript6 怎么写 class 现 ，为什么会出现 class 这种东西
+
+在我看来 ES6 新添加的 class 只是为了补充 js 中缺少的一些面向对象语言的特性，但本质上来说它只是一种语法糖，不是一个新的东西，其背后还是原型继承的思想。通过加入 class 可以有利于我们更好的组织代码。在 class 中添加的方法，其实是添加在类的原型上的。
+
+## documen.write 和 innerHTML 的区别？
+
+document.write 的内容会代替整个文档内容，会重写整个页面。
+
+innerHTML 的内容只是替代指定元素的内容，只会重写页面中的部分内容。
+
+## DOM 操作——怎样添加、移除、移动、复制、创建和查找节点
+
+（1）创建新节点
+
+```js
+createDocumentFragment(node);
+createElement(node);
+createTextNode(text);
+```
+
+（2）添加、移除、替换、插入
+
+```js
+appendChild(node)removeChild(node)replaceChild(new,old)insertBefore(new,old)
+```
+
+（3）查找
+
+```js
+getElementById();
+getElementsByName();
+getElementsByTagName();
+getElementsByClassName();
+querySelector();
+querySelectorAll();
+```
+
+（4）属性操作
+
+```js
+getAttribute(key);
+setAttribute(key, value);
+hasAttribute(key);
+removeAttribute(key);
+```
+
+（1）创建新节点
+
+```js
+createDocumentFragment(node);
+createElement(node);
+createTextNode(text);
+```
+
+（2）添加、移除、替换、插入
+
+```js
+appendChild(node)removeChild(node)replaceChild(new,old)insertBefore(new,old)
+```
+
+（3）查找
+
+```js
+getElementById();
+getElementsByName();
+getElementsByTagName();
+getElementsByClassName();
+querySelector();
+querySelectorAll();
+```
+
+（4）属性操作
+
+```js
+getAttribute(key);
+setAttribute(key, value);
+hasAttribute(key);
+removeAttribute(key);
+```
+
+## innerHTML 与 与 outerHTML 的区别？
+
+对于这样一个 HTML 元素：`<div>content<br/></div>`。
+
+innerHTML：内部 HTML，`content<br/>`
+
+outerHTML：外部 HTML，`<div>content<br/></div>`
+
+innerText：内部文本，content
+
+outerText：内部文本，content
+
+## .call() 和.apply() 的区别
+
+它们的作用一模一样，区别仅在于传入参数的形式的不同。
+
+apply 接受两个参数，第一个参数指定了函数体内 this 对象的指向，第二个参数为一个带下标的集合，这个集合可以为数组，也可以为类数组，apply 方法把这个集合中的元素作为参数传递给被调用的函数。call 传入的参数数量不固定，跟 apply 相同的是，第一个参数也是代表函数体内的 this 指向，从第二个参数开始往后，每个参数被依次传入函数
+
+## JavaScript 类数组对象的定义
+
+一个**拥有 length 属性和若干索引属性的对象**就可以被称为类数组对象，类数组对象和数组类似，但是不能调用数组的方法。**常见的类数组对象有 arguments 和 DOM 方法的返回结果**，还有一个**函数也可以被看作是类数组对象，因为它含有 length 属性值，代表可接收的参数个数**。
+
+常见的类数组转换为数组的方法有这样几种：
+
+- 通过 call 调用数组的 slice 方法来实现转换 Array.prototype.slice.call(arrayLike);
+- 通过 call 调用数组的 splice 方法来实现转换 Array.prototype.splice.call(arrayLike, 0);
+- 通过 apply 调用数组的 concat 方法来实现转换 Array.prototype.concat.apply([], arrayLike);
+- 通过 Array.from 方法来实现转换 Array.from(arrayLike);
+
+## 数组有哪些原生方法，列举一下
+
+数组和字符串的转换方法：toString()、toLocalString()、join() 其中 join() 方法可以指定转换为字符串时的分隔符。数组尾部操作的方法 pop() 和 push()，push 方法可以传入多个参数。数组首部操作的方法 shift() 和 unshift() 重排序的方法 reverse() 和 sort()，sort() 方法可以传入一个函数来进行比较，传入前后两个值，如果返回值为正数，则交换两个参数的位置。
+
+- 数组连接的方法 concat() ，返回的是拼接好的数组，不影响原数组。
+- 数组截取办法 slice()，用于截取数组中的一部分返回，不影响原数组。
+- 数组插入方法 splice()，影响原数组查找特定项的索引的方法，indexOf() 和 lastIndexOf() 迭代方法 every()、some()、filter()、map() 和 forEach() 方法
+- 数组归并方法 reduce() 和 reduceRight() 方法
+
+## 数组的 fill 方法？
+
+fill() 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。
+
+fill 方法接受三个参数 value，start 以及 end，start 和 end 参数是可选的，其默认值分别为 0 和 this 对象的 length 属性值。
+
+## [,,,] 的长度？
+
+尾后逗号 （有时叫做“终止逗号”）在向 JavaScript 代码添加元素、参数、属性时十分有用。如果你想要添加新的属性，并且上一行已经使用了尾后逗号，你可以仅仅添加新的一行，而不需要修改上一行。这使得版本控制更加清晰，以及代码维护麻烦更少。
+
+JavaScript 一开始就支持数组字面值中的尾后逗号，随后向对象字面值（ECMAScript 5）中添加了尾后逗号。最近（ECMAScript 2017），又将其添加到函数参数中。但是 JSON 不支持尾后逗号。如果使用了多于一个尾后逗号，会产生间隙。 带有间隙的数组叫做稀疏数组（密致数组没有间隙）。**稀疏数组的长度为逗号的数量**。
+
+## JavaScript 中的作用域与变量声明提升
+
+变量提升的表现是，无论我们在函数中何处位置声明的变量，好像都被提升到了函数的首部，我们可以在变量声明前访问到而不会报错。造成变量声明提升的本质原因是 **js 引擎在代码执行前有一个解析的过程**，创建了**执行上下文**，初始化了一些代码执行时需要用到的对象。当我们访问一个变量时，我们会到当前执行上下文中的作用域链中去查找，而作用域链的首端指向的是当前执行上下文的变量对象，这个变量对象是执行上下文的一个属性，它包含了函数的形参、所有的函数和变量声明，这个对象是在代码解析的时候创建的。这就是会出现变量声明提升的根本原因。
+
+## 如何编写高性能的 Javascript
+
+- 使用位运算代替一些简单的四则运算。
+- 避免使用过深的嵌套循环。
+- 不要使用未定义的变量。
+- 当需要多次访问数组长度时，可以用变量保存起来，避免每次都会去进行属性查找。
+
+## 简单介绍一下 V8 引擎的垃圾回收机制
+
+v8 的垃圾回收机制**基于分代回收机制**，这个机制又基于世代假说，这个假说有两个特点，一是新生的对象容易早死，另一个是不死的对象会活得更久。基于这个假说，**v8 引擎将内存分为了新生代和老生代**。新创建的对象或者只经历过一次的垃圾回收的对象被称为新生代。经历过多次垃圾回收的对象被称为老生代。
+
+**新生代被分为 From 和 To 两个空间**，To 一般是闲置的。当 From 空间满了的时候会执行 Scavenge 算法进行垃圾回收。**当我们执行垃圾回收算法的时候应用逻辑将会停止，等垃圾回收结束后再继续执行**。这个算法分为三步：
+
+（1）首先检查 From 空间的存活对象，如果对象存活则判断对象是否满足晋升到老生代的条件，如果满足条件则晋升到老生代。如果不满足条件则移动 To 空间。
+（2）如果对象不存活，则释放对象的空间。
+（3）最后将 From 空间和 To 空间角色进行交换。
+
+新生代对象晋升到老生代有两个条件：
+
+（1）第一个是判断是对象否**已经经过一次 Scavenge 回收**。若经历过，则将对象从 From 空间复制到老生代中；若没有经历，则复制到 To 空间。
+（2）第二个是 **To 空间的内存使用占比是否超过限制**。当对象从 From 空间复制到 To 空间时，若 **To 空间使用超过 25%**，则对象直接晋升到老生代中。设置 25% 的原因主要是因为算法结束后，两个空间结束后会交换位置，如果 To 空间的内存太小，会影响后续的内存分配。
+
+老生代采用了**标记清除法**和**标记压缩法**。标记清除法首先会对内存中存活的对象进行标记，标记结束后清除掉那些没有标记的对象。由于**标记清除后会造成很多的内存碎片，不便于后面的内存分配**。所以了解决内存碎片的问题引入了标记压缩法。由于在进行垃圾回收的时候会暂停应用的逻辑，对于新生代方法由于内存小，每次停顿的时间不会太长，但**对于老生代来说每次垃圾回收的时间长，停顿会造成很大的影响**。 为了解决这个问题 V8 引入了**增量标记的方法**，将一次停顿进行的过程分为了多步，每次执行完一小步就让运行逻辑执行一会，就这样交替运行。
+
+## 哪些操作会造成内存泄漏
+
+相关知识点：
+
+- 意外的全局变量
+- 被遗忘的计时器或回调函数
+- 脱离 DOM 的引用
+- 闭包
+
+回答：
+
+第一种情况是我们由于使用**未声明的变量**，而意外的创建了一个全局变量，而使这个变量一直留在内存中无法被回收。
+
+第二种情况是我们设置了 **setInterval 定时器**，而忘记取消它，如果循环函数有对外部变量的引用的话，那么这个变量会被一直留在内存中，而无法被回收。
+
+第三种情况是我们获取一个 **DOM 元素的引用**，而后面这个元素被删除，由于我们一直保留了对这个元素的引用，所以它也无法被回收。
+
+第四种情况是不合理的使用**闭包**，从而导致某些变量一直被留在内存当中。
+
+## 实现一个页面操作不会整页刷新的网站 ， 并且能在浏览器前进 、 后退时正确响应
+
+通过使用 pushState + ajax 实现浏览器无刷新前进后退，当一次 ajax 调用成功后我们将一条 state 记录加入到 history
+
+对象中。**一条 state 记录包含了 url、title 和 content 属性**，在 popstate 事件中可以获取到这个 state 对象，我们可以使用 content 来传递数据。最后我们通过对 **window.onpopstate 事件监听来响应浏览器的前进后退操作**。
+
+使用 pushState 来实现有两个问题，一个是打开首页时没有记录，我们可以使用 replaceState 来将首页的记录替换，另一个问题是当一个页面刷新的时候，仍然会向服务器端请求数据，因此如果请求的 url 需要后端的配合将其重定向到一个页面
+
+## 如何判断当前脚本运行在浏览器还是 node 环境中
+
+`this === window ? 'browser' : 'node';`
+
+通过判断 Global 对象是否为 window，如果不为 window，当前脚本没有运行在浏览器中。
+
+## 为什么不把 Script 标签放在 body 结束标签之后 html 结束标签之前
+
+第一，这是不合标准的行为，而且从有 HTML 标准以来都是不合标准的，因此浏览器实现不一致或者在这种情况下有 bug 的风险显然更大。
+
+第二，虽然将`<script>写在</body>`之后，但最终的 DOM 树里，`<script>`元素还是会成为 body 的子节点，这一点很容易在 firebug 等调试器里验证。既然如此，如果将`<script>`写在`</body>`之前会有问题，你又如何保证写在之后（并在 DOM 里又变成了和写在之前一样的结构）就没有问题？
+
+## 移动端的点击事件的有延迟，时间是多久，为什么会有？ 移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时
+
+移动端点击有 300ms 的延迟是因为移动端会有双击缩放的这个操作，因此浏览器在 click 之后要等待 300ms，看用户有没有下一次点击，来判断这次操作是不是双击。
+
+有三种办法来解决这个问题：
+
+- 通过 meta 标签**禁用网页的缩放**。
+- 通过 meta 标签将网页的 viewport 设置为 **ideal viewport**。
+- 调用一些 js 库，比如 **FastClick**
+
+click 延时问题还可能引起**点击穿透**的问题，就是如果我们在一个元素上注册了 touchStart 的监听事件，这个事件会将这个元素隐藏掉，我们发现当这个元素隐藏后，触发了这个元素下的一个元素的点击事件，这就是点击穿透。
+
+## 什么是“ 前端路由” ？什么时候适合使用“ 前端路由” ？“ 前端路由有哪些优点和缺点
+
+（1）什么是前端路由？
+
+前端路由就是把不同路由对应不同的内容或页面的任务交给前端来做，之前是通过服务端根据 url 的不同返回不同的页面实现的。
+
+（2）什么时候使用前端路由？
+
+在单页面应用，大部分页面结构不变，只改变部分内容的使用
+
+（3）前端路由有什么优点和缺点？
+
+优点：用户体验好，不需要每次都从服务器全部获取，快速展现给用户
+
+缺点：单页面无法记住之前滚动的位置，无法在前进，后退的时候记住滚动的位置前端路由一共有两种实现方式，一种是通过 hash 的方式，一种是通过使用 pushState 的方式。
+
+## 如何测试前端代码 BDD, TDD, Unit Test 怎么测试你的前端工程(mocha, sinon, jasmin, qUnit..)
+
+[浅谈前端单元测试](https://juejin.cn/post/6844903624301084680)
+
+## 检测浏览器版本版本有哪些方式
+
+检测浏览器版本一共有两种方式：
+
+一种是检测 window.navigator.userAgent 的值，但这种方式很不可靠，因为 userAgent 可以被改写，并且早期的浏览器如 ie，会通过伪装自己的 userAgent 的值为 Mozilla 来躲过服务器的检测。
+
+第二种方式是功能检测，根据每个浏览器独有的特性来进行判断，如 ie 下独有的 ActiveXObject。
+
+## 什么是 Polyfil
+
+Polyfill 指的是用于**实现浏览器并不支持的原生 API 的代码**。比如说 querySelectorAll 是很多现代浏览器都支持的原生 Web API，但是有些古老的浏览器并不支持，那么假设有人写了一段代码来实现这个功能使这些浏览器也支持了这个功能，那么这就可以成为一个 Polyfill。
+
+一个 shim 是一个库，有自己的 API，而不是单纯实现原生不支持的 API。
+
+## 使用 JS 实现获取文件扩展名？
+
+`String.lastIndexOf() `方法返回指定值（本例中的'.'）在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。
+对于 'filename' 和 '.hiddenfile' ，lastIndexOf 的返回值分别为 0 和 -1
+
+无符号右移操作符(>>>) 将 -1 转换为 4294967295 ，将 -2 转换为 4294967294 ，这个方法可以保证边缘情况时文件名不变。
+
+`String.prototype.slice()` 从上面计算的索引处提取文件的扩展名。如果索引比文件名的长度大，结果为""。
+
+```js
+function getFileExtension(filename) {
+  return filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2);
+}
+```
+
+## 介绍一下 js 的节流与防抖
+
+相关知识点：
+
+函数防抖： 在**事件被触发 n 秒后再执行回调**，如果在这 n 秒内事件又被触发，则重新计时。
+
+函数节流： 规定一个单位时间，**在这个单位时间内，只能有一次触发事件的回调函数执行**，如果在同一个单位时间内某事件被触发多次，只有一次能生效。
+
+函数防抖的实现
+
+```js
+function debounce(fn, wait) {
+  var timer = null;
+  return function () {
+    var context = this,
+      args = arguments;
+    // 如果此时存在定时器的话，则取消之前的定时器重新记时
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    // 设置定时器，使事件间隔指定事件后执行
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, wait);
+  };
+}
+```
+
+函数节流的实现;
+
+```js
+function throttle(fn, delay) {
+  var preTime = Date.now();
+  return function () {
+    var context = this,
+      args = arguments,
+      nowTime = Date.now();
+    // 如果两次时间间隔超过了指定时间，则执行函数。
+    if (nowTime - preTime >= delay) {
+      preTime = Date.now();
+      return fn.apply(context, args);
+    }
+  };
+}
+```
+
+回答：
+
+函数防抖是指在事件被触发 n 秒后再执行回调，如果在这 n 秒内事件又被触发，则重新计时。这可以使用在一些点击请求的事件上，**避免因为用户的多次点击向后端发送多次请求**。函数节流是指规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效。**节流可以使用在 scroll 函数的事件监听上，通过事件节流来降低事件调用的频率**。
+
+## Object.is() 符 与原来的比较操作符 “===” 、“==” 的区别
+
+相关知识点：
+
+两等号判等，会在比较时进行类型转换。
+
+三等号判等（判断严格），比较时不进行隐式类型转换，（类型不同则会返回 false）。
+
+Object.is 在三等号判等的基础上特别处理了 NaN 、-0 和 +0 ，**保证 -0 和 +0 不再相同**，但 **Object.is(NaN, NaN) 会返回 true**.**Object.is 应被认为有其特殊的用途，而不能用它认为它比其它的相等对比更宽松或严格。**
+
+回答：
+
+使用双等号进行相等判断时，如果两边的类型不一致，则会进行强制类型转化后再进行比较。
+
+使用三等号进行相等判断时，如果两边的类型不一致时，不会做强制类型准换，直接返回 false。
+
+使用 Object.is 来进行相等判断时，一般情况下和三等号的判断相同，它**处理了一些特殊的情况**，比如 -0 和 +0 不再相等，两个 NaN 认定为是相等的。
+
+## escape,encodeURI,encodeURIComponent 有什么区别？
+
+相关知识点：
+
+escape 和 encodeURI 都属于 Percent-encoding，基本功能都是把 URI 非法字符转化成合法字符，转化后形式类似「%\*」。
+
+它们的根本区别在于，**escape 在处理 0xff 之外字符的时候，是直接使用字符的 unicode 在前面加上一个「%u」**，而 **encode URI 则是先进行 UTF-8，再在 UTF-8 的每个字节码前加上一个「%」**；在处理 0xff 以内字符时，编码方式是一样的（都是「%XX」，XX 为字符的 16 进制 unicode，同时也是字符的 UTF-8），只是范围（即哪些字符编码哪些字符不编码）不一样。
+
+回答：
+
+encodeURI 是对整个 URI 进行转义，将 URI 中的非法字符转换为合法字符，所以对于一些在 URI 中有特殊意义的字符不会进行转义。
+
+encodeURIComponent 是对 URI 的组成部分进行转义，所以一些特殊字符也会得到转义。
+
+escape 和 encodeURI 的作用相同，不过它们对于 unicode 编码为 0xff 之外字符的时候会有区别，**escape 是直接在字符的 unicode 编码前加上 %u，而 encodeURI 首先会将字符转换为 UTF-8 的格式，再在每个字节前加上 %**。
+
+## Unicode 和 和 UTF-8 之间的关系
+
+Unicode 是一种字符集合，现在可容纳 100 多万个字符。每个字符对应一个不同的 Unicode 编码，它只规定了符号的二进制代码，却没有规定这个二进制代码在计算机中如何编码传输。UTF-8 是一种对 Unicode 的编码方式，它是一种变长的编码方式，可以用 1~4 个字节来表示一个字符。
+
+## js 的事件循环是什么？
+
+相关知识点：
+事件队列是一个存储着待执行任务的队列，其中的任务严格按照时间先后顺序执行，排在队头的任务将会率先执行，而排在队尾的任务会最后执行。事件队列每次仅执行一个任务，在该任务执行完毕之后，再执行下一个任务。执行栈则是一个类似于函数调用栈的运行容器，当执行栈为空时，JS 引擎便检查事件队列，如果不为空的话，事件队列便将第一个任务压入执行栈中运行。
+
+回答：
+
+因为 js 是**单线程**运行的，在代码执行的时候，通过**将不同函数的执行上下文压入执行栈中来保证代码的有序执**行。在执行同步代码的时候，如果遇到了**异步事件**，js 引擎并不会一直等待其返回结果，而是会将这个事件挂起，继续执行执行栈中的其他任务。当异步事件执行完毕后，再将异步事件对应的回调加入到与当前执行栈中不同的另一个任务队列中等待执行。**任务队列**可以分为宏任务对列和微任务对列，当当前执行栈中的事件执行完毕后，js 引擎首先会判断微任务对列中是否有任务可以执行，如果有就将微任务队首的事件压入栈中执行。当微任务对列中的任务都执行完成后再去判断宏任务对列中的任务。
+
+微任务包括了 promise 的回调、node 中的 process.nextTick 、对 Dom 变化监听的 MutationObserver。
+
+宏任务包括了 script 脚本的执行、setTimeout ，setInterval ，setImmediate 一类的定时事件，还有如 I/O 操作、UI 渲染等。
+
+## js 中的深浅拷贝实现
+
+浅拷贝的实现
+
+```js
+function shallowCopy(object) {
+  // 只拷贝对象
+  if (!object || typeof object !== "object") return;
+  // 根据 object 的类型判断是新建一个数组还是对象
+  let newObject = Array.isArray(object) ? [] : {};
+  // 遍历 object，并且判断是 object 的属性才拷贝
+  for (let key in object) {
+    if (object.hasOwnProperty(key)) {
+      newObject[key] = object[key];
+    }
+  }
+  return newObject;
+}
+```
+
+## 深拷贝的实现
+
+```js
+function deepCopy(object) {
+  if (!object || typeof object !== "object") return;
+  let newObject = Array.isArray(object) ? [] : {};
+  for (let key in object) {
+    if (object.hasOwnProperty(key)) {
+      newObject[key] =
+        typeof object[key] === "object" ? deepCopy(object[key]) : object[key];
+    }
+  }
+  return newObject;
+}
+```
+
+浅拷贝指的是将一个对象的属性值复制到另一个对象，如果有的属性的值为引用类型的话，那么会将这个引用的地址复制给对象，因此两个对象会有同一个引用类型的引用。浅拷贝可以使用 Object.assign 和展开运算符来实现。
+
+深拷贝相对浅拷贝而言，如果遇到属性值为引用类型的时候，它新建一个引用类型并将对应的值复制给它，因此对象获得的一个新的引用类型而不是一个原有类型的引用。**深拷贝对于一些对象可以使用 JSON 的两个函数来实现**，**但是由于 JSON 的对象格式比 js 的对象格式更加严格，所以如果属性值里边出现函数或者 Symbol 类型的值时，会转换失败**。
+
+## 手写 call 、apply 及 bind 函数
+
+call 函数实现
+
+```js
+Function.prototype.myCall = function (context) {
+  // 判断调用对象
+  if (typeof this !== "function") {
+    console.error("type error");
+  }
+  // 获取参数
+  let args = [...arguments].slice(1),
+    result = null;
+  // 判断 context 是否传入，如果未传入则设置为 window
+  context = context || window;
+  // 将调用函数设为对象的方法
+  context.fn = this;
+  // 调用函数
+  result = context.fn(...args);
+  // 将属性删除
+  delete context.fn;
+  return result;
+};
+```
+
+call 函数的实现步骤：
+
+- 判断调用对象是否为函数，即使我们是定义在函数的原型上的，但是可能出现使用 call 等方式调用的情况。
+- 判断传入上下文对象是否存在，如果不存在，则设置为 window 。
+- 处理传入的参数，截取第一个参数后的所有参数。
+- 将函数作为上下文对象的一个属性。
+- 使用上下文对象来调用这个方法，并保存返回结果。
+- 删除刚才新增的属性。
+- 返回结果
+
+apply 函数实现
+
+```js
+Function.prototype.myApply = function (context) {
+  // 判断调用对象是否为函数
+  if (typeof this !== "function") {
+    throw new TypeError("Error");
+  }
+  let result = null;
+  // 判断 context 是否存在，如果未传入则为 window
+  context = context || window;
+  // 将函数设为对象的方法
+  context.fn = this;
+  // 调用方法
+  if (arguments[1]) {
+    result = context.fn(...arguments[1]);
+  } else {
+    result = context.fn();
+  }
+  // 将属性删除
+  delete context.fn;
+  return result;
+};
+```
+
+apply 函数的实现步骤：
+
+- 判断调用对象是否为函数，即使我们是定义在函数的原型上的，但是可能出现使用 call 等方式调用的情况。
+- 判断传入上下文对象是否存在，如果不存在，则设置为 window 。
+- 将函数作为上下文对象的一个属性。
+- 判断参数值是否传入
+- 使用上下文对象来调用这个方法，并保存返回结果。
+- 删除刚才新增的属性
+- 返回结果
+
+bind 函数实现
+
+```js
+Function.prototype.myBind = function (context) {
+  // 判断调用对象是否为函数
+  if (typeof this !== "function") {
+    throw new TypeError("Error");
+  }
+  // 获取参数
+  var args = [...arguments].slice(1),
+    fn = this;
+  return function Fn() {
+    // 根据调用方式，传入不同绑定值
+    return fn.apply(
+      this instanceof Fn ? this : context,
+      args.concat(...arguments)
+    );
+  };
+};
+```
+
+bind 函数的实现步骤：
+
+- 判断调用对象是否为函数，即使我们是定义在函数的原型上的，但是可能出现使用 call 等方式调用的情况。
+- 保存当前函数的引用，获取其余传入参数值。
+- 创建一个函数返回
+- 函数内部使用 apply 来绑定函数调用，需要判断函数作为构造函数的情况，这个时候需要传入当前函数的 this 给 apply 调用，其余情况都传入指定的上下文对象。
+
+## 函数柯里化的实现
+
+函数柯里化指的是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。
+
+```js
+function curry(fn, args) {
+  // 获取函数需要的参数长度
+  let length = fn.length;
+  args = args || [];
+  return function () {
+    let subArgs = args.slice(0);
+    // 拼接得到现有的所有参数
+    for (let i = 0; i < arguments.length; i++) {
+      subArgs.push(arguments[i]);
+    }
+    // 判断参数的长度是否已经满足函数所需参数的长度
+    if (subArgs.length >= length) {
+      // 如果满足，执行函数
+      return fn.apply(this, subArgs);
+    } else {
+      // 如果不满足，递归返回科里化的函数，等待参数的传入
+      return curry.call(this, fn, subArgs);
+    }
+  };
+}
+```
+
+es6
+
+```js
+function curry(fn, ...args) {
+  return fn.length <= args.length ? fn(...args) : curry.bind(null, fn, ...args);
+}
+```
+
+## 为什么 0.1 + 0.2 != 0.3？如何解决这个问题
+
+当计算机计算 0.1+0.2 的时候，实际上计算的是这两个数字在计算机里所存储的二进制，**0.1 和 0.2 在转换为二进制表示的时候会出现位数无限循环的情况**。**js 中是以 64 位双精度格式来存储数字的，只有 53 位的有效数字**，超过这个长度的位数会被截取掉这样就造成了精度丢失的问题。这是第一个会造成精度丢失的地方。在对两个以 64 位双精度格式的数据进行计算的时候，首先会进行**对阶的处理**，对阶指的是将阶码对齐，也就是将小数点的位置对齐后，再进行计算，一般是小阶向大阶对齐，因此小阶的数在**对齐的过程中，有效数字会向右移动**，**移动后超过有效位数的位会被截取掉**，这是第二个可能会出现精度丢失的地方。当两个数据阶码对齐后，进行**相加运算后，得到的结果可能会超过 53 位有效数字**，因此超过的位数也会被截取掉，这是可能发生精度丢失的第三个地方。
+
+对于这样的情况，我们可以将其转换为整数后再进行运算，运算后再转换为对应的小数，以这种方式来解决这个问题。
+
+我们还可以将两个数相加的结果和右边相减，如果相减的结果小于一个极小数，那么我们就可以认定结果是相等的，这个极小数可以使用 es6 的 Number.EPSILON
+
+## 原码、反码和补码的介绍
+
+原码是计算机中对数字的二进制的定点表示方法，最高位表示符号位，其余位表示数值位。优点是易于分辨，缺点是不能够直接参与运算。
+
+**正数的反码和其原码一样；负数的反码，符号位为 1，数值部分按原码取反**。
+
+如`[+7]`原 = 00000111，`[+7]`反 = 00000111； `[-7]`原 = 10000111，`[-7]`反 = 11111000。
+正数的补码和其原码一样；负数的补码为其反码加 1。
+
+例如 `[+7]`原 = 00000111，`[+7]`反 = 00000111，`[+7]`补 = 00000111；`[-7]`原 = 10000111，`[-7]`反 = 11111000，`[-7]`补 = 11111001
+
+之所以在计算机中使用补码来表示负数的原因是，这样可以将加法运算扩展到所有的数值计算上，因此在数字电路中我们只需要考虑加法器的设计就行了，而不用再为减法设置新的数字电路。
+
+## toPrecision 和 和 toFixed 和 和 Math.round 的区别
+
+toPrecision 用于处理精度，精度是从左至右第一个不为 0 的数开始数起。
+
+toFixed 是对小数点后指定位数取整，从小数点开始数起。
+
+Math.round 是将一个数字四舍五入到一个整数。
+
+## `offsetWidth/offsetHeight`,`clientWidth/clientHeight`与`scrollWidth/scrollHeight`的区别
+
+- clientWidth/clientHeight 返回的是**元素的内部宽度**，它的值只包含 content + padding，如果有滚动条，**不包含滚动条**。
+- clientTop 返回的是**上边框的宽度**。
+- clientLeft 返回的**左边框的宽度**。
+- offsetWidth/offsetHeight 返回的是**元素的布局宽度**，它的值包含 **content + padding +border 包含了滚动条**。
+- offsetTop 返回的是**当前元素相对于其 offsetParent 元素的顶部的距离**。
+- offsetLeft 返回的是**当前元素相对于其 offsetParent 元素的左部的距离**。
+- scrollWidth/scrollHeight 返回值包含 **content + padding + 溢出内容的尺寸**。
+- scrollTop 属性返回的是**一个元素的内容垂直滚动的像素数**。
+- scrollLeft 属性返回的是**元素滚动条到元素左边的距离**。
+
+## 函数式编程
+
+简单说，**"函数式编程"是一种"编程范式"（programming paradigm），也就是如何编写程序的方法论**。
+
+它具有以下特性：**闭包和高阶函数、惰性计算、递归、函数是"第一等公民"、只用"表达式"**。
+
+## 异步编程的实现方式
+
+相关资料：
+
+回调函数
+
+- 优点：简单、容易理解
+- 缺点：不利于维护，代码耦合高
+
+事件监听（采用时间驱动模式，取决于某个事件是否发生）：
+
+- 优点：容易理解，可以绑定多个事件，每个事件可以指定多个回调函数
+- 缺点：事件驱动型，流程不够清晰
+
+发布/订阅（观察者模式）
+
+- 类似于事件监听，但是可以通过‘消息中心’，了解现在有多少发布者，多少订阅者
+
+Promise 对象
+
+- 优点：可以利用 then 方法，进行链式写法；可以书写错误时的回调函数；
+- 缺点：编写和理解，相对比较难
+
+Generator 函数
+
+- 优点：函数体内外的数据交换、错误处理机制
+- 缺点：流程管理不方便
+
+async 函数
+
+- 优点：内置执行器、更好的语义、更广的适用性、返回的是 Promise、结构清晰。
+- 缺点：错误处理机制
+
+回答：
+
+js 中的异步机制可以分为以下几种：
+
+第一种最常见的是使用回调函数的方式，使用回调函数的方式有一个缺点是，**多个回调函数嵌套的时候会造成回调函数地狱**，上下两层的回调函数间的代码耦合度太高，不利于代码的可维护。
+
+第二种是 Promise 的方式，使用 Promise 的方式可以**将嵌套的回调函数作为链式调用**。但是使用这种方法，有时会**造成多个 then 的链式调用，可能会造成代码的语义不够明确**。
+
+第三种是使用 generator 的方式，它可以在函数的执行过程中，**将函数的执行权转移出去**，**在函数外部我们还可以将执行权转移回**来。当我们遇到异步函数执行的时候，将函数执行权转移出去，当异步函数执行完毕的时候我们再将执行权给转移回来。因此我**们在 generator 内部对于异步操作的方式，可以以同步的顺序来书写**。**使用这种方式我们需要考虑的问题是何时将函数的控制权转移回来，因此我们需要有一个自动执行 generator 的机制，比如说 co 模块等方式来实现 generator 的自动执行**。
+
+第四种是使用 async 函数的形式，**async 函数是 generator 和 promise 实现的一个自动执行的语法糖**，它**内部自带执行器**，当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。因此我们**可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行**。
+
+## Js 与 动画与 CSS 动画区别及相应实现
+
+- CSS3 的动画的优点:在性能上会稍微好一些，浏览器会对 CSS3 的动画做一些优化代码相对简单
+- 缺点:在动画控制上不够灵活兼容性不好
+
+JavaScript 的动画正好弥补了这两个缺点，控制能力很强，可以单帧的控制、变换，同时写得好完全可以兼容 IE6，并且功能强大。**对于一些复杂控制的动画，使用 javascript 会比较靠谱**。而在实现一些小的交互动效的时候，就多考虑考虑 CSS 吧
+
+## mouseover 和 和 mouseenter 的区别
+
+当**鼠标移动到元素上时就会触发 mouseenter 事件**，类似 mouseover，它们两者之间的差别是**mouseenter 不会冒泡**。
+
+由于 **mouseenter 不支持事件冒泡**，导致在一个元素的子元素上进入或离开的时候**会触发其 mouseover 和 mouseout 事件，但是却不会触发 mouseenter 和 mouseleave 事件**
+
+## js 拖拽功能的实现
+
+相关知识点：
+
+首先是三个事件，分别是 mousedown，mousemove，mouseup 当鼠标点击按下的时候，需要一个 tag 标识此时已经按下，可以执行 mousemove 里面的具体方法。
+
+**clientX，clientY 标识的是鼠标的坐标**，分别标识横坐标和纵坐标，并且我们**用 offsetX 和 offsetY 来表示元素的元素的初始坐标**，移动的举例应该是：鼠标移动时候的坐标-鼠标按下去时候的坐标。也就是说**定位信息为：鼠标移动时候的坐标-鼠标按下去时候的坐标+元素初始情况下的 offetLeft**.
+
+回答：
+
+一个元素的拖拽过程，我们可以分为三个步骤，第一步是鼠标按下目标元素，第二步是鼠标保持按下的状态移动鼠标，第三步是鼠标抬起，拖拽过程结束。
+
+这三步分别对应了三个事件，**mousedown 事件，mousemove 事件和 mouseup 事件**。只有在鼠标按下的状态移动鼠标我们才会执行拖拽事件，因此我们需要**在 mousedown 事件中设置一个状态来标识鼠标已经按下，然后在 mouseup 事件中再取消这个状态**。在 mousedown 事件中我们首先应该判断，目标元素是否为拖拽元素，如果是拖拽元素，我们就设置状态并且保存这个时候鼠标的位置。然后**在 mousemove 事件中，我们通过判断鼠标现在的位置和以前位置的相对移动，来确定拖拽元素在移动中的坐标**。最后 mouseup 事件触发后，清除状态，结束拖拽事件。
+
+## 为什么使用 setTimeout 实现 setInterval？怎么模拟？
+
+相关知识点：
+
+```js
+// 思路是使用递归函数，不断地去执行 setTimeout 从而达到 setInterval 的效果
+function mySetInterval(fn, timeout) {
+  // 控制器，控制定时器是否继续执行
+  var timer = {
+    flag: true,
+  };
+  // 设置递归函数，模拟定时器执行。
+  function interval() {
+    if (timer.flag) {
+      fn();
+      setTimeout(interval, timeout);
+    }
+  }
+  // 启动定时器
+  setTimeout(interval, timeout);
+  // 返回控制器
+  return timer;
+}
+```
+
+回答：
+
+setInterval 的作用是每隔一段指定时间执行一个函数，但是这个执行不是真的到了时间立即执行，它真正的作用是**每隔一段时间将事件加入事件队列中去**，**只有当当前的执行栈为空的时候，才能去从事件队列中取出事件执行**。所以可能会出现这样的情况，就是当前执行栈执行的时间很长，导致事件队列里边积累多个定时器加入的事件，当执行栈结束的时候，这些事件会依次执行，因此就不能到间隔一段时间执行的效果。
+
+针对 setInterval 的这个缺点，我们可以**使用 setTimeout 递归调用来模拟 setInterval，这样我们就确保了只有一个事件结束了，我们才会触发下一个定时器事件，这样解决了 setInterval 的问题**。
+
+## let 和 和 const 的注意点
+
+- 声明的变量只在声明时的**代码块内有效**
+- **不存在声明提升**
+- 存在**暂时性死区**，如果在变量声明前使用，会报错
+- 不允许重复声明，**重复声明会报错**
+
+## 什么是 rest 参数
+
+rest 参数（形式为...变量名），用于获取函数的多余参数
+
+## 什么是尾调用，使用尾调用有什么好处
+
+尾调用指的是函数的最后一步调用另一个函数。我们代码执行是基于执行栈的，所以当我们在一个函数里调用另一个函数时，我们会**保留当前的执行上下文**，然后再新建另外一个执行上下文加入栈中。**使用尾调用的话，因为已经是函数的最后一步，所以这个时候我们可以不必再保留当前的执行上下文，从而节省了内存，这就是尾调用优化**。但是 ES6 的尾调用优化只在**严格模式下开启，正常模式是无效的**
+
+## Symbol 类型的注意点
+
+- Symbol 函数前**不能使用 new 命令**，否则会报错。
+- Symbol 函数**可以接受一个字符串作为参数**，表示对 Symbol 实例的描述，主要是为了在控制台显示，或者转为字符串时，比较容易区分。
+- Symbol **作为属性名，该属性不会出现在 for...in、for...of 循环中，也不会被 Object.keys()、Object.getOwnPropertyNames()、JSON.stringify() 返回**。
+- **Object.getOwnPropertySymbols 方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值**。
+- **Symbol.for** 接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。**如果有，就返回这个 Symbol 值，否则就新建并返回一个以该字符串为名称的 Symbol 值**。
+- **Symbol.keyFor** 方法返回一个已登记的 Symbol 类型值的 key。
+
+## Set 和 WeakSet 结构？
+
+- ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+- WeakSet 结构与 Set 类似，也是不重复的值的集合。但是 WeakSet 的成员只能是对象，而不能是其他类型的值。WeakSet 中的对象都是**弱引用**，**即垃圾回收机制不考虑 WeakSet 对该对象的引用**
+
+## Map 和 WeakMap 结构？
+
+- Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+- WeakMap 结构与 Map 结构类似，也是用于生成键值对的集合。但是 WeakMap 只接受对象作为键名（ null 除外），不接受其他类型的值作为键名。而且 **WeakMap 的键名所指向的对象，不计入垃圾回收机制**。
+
+## 什么是 Proxy ？
+
+Proxy 用于修改某些操作的默认行为，等同于**在语言层面做出修改**，所以属于一种“**元编程**”，即对编程语言进行编程。
+
+Proxy 可以理解成，在目标对象之前架设一层“**拦截**”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“**代理器**”。
+
+## Reflect 对象创建目的
+
+- **将 Object 对象的一些明显属于语言内部的方法（ 比 如 Object.defineProperty，放到 Reflect 对象上**。
+- **修改某些 Object 方法的返回结果，让其变得更合理**。
+- **让 Object 操作都变成函数行为**。
+- **Reflect 对象的方法与 Proxy 对象的方法一一对应**，只要是 Proxy 对象的方法，就能在 Reflect 对象上找到对应的方法。这就让 Proxy 对象可以方便地调用对应的 Reflect 方法，完成默认行为，作为修改行为的基础。也就是说，**不管 Proxy 怎么修改默认行为，你总可以在 Reflect 上获取默认行为**。
+
+## require 模块引入的查找方式
+
+当 Node 遇到 require(X) 时，按下面的顺序处理。
+
+（1）如果 X 是内置模块（比如 require('http')）
+
+- 返回该模块。
+- 不再继续执行。
+
+（2）如果 X 以 "./" 或者 "/" 或者 "../" 开头
+
+- 根据 X 所在的父模块，确定 X 的绝对路径。
+- 将 X 当成文件，依次查找下面文件，只要其中有一个存在，就返回该文件，不再继续执行。
+
+```
+X
+X.js
+X.json
+X.node
+```
+
+- 将 X 当成目录，依次查找下面文件，只要其中有一个存在，就返回该文件，不再继续执行。
+
+```
+X/package.json（main 字段）
+X/index.js
+X/index.json
+X/index.node
+```
+
+（3）如果 X 不带路径
+
+- 根据 X 所在的父模块，确定 X 可能的安装目录。
+- 依次在每个目录中，将 X 当成文件名或目录名加载。
+
+（4）抛出 "not found"
+
+## 什么是 Promise 对象，什么是 Promises/A+ 规范
+
+Promise 对象是异步编程的一种解决方案，最早由社区提出。**Promises/A+ 规范是 JavaScript Promise 的标准**，规定了一个 Promise 所必须具有的特性。
+
+Promise 是一个构造函数，接收一个函数作为参数，返回一个 Promise 实例。一个 Promise 实例有三种状态，分别是 pending、resolved 和 rejected，分别代表了进行中、已成功和已失败。实例的状态只能由 pending 转变 resolved 或者 rejected 状态，并且状态一经改变，就凝固了，无法再被改变了。状态的改变是通过 resolve() 和 reject() 函数来实现的，我们可以在异步操作结束后调用这两个函数改变 Promise 实例的状态，它的原型上定义了一个 then 方法，使用这个 then 方法可以为两个状态的改变注册回调函数。这个回调函数属于**微任务**，会在**本轮事件循环的末尾执行**。
+
+## 手写一个 Promise
+
+```js
+const PENDING = "pending";
+const RESOLVED = "resolved";
+const REJECTED = "rejected";
+function MyPromise(fn) {
+  // 保存初始化状态
+  var self = this;
+  // 初始化状态
+  this.state = PENDING;
+  // 用于保存 resolve 或者 rejected 传入的值
+  this.value = null;
+  // 用于保存 resolve 的回调函数
+  this.resolvedCallbacks = [];
+  // 用于保存 reject 的回调函数
+  this.rejectedCallbacks = [];
+  // 状态转变为 resolved 方法
+  function resolve(value) {
+    // 判断传入元素是否为 Promise 值，如果是，则状态改变必须等待前一个状态改变后再
+    进行改变;
+    if (value instanceof MyPromise) {
+      return value.then(resolve, reject);
+    }
+    // 保证代码的执行顺序为本轮事件循环的末尾
+    setTimeout(() => {
+      // 只有状态为 pending 时才能转变，
+      if (self.state === PENDING) {
+        // 修改状态
+        self.state = RESOLVED;
+        // 设置传入的值
+        self.value = value;
+        // 执行回调函数
+        self.resolvedCallbacks.forEach((callback) => {
+          callback(value);
+        });
+      }
+    }, 0);
+  }
+  // 状态转变为 rejected 方法
+  function reject(value) {
+    // 保证代码的执行顺序为本轮事件循环的末尾
+    setTimeout(() => {
+      // 只有状态为 pending 时才能转变
+      if (self.state === PENDING) {
+        // 修改状态
+        self.state = REJECTED;
+        // 设置传入的值
+        self.value = value;
+        // 执行回调函数
+        self.rejectedCallbacks.forEach((callback) => {
+          callback(value);
+        });
+      }
+    }, 0);
+  }
+  // 将两个方法传入函数执行
+  try {
+    fn(resolve, reject);
+  } catch (e) {
+    // 遇到错误时，捕获错误，执行 reject 函数
+    reject(e);
+  }
+}
+MyPromise.prototype.then = function (onResolved, onRejected) {
+  // 首先判断两个参数是否为函数类型，因为这两个参数是可选参数
+  onResolved =
+    typeof onResolved === "function"
+      ? onResolved
+      : function (value) {
+          return value;
+        };
+  onRejected =
+    typeof onRejected === "function"
+      ? onRejected
+      : function (error) {
+          throw error;
+        };
+  // 如果是等待状态，则将函数加入对应列表中
+  if (this.state === PENDING) {
+    this.resolvedCallbacks.push(onResolved);
+    this.rejectedCallbacks.push(onRejected);
+  }
+  // 如果状态已经凝固，则直接执行对应状态的函数
+  if (this.state === RESOLVED) {
+    onResolved(this.value);
+  }
+  if (this.state === REJECTED) {
+    onRejected(this.value);
+  }
+};
+```
+
+## 如何检测浏览器所支持的最小字体大小？
+
+用 JS 设置 DOM 的字体为某一个值，然后再取出来，如果值设置成功，就说明支持。
+
+## 怎么做 JS 码 代码 Error 统计
+
+error 统计使用浏览器的 window.error 事件。
+
+## 如何封装一个 javascript 的类型判断函数
+
+```js
+function getType(value) {
+  // 判断数据是 null 的情况
+  if (value === null) {
+    return value + "";
+  }
+  // 判断数据是引用类型的情况
+  if (typeof value === "object") {
+    let valueClass = Object.prototype.toString.call(value),
+      type = valueClass.split(" ")[1].split("");
+    type.pop();
+    return type.join("").toLowerCase();
+  } else {
+    // 判断数据是基本数据类型的情况和函数的情况
+    return typeof value;
+  }
+}
+```
+
+## 如何判断一个对象是否为空对象？
+
+```js
+function checkNullObj(obj) {
+  return Object.keys(obj).length === 0;
+}
+```
+
+## 使用闭包实现每隔一秒打印 1,2,3,4
+
+```js
+// 使用闭包实现
+for (var i = 0; i < 5; i++) {
+  (function (i) {
+    setTimeout(function () {
+      console.log(i);
+    }, i * 1000);
+  })(i);
+}
+// 使用 let 块级作用域
+for (let i = 0; i < 5; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, i * 1000);
+}
+```
+
+## 手写一个 jsonp
+
+```js
+function jsonp(url, params, callback) {
+  // 判断是否含有参数
+  let queryString = url.indexOf("?") === "-1" ? "?" : "&";
+  // 添加参数
+  for (var k in params) {
+    if (params.hasOwnProperty(k)) {
+      queryString += k + "=" + params[k] + "&";
+    }
+  }
+  // 处理回调函数名
+  let random = Math.random().toString().replace(".", ""),
+    callbackName = "myJsonp" + random;
+  // 添加回调函数
+  queryString += "callback=" + callbackName;
+  // 构建请求
+  let scriptNode = document.createElement("script");
+  scriptNode.src = url + queryString;
+  window[callbackName] = function () {
+    // 调用回调函数
+    callback(...arguments);
+    // 删除这个引入的脚本
+    document.getElementsByTagName("head")[0].removeChild(scriptNode);
+  };
+  // 发起请求
+  document.getElementsByTagName("head")[0].appendChild(scriptNode);
+}
+```
+
+## 手写一个观察者模式
+
+```js
+var events = (function () {
+  var topics = {};
+  return {
+    // 注册监听函数
+    subscribe: function (topic, handler) {
+      if (!topics.hasOwnProperty(topic)) {
+        topics[topic] = [];
+      }
+      topics[topic].push(handler);
+    },
+    // 发布事件，触发观察者回调事件
+    publish: function (topic, info) {
+      if (topics.hasOwnProperty(topic)) {
+        topics[topic].forEach(function (handler) {
+          handler(info);
+        });
+      }
+    },
+    // 移除主题的一个观察者的回调事件
+    remove: function (topic, handler) {
+      if (!topics.hasOwnProperty(topic)) return;
+      var handlerIndex = -1;
+      topics[topic].forEach(function (item, index) {
+        if (item === handler) {
+          handlerIndex = index;
+        }
+      });
+      if (handlerIndex >= 0) {
+        topics[topic].splice(handlerIndex, 1);
+      }
+    },
+    // 移除主题的所有观察者的回调事件
+    removeAll: function (topic) {
+      if (topics.hasOwnProperty(topic)) {
+        topics[topic] = [];
+      }
+    },
+  };
+})();
+```
+
+## EventEmitter 实现
+
+```js
+class EventEmitter {
+  constructor() {
+    this.events = {};
+  }
+  on(event, callback) {
+    let callbacks = this.events[event] || [];
+    callbacks.push(callback);
+    this.events[event] = callbacks;
+    return this;
+  }
+  off(event, callback) {
+    let callbacks = this.events[event];
+    this.events[event] = callbacks && callbacks.filter((fn) => fn !== callback);
+    return this;
+  }
+  emit(event, ...args) {
+    let callbacks = this.events[event];
+    callbacks.forEach((fn) => {
+      fn(...args);
+    });
+    return this;
+  }
+  once(event, callback) {
+    let wrapFun = function (...args) {
+      callback(...args);
+      this.off(event, wrapFun);
+    };
+    this.on(event, wrapFun);
+    return this;
+  }
+}
+```
+
+## 一道常被人轻视的前端 JS 面试题
+
+```js
+function Foo() {
+  getName = function () {
+    alert(1);
+  };
+  return this;
+}
+Foo.getName = function () {
+  alert(2);
+};
+Foo.prototype.getName = function () {
+  alert(3);
+};
+var getName = function () {
+  alert(4);
+};
+function getName() {
+  alert(5);
+}
+//请写出以下输出结果：
+Foo.getName(); // 2
+getName(); // 4
+Foo().getName(); //1
+getName(); // 1
+new Foo.getName(); // 2
+new Foo().getName(); // 3
+new new Foo().getName(); // 3
+```
+
+## 如何确定页面的可用性时间，什么是 `Performance API`
+
+Performance API 用于**精确度量、控制、增强浏览器的性能表现**。这个 API 为测量网站性能，提供以前没有办法做到的精度。
+
+使用 getTime 来计算脚本耗时的缺点，首先，**getTime 方法（以及 Date 对象的其他方法）都只能精确到毫秒级别（一秒的千分之一）**，想要得到更小的时间差别就无能为力了。其次，**这种写法只能获取代码运行过程中的时间进度，无法知道一些后台事件的时间进度**，比如浏览器用了多少时间从服务器加载网页。
+
+为了解决这两个不足之处，ECMAScript 5 引入“**高精度时间戳**”这个 API，部署在 performance 对象上。它的**精度可以达到 1 毫秒的千分之一（1 秒的百万分之一）**。
+
+navigationStart：**当前浏览器窗口的前一个网页关闭，发生 unload 事件时的 Unix 毫秒时间戳**。如果没有前一个网页，则等于 fetchStart 属性。
+
+loadEventEnd：**返回当前网页 load 事件的回调函数运行结束时的 Unix 毫秒时间戳**。如果该事件还没有发生，返回 0。
+
+根据上面这些属性，可以计算出网页加载各个阶段的耗时。比如，网页加载整个过程的耗时的计算方法如下：
+
+`var t = performance.timing;var pageLoadTime = t.loadEventEnd -t.navigationStart;`
+
+## js 中的命名规则
+
+（1）第一个字符必须是字母、下划线（`_`）或美元符号（`$`）
+
+（2）余下的字符可以是下划线、美元符号或任何字母或数字字符一般我们推荐使用**驼峰法**来对变量名进行命名，因为这样可以**与 ECMAScript 内置的函数和对象命名格式保持一致**。
+
+## js 语句末尾分号是否可以省略？
+
+在 ECMAScript 规范中，语句结尾的分号并不是必需的。但是我们一般最好不要省略分号，因为**加上分号一方面有利于我们代码的可维护性，另一方面也可以避免我们在对代码进行压缩时出现错误**。
+
+## `Object.assign()`
+
+`Object.assign()` 方法用于**将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象**。
+
+## Math.ceil 和 Math.floor
+
+Math.ceil() === 向上取整，函数返回一个大于或等于给定数字的最小整数。
+
+Math.floor() === 向下取整，函数返回一个小于或等于给定数字的最大整数。
+
+## js for 循环注意点
+
+```js
+for (var i = 0, j = 0; i < 5, j < 9; i++, j++) {
+  console.log(i, j);
+}
+// 当判断语句含有多个语句时，以最后一个判断语句的值为准，因此上面的代码会执行 10 次。
+// 当判断语句为空时，循环会一直进行。
+```
+
+## 一个列表，假设有 100000 个数据，这个该怎么办
+
+我们需要思考的问题：该处理**是否必须同步**完成？数据**是否必须按顺序**完成？
+
+解决办法：
+
+（1）将**数据分页**，利用分页的原理，每次服务器端只返回一定数目的数据，浏览器每次只对一部分进行加载。
+
+（2）使用**懒加载的方法**，每次加载一部分数据，其余数据当需要使用时再去加载。
+
+（3）使用**数组分块技术**，基本思路是为要处理的项目创建一个队列，然后设置定时器每过一段时间取出一部分数据，然后再使用定时器取出下一个要处理的项目进行处理，接着再设置另一个定时器。
+
+## js 中倒计时的纠偏实现
+
+在前端实现中我们一般通过 setTimeout 和 setInterval 方法来实现一个倒计时效果。但是使用这些方法会**存在时间偏差的问题**，这是由于 **js 的程序执行机制造成**的，setTimeout 和 setInterval 的作用是隔一段时间将回调事件加入到事件队列中，因此事件并不是立即执行的，它会等到当前执行栈为空的时候再取出事件执行，因此事件等待执行的时间就是造成误差的原因。
+
+一般解决倒计时中的误差的有这样两种办法：
+
+（1）第一种是通过前端定时向服务器发送请求获取最新的时间差，以此来**校准倒计时时间**。
+
+（2）第二种方法是前端**根据偏差时间来自动调整间隔时间的方式来实现的**。这一种方式首先是以 setTimeout 递归的方式来实现倒计时，然后通过一个变量来记录已经倒计时的秒数。每一次函数调用的时候，首先将变量加一，然后根据这个变量和每次的间隔时间，我们就可以计算出此时无偏差时应该显示的时间。然后将当前的真实时间与这个时间相减，这样我们就可以得到时间的偏差大小，因此我们在设置下一个定时器的间隔大小的时候，我们就从间隔时间中减去这个偏差大小，以此来实现由于程序执行所造成的时间误差的纠正。
+
+## 进程间通信的方式？
+
+- 1.**管道**通信
+- 2.**消息队列**通信
+- 3.**信号量**通信
+- 4.**信号**通信
+- 5.**共享内存**通信
+- 6.**套接字**通信
+
+## 如何查找一篇英文文章中出现频率最高的单词
+
+```js
+function findMostWord(article) {
+  // 合法性判断
+  if (!article) return;
+  // 参数处理
+  article = article.trim().toLowerCase();
+  let wordList = article.match(/[a-z]+/g),
+    visited = [],
+    maxNum = 0,
+    maxWord = "";
+  article = " " + wordList.join(" ") + " ";
+  // 遍历判断单词出现次数
+  wordList.forEach(function (item) {
+    if (visited.indexOf(item) < 0) {
+      // 加入 visited
+      visited.push(item);
+      let word = new RegExp(" " + item + " ", "g"),
+        num = article.match(word).length;
+      if (num > maxNum) {
+        maxNum = num;
+        maxWord = item;
+      }
+    }
+  });
+  return maxWord + " " + maxNum;
+}
+```
