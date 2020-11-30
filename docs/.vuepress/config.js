@@ -111,7 +111,7 @@ module.exports = {
           collapsable: false,
         },
         {
-          title: "面试题",
+          title: "面试知识点",
           collapsable: true, //是否展开
           children: [
             ["/mian/base/browser", "浏览器"],
@@ -124,6 +124,7 @@ module.exports = {
             ["/mian/base/design", "设计模式"],
             ["/mian/base/safe", "安全"],
             ["/mian/base/better", "性能优化"],
+            ["/mian/base/tools", "工具"],
           ]
         },
         {
