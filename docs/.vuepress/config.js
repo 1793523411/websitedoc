@@ -1,9 +1,38 @@
 module.exports = {
   title: "跌倒的小黄瓜",
-  description: "文档部分",
+  logo:"https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/my-website/logo.png",
+  description: "这儿将描述一些东西···💤",
   theme: 'antdocs',
   themeConfig: {
     sidebar: 'auto',
+    backToTop: true,
+    ads:{
+      style: 2, 
+      speed: 2000,
+      items:[
+        {
+          text: 'Ads details here',
+          image:'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/4173c34f96e93981fd435e36b01b96f9.jpeg',
+          link: 'http://doc1.ygjie.icu/'
+        },
+     
+        {
+          text: 'Ads details here',
+          image:'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/5b98420cfdce4a50987d5b137da4fa08.jpg',
+          link: 'http://doc1.ygjie.icu/'
+        },
+        {
+          text: 'Ads details here',
+          image:'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/5699abf03eb19.jpg',
+          link: 'http://doc1.ygjie.icu/'
+        },
+        {
+          text: 'Ads details here',
+          image:'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/timg8.gif',
+          link: 'http://doc1.ygjie.icu/'
+        }
+      ]
+    },
     nav: [
       { text: "首页", link: "/" },
       { text: "面试", link: "/mian/index" },
