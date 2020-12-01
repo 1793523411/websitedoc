@@ -24,6 +24,10 @@ IE 盒模型和 W3C 标准盒模型的区别：
 
 一般来说，我们可以通过修改元素的 box-sizing 属性来改变元素的盒模型。
 
+```css
+box-sizing : content-box || border-box || inherit;
+```
+
 ## CSS 选择符有哪些？
 
 （1）id 选择器（#myid）

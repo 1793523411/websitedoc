@@ -1,12 +1,13 @@
 module.exports = {
   title: "跌倒的小黄瓜",
   description: "文档部分",
+  theme: 'antdocs',
   themeConfig: {
     sidebar: 'auto',
     nav: [
       { text: "首页", link: "/" },
-      { text: "面试", link: "/mian/" },
-      { text: "Demo", link: "/Demo/" },
+      { text: "面试", link: "/mian/index" },
+      { text: "Demo", link: "/Demo/index" },
       {
         text: "其他",
         items: [

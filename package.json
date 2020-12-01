@@ -12,5 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "vuepress": "^1.7.1"
+  },
+  "dependencies": {
+    "core-js": "2.6.11",
+    "vuepress-theme-antdocs": "^1.2.2"
   }
 }

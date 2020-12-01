@@ -82,6 +82,8 @@
 
 [浏览器的回流与重绘](https://juejin.cn/post/6844903569087266823)
 
+[How Browser Work](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)
+
 ## css
 
 [CSS 盒模型详解](https://juejin.cn/post/6844903505983963143)
