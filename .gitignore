@@ -10,7 +10,7 @@
 
 # production
 /build
-
+/docs/.vuepress
 
 # misc
 .DS_Store
