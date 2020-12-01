@@ -125,6 +125,9 @@ module.exports = {
             ["/mian/base/safe", "安全"],
             ["/mian/base/better", "性能优化"],
             ["/mian/base/tools", "工具"],
+            ["/mian/base/datastruct", "数据结构"],
+            ["/mian/base/jstimu", "js相关题目"],
+            ["/mian/base/suanfa", "算法"],
           ]
         },
         {
