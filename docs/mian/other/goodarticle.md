@@ -701,6 +701,8 @@
 
 [基于用户行为的图片等资源预加载](https://www.zhangxinxu.com/wordpress/2016/06/image-preload-based-on-user-behavior/)
 
+[前端性能优化的七大手段](https://www.cnblogs.com/xiaohuochai/p/9178390.html)
+
 ## 工具
 
 [常见工作流比较](https://github.com/geeeeeeeeek/git-recipes/wiki/3.5-%E5%B8%B8%E8%A7%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%AF%94%E8%BE%83)
