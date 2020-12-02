@@ -1,4 +1,34 @@
+## 时间复杂度分析
+
+当问题规模数据大量增加时，重复执行的次数也必定会增加，那么我们就有必要关心执行次数是以什么样的数量级增加，这也是分析时间复杂度的意义，是一个非常重要衡量算法好快的事前估算的方法
+
+常见的时间复杂度：
+
+- O(1)：常数阶的复杂度，这种复杂度无论数据规模如何增长，计算时间是不变的
+
+```js
+const increment = (n) => n++;
+```
+
+- O(n)：线性复杂度，线性增长
+
+```js
+// 最典型的例子就是线性查找
+const linearSearch = (arr, target) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return 1;
+  }
+  return -1;
+};
+```
+
+- O(logn)：对数复杂度，随着问题规模的增长，计算时间会对数级增长，典型的例子是归并查找
+- O(nlogn)：线性对数复杂度，计算时间随数据规模呈线性对数级增长，典型的例子是归并排序
+- O(n^2)：平方级复杂度，典型就是双层循环的时候，代表应用是冒泡排序算法
+
 ## 排序
+
+![](../../.vuepress/public/sort.png)
 
 ### 冒泡排序
 
@@ -375,6 +405,45 @@ function radixSort(array) {
 - 对 n 个记录的线性表进行快速排序为减少算法的递归深度，每次分区后，先处理较短的部分
 - 在用邻接表表示图时，拓扑排序算法时间复杂度为 O(n+e)
 
+## 查找
+
+### 线性查找
+
+线性查找较简单，只需要简单遍历即可
+
+```js
+const linearSearch = (arr, target) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
+  }
+  return -1;
+};
+```
+
+时间复杂度：最佳情况 O(n)，最差情况 O(n)，平均情况 O(n)
+
+### 二分查找法
+
+也叫作折半查找，要求查找表的数据实现线性结构存储，还要求查找表中的顺序是有序的
+
+```js
+const binarySearch = (arr, target) => {
+  let height = arr.length - 1;
+  let low = 0;
+  while (low <= height) {
+    let middle = Math.floor((low + height) / 2);
+    if (target < arr[middle]) {
+      height = middle - 1;
+    } else if (target > arr[middle]) {
+      low = middle + 1;
+    } else {
+      return middle;
+    }
+  }
+  return -1;
+};
+```
+
 ## 树
 
 ### 二叉树相关性质
@@ -734,7 +803,7 @@ class BinarySearchTree {
 需要将一个单向链表反转。思路很简单，使用三个变量分别表示当前节点和当前节点的前后节点，虽然这题很简单，但是却是 一道面试常考题。思路是从头节点往后遍历，先获取下一个节点，然后将当前节点的 next 设置为前一个节点，然后再继续循环
 
 ```js
-var reverseList = function (head) {
+var reverseList = function(head) {
   // 判断下变量边界问题
   if (!head || !head.next) return head;
   // 初始设置为空，因为第一个节点反转后就是尾部，尾部节点指向 null

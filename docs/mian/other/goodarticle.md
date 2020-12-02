@@ -548,6 +548,8 @@
 
 [如何防范常见的 Web 攻击](http://blog.720ui.com/2016/security_web/)
 
+[HTTPS中间人攻击实践](https://www.cnblogs.com/lulianqi/p/10558719.html)
+
 ## vue
 
 [Vue.js 双向绑定的实现原理](https://www.cnblogs.com/kidney/p/6052935.html?utm_source=gold_browser_extension)
@@ -580,6 +582,7 @@
 
 [混入](https://cn.vuejs.org/v2/guide/mixins.html)
 
+[vue中8种组件通信方式](https://juejin.cn/post/6844903887162310669)
 
 ## 工程化
 
@@ -591,6 +594,7 @@
 
 [前端构建工具发展及其比较](https://juejin.cn/post/6844903599999303694)
 
+[Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
 
 ## 设计模式
 

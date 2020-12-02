@@ -55,16 +55,16 @@ Object.defineProperty 函数一共有三个参数，第一个参数是**需要�
 
 **有一些对属性的操作，使用这种方法无法拦截**，比如说**通过下标方式修改数组数据**或者**给对象新增属性**，**vue 内部通过重写函数解决了这个问**题。在 Vue3.0 中已经不使用这种方式了，而是通过使用 Proxy 对对象进行代理，从而实现数据劫持。使用 **Proxy 的好处是它可以完美的监听到任何方式的数据改变**，唯一的缺点是**兼容性的问题**，因为这是 ES6 的语法。
 
-## Object.defineProperty和proxy的优劣区别
+## Object.defineProperty 和 proxy 的优劣区别
 
-Object.defineProperty兼容性较好，但不能直接监听数组的变化，只能监听对象的属性(有时需要深层遍历)
+Object.defineProperty 兼容性较好，但不能直接监听数组的变化，只能监听对象的属性(有时需要深层遍历)
 
-与之相比proxy的优点：
+与之相比 proxy 的优点：
 
-+ 可以直接监听数组的变化
-+ 可以直接监听对象而非属性
-+ proxy有多达13种的拦截方法，不限于apply、ownKeys、deleteProperty、has等等
-+ proxy受到各大浏览器厂商的重视
+- 可以直接监听数组的变化
+- 可以直接监听对象而非属性
+- proxy 有多达 13 种的拦截方法，不限于 apply、ownKeys、deleteProperty、has 等等
+- proxy 受到各大浏览器厂商的重视
 
 ## 什么是 Virtual DOM 么 ？为什么 Virtual DOM 生 比原生 DOM 快
 
@@ -74,13 +74,13 @@ Object.defineProperty兼容性较好，但不能直接监听数组的变化，�
 
 最后将记录的有差异的地方应用到真正的 DOM 树中去，这样视图就更新了。我认为 Virtual DOM 这种方法对于我们需要有大量的 DOM 操作的时候，能够很好的提高我们的操作效率，**通过在操作前确定需要做的最小修改**，**尽可能的减少 DOM 操作带来的重流和重绘的影响**。其实 **Virtual DOM 并不一定比我们真实的操作 DOM 要快，这种方法的目的是为了提高我们开发时的可维护性，在任意的情况下，都能保证一个尽量小的性能消耗去进行操作**。
 
-## 除了数据劫持，vue为什么还需要虚拟DOM进行diff检测差异
+## 除了数据劫持，vue 为什么还需要虚拟 DOM 进行 diff 检测差异
 
 现代前端框架主要有两种监听数据的方式：一种是**pull**的方式，一种是**push**的方式
 
-**pull，其代表为react**，react和vue基于双向数据绑定的依赖收集的订阅式机制不同，react是通过显式的触发函数调用来更新视图，比如setState，然后React会一层层的进行VirtualDom Diff操作找出差异，通过较暴力diff的方式查找哪里发生变化。**另一个代表是angular的脏值检测**
+**pull，其代表为 react**，react 和 vue 基于双向数据绑定的依赖收集的订阅式机制不同，react 是通过显式的触发函数调用来更新视图，比如 setState，然后 React 会一层层的进行 VirtualDom Diff 操作找出差异，通过较暴力 diff 的方式查找哪里发生变化。**另一个代表是 angular 的脏值检测**
 
-**push，其代表为vue**，当Vue程序初始化的时候就会对数据data进行依赖的收集，一但数据发生变化，响应式系统就会立刻得知；我们知道绑定一个数据通常就需要一个watcher，那么一旦细粒度过高会产生大量的watcher，会给增加内存以及依赖追踪的开销，而细粒度过低会无法精准检测变化，因此vue选择中细粒度方案，**在组件级进行push检测的方式(即依赖响应式系统)，在组件内部进行Virtual Dom Diff获取更加具体的差异，所以vue采用了push+pull结合的方式**
+**push，其代表为 vue**，当 Vue 程序初始化的时候就会对数据 data 进行依赖的收集，一但数据发生变化，响应式系统就会立刻得知；我们知道绑定一个数据通常就需要一个 watcher，那么一旦细粒度过高会产生大量的 watcher，会给增加内存以及依赖追踪的开销，而细粒度过低会无法精准检测变化，因此 vue 选择中细粒度方案，**在组件级进行 push 检测的方式(即依赖响应式系统)，在组件内部进行 Virtual Dom Diff 获取更加具体的差异，所以 vue 采用了 push+pull 结合的方式**
 
 ## 如何比较两个 DOM 树的差异？
 
@@ -90,9 +90,33 @@ Object.defineProperty兼容性较好，但不能直接监听数组的变化，�
 
 在对列表元素进行对比的时候，由于 TagName 是重复的，所以我们不能使用这个来对比。我们需要给每一个子节点加上一个 key，**列表对比的时候使用 key 来进行比较，这样我们才能够复用老的 DOM 树上的节点**。
 
+## 对 vue 响应式系统的理解
+
+![](../../.vuepress/public/08.png)
+
+响应式系统简述：
+
+- 任何⼀个 Vue Component 都有⼀个与之对应的 Watcher 实例
+- Vue 的 data 上的属性会被添加 getter 和 setter 属性
+- 当 Vue Component render 函数被执⾏的时候，data 上会被触碰(touch)， 即被读，getter ⽅法会被调⽤， 此时 Vue 会去记录此 Vue component 所依赖的所有 data(这⼀过程被称为依赖收集)
+- data 被改动时(主要是⽤户操作)， setter ⽅法会被调⽤， 此时 Vue 会去通知所有依赖于此 data 的组件去调⽤他们的 render 函数进⾏更新
+
 ## Vue 的生命周期是什么
 
 Vue 的生命周期指的是**组件从创建到销毁的一系列的过程**，被称为 Vue 的生命周期。通过提供的 Vue 在生命周期各个阶段的钩子函数，我们可以很好的在 Vue 的各个生命阶段实现一些操作
+
+![](../../.vuepress/public/vue-life-cycle.png)
+
+- beforeCreate：完成实例初始化，初始化非响应式变量
+- created：实例初始化完成(未挂载 DOM)
+- berofeMount：找到对应的 template，并编译成 render 函数
+- mounted：完成创建 vm.\$el 和双向绑定，完成 DOM 挂载
+- beforeUpdate：数据更新之前(可在更新前访问现有的 DOM)
+- updated：完成虚拟 DOM 的重新渲染和打补丁
+- activated：子组件需要在每次加载时候进行某些操作，可以使用 activated 钩子触发
+- deactivated：keep-alive 组件被移除时使用
+- beforeDestroy：可做一些删除提示，销毁定时器，解绑全局时间 销毁插件对象
+- destroyed：当前组件已被销毁
 
 ## Vue 的各个生命阶段是什么？
 
@@ -136,7 +160,36 @@ Vue 一共有 **8** 个生命阶段，分别是**创建前、创建后、加载�
 
 使用 **eventBus** ，其实就是创建一个**事件中心，相当于中转站**，可以用它来传递事件和接收事件。如果业务逻辑复杂，很多组件之间需要同时处理一些公共的数据，这个时候采用上面这一些方法可能不利于项目的维护。这个时候可以使用 **vuex** ，**vuex 的思想就是将这一些公共的数据抽离出来，将它作为一个全局的变量来管理，然后其他组件就可以对这个公共数据进行读写操作，这样达到了解耦的目的**。
 
+总结：
+
+- props/\$emit+v-on
+  - 父组件通过 props 的方式向子组件传递数据，而通过\$emit 子组件可以向父组件通信
+- eventBus
+  - 通过 eventBus 向中心事件发送或者接收事件，所有事件都可以共用事件中心
+- vuex
+  - 状态管理模式，采用集中式存储管理应用的所有组件的状态，可以通过 vuex 管理全局的数据
+
 ## computed 和 和 watch 的差异
+
+知识点：
+
+当我们要进⾏数值计算,⽽且依赖于其他数据，我们需要使用 computed
+
+如果你需要在某个数据变化时做⼀些事情，使⽤ watch 来观察这个数据
+
+computed：
+
+- 是计算值，
+- 应用：就是简化 tempalte 里面计算和处理 props 或\$emit 的传值
+- 具有缓存性，页面重新渲染值不变化,计算属性会立即返回之前的计算结果，而不必再次执行函数
+
+watch：
+
+- 是观察的动作，
+- 应用：监听 props，\$emit 或本组件的值执行异步操作
+- 无缓存性，页面重新渲染时值不变化也会执行
+
+回答：
 
 （1）computed 是**计算一个新的属性，并将该属性挂载到 Vue 实例上**，而 watch 是**监听已经存在且已挂载到 Vue 实例上的数**据，所以**用 watch 同样可以监听 computed 计算属性的变化**。
 
@@ -147,6 +200,21 @@ Vue 一共有 **8** 个生命阶段，分别是**创建前、创建后、加载�
 computed 是计算属性，**依赖其他属性计算值，并且 computed 的值有缓存**，只有当计算值变化才会返回内容。
 
 watch **监听到值的变化就会执行回调，在回调中可以进行一些逻辑操作**。
+
+## vue 指令有哪些，v-if 和 v-for 能不能一起使用
+
+```
+v-html，v-text，v-show，v-for，v-if v-else-if v-else，
+v-bind（用来动态的绑定一个或者多个特性）
+img
+v-model（创建双向数据绑定）
+v-cloak（保持在元素上直到关联实例结束时进行编译）
+v-pre（用来跳过这个元素和它的子元素编译过程）
+```
+
+:::tip v-if 和 v-for 能不能一起使用(或者问 v-for 和 v-if 谁的优先级更高)：
+v-for 指令的优先级要高于 v-if，当处于同一节点时候，意味着 v-if 将分别重复运行于每个 v-for 循环中，所以应该尽量避免 v-for 和 v-if 在同一结点
+:::
 
 ## vue-router 中的导航钩子函数
 
@@ -160,6 +228,60 @@ watch **监听到值的变化就会执行回调，在回调中可以进行一些
 
 **`$route` 是“路由信息对象”**，包括 path，params，hash，query，fullPath，matched，name 等路由信息参数。而 **`$router` 是“路由实例”对象**包括了路由的跳转方法，钩子函数等。
 
+## vue 的路由实现
+
+更新视图但不重新请求页面，是前端路由原理的核心，目前在浏览器环境主要有两种方式：
+
+- Hash 模式
+
+hash("#")符号的本来作用是加在 URL 指示网页中的位置：
+
+```
+http://www.example.com/index.html#print
+```
+
+`#`本身以及它后面的字符称之为 hash，可通过 window.location.hash 属性读取，hash 虽然在 url 中，但是却不会被包含在 http 请求中，也不会重新加载页面，它用来指导浏览器动作
+
+- History 模式
+
+History interface 是浏览器历史记录栈提供的接口，从 HTML5 开始，History interface 提供了 2 个新的方法： pushState()  ， replaceState()  使得我们可以对浏览器历史记录栈进行修改；这两个方法有有一个特点，当调用他们修改浏览器历史栈后，虽然当前 url 改变了，但浏览器不会立即发送请求该 url，这就为单页应用前端路由，更新视图但不重新请求页面提供了基础
+
+## vue 路由懒加载的方式有哪些
+
+懒加载简单来说就是延迟加载或按需加载，即在需要的时候的时候进行加载，常用的懒加载方式有三种：即使用**vue 异步组件** 和 **ES6 中的 import**，以及**webpack 的 require.ensure()**
+
+- vue 异步组件
+
+```js
+// 路由配置，使用vue异步组件
+{
+  path: '/home',
+  name: 'home',
+  component: resolve => require(['@/components/home'],resolve)
+}
+```
+
+- ES6 中的 import
+
+```js
+// 指定了相同的webpackChunkName，合并打包成一个js文件
+// 如果不指定，则分开打包 2
+const Home = () =>
+  import(/*webpackChunkName:'ImportFuncDemo'*/ "@/component/Home");
+const Index = () =>
+  import(/*webpackChunkName:'ImportFuncDemo'*/ "@/component/Index");
+```
+
+- webpack 推出的 require.ensure()
+
+```js
+{
+  path: '/home',
+  name: 'home',
+  component: r => require.ensure([], () => r(require('@/components/hoome')
+}
+```
+
 ## vue 常用的修饰符
 
 `.prevent`: 提交事件**不再重载页面**；`.stop`: **阻止单击事件冒泡**；`.self`: 当事件发生在该元素本身而不是子元素的时候会触发；
@@ -171,6 +293,26 @@ vue 中 key 值的作用可以分为两种情况来考虑。
 第一种情况是 **v-if 中使用 key**。由于 Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。因此当我们使用 v-if 来实现元素切换的时候，**如果切换前后含有相同类型的元素，那么这个元素就会被复用**。如果是相同的 input 元素，那么切换前后用户的输入不会被清除掉，这样是不符合需求的。因此我们可以通过使用 key 来唯一的标识一个元素，这个情况下，使用 key 的元素不会被复用。这个时候 **key 的作用是用来标识一个独立的元素**。
 
 第二种情况是 **v-for 中使用 key**。**用 v-for 更新已渲染过的元素列表时，它默认使用“就地复用”的策略**。如果数据项的顺序发生了改变，Vue 不会移动 DOM 元素来匹配数据项的顺序，而是简单复用此处的每个元素。因此通过为每个列表项提供一个 key 值，来**以便 Vue 跟踪元素的身份**，从而高效的实现复用。**这个时候 key 的作用是为了高效的更新渲染虚拟 DOM**。
+
+## diff 算法的过程(key 的作用)
+
+vue 采用“就地复用”策略，如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素，key 的作用主要是为了高效的更新虚拟 DOM
+
+:::tip &nbsp;
+虚拟 dom 的 diff 算法的过程中，先会进⾏新旧节点的⾸尾交叉对比，当⽆法匹配的时候会⽤新节点的 key 与旧节点进⾏⽐对，然后超出差异
+:::
+
+![](../../.vuepress/public/diff.png)
+
+vue 的 diff 位于 patch.js 中，这里简单总结一下 patchVnode 比较的的过程，首先要判断 vnode 和 oldVnode 是否都存在，都存在并且 vnode 和 oldVnode 是同一节点时，才会进入 patchVnode 进行比较，结点比较五种情况：
+
+- 引用一致，可以认为没有变化
+- 文本节点的比较，如果需要修改：则会调用 Node.textContent = vnode.text
+- 两个节点都有子节点，而且它们不一样：则调用 updateChildren 函数比较子节点
+- 只有新的节点有子节点：则调用 addVnodes 创建子节点
+- 只有老节点有子节点，则调用 removeVnodes 把这些子节点都删除
+
+updateChildren 的过程：updateChildren 用指针的方式把新旧节点的子节点的首尾节点标记，即 oldStartIndex(1)，oldEndIndex(2)，newStartIndex(3), oldEndIndex(4)（这里简单用 12 3 4 顺序标记）即依次比较 13，14，23，24，有 10 种左右情况分别做出对应的处理
 
 ## keep-alive 组件有什么作用
 
