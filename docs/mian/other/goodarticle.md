@@ -58,6 +58,8 @@
 
 [协议相对 URL](https://www.ludou.org/the-protocol-relative-url.html)
 
+[100*100的 canvas 占多少内存](https://www.jianshu.com/p/27dd0e802809)
+
 ## 浏览器
 
 [浏览器内核的解析和对比](https://www.cnblogs.com/fullhouse/archive/2011/12/19/2293455.html)

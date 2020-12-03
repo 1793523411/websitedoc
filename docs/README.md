@@ -52,7 +52,55 @@ footerWrap:
 
 </a-row>
 <a-tag color="pink">
+<a href="/mian/" style="color:pink;">面试</a>
+      </a-tag>
+      <a-tag color="red">
+        red
+      </a-tag>
+      <a-tag color="orange">
+        orange
+      </a-tag>
+      <a-tag color="green">
+        green
+      </a-tag>
+      <a-tag color="cyan">
+        cyan
+      </a-tag>
+      <a-tag color="blue">
+        blue
+      </a-tag>
+      <a-tag color="purple">
+        purple
+      </a-tag>
+      <a-tag color="pink">
         pink
+      </a-tag>
+      <a-tag color="red">
+        red
+      </a-tag>
+      <a-tag color="orange">
+        orange
+      </a-tag>
+      <a-tag color="green">
+        green
+      </a-tag>
+      <a-tag color="cyan">
+        cyan
+      </a-tag>
+      <a-tag color="blue">
+        blue
+      </a-tag>
+      <a-tag color="purple">
+        purple
+      </a-tag>
+      <a-tag color="pink">
+        pink
+      </a-tag>
+      <a-tag color="red">
+        red
+      </a-tag>
+      <a-tag color="pink">
+<a href="/Demo/" style="color:pink;">Demo</a>
       </a-tag>
       <a-tag color="red">
         red
