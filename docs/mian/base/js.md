@@ -974,6 +974,73 @@ echo $_GET['callback'].'('.json_encode($data).')';
 
 服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。一条 cookie 包括了 5 个属性值 **expires、domain、path、secure、HttpOnly**。其中 expires 指定了 cookie 失效的时间，domain 是域名、path 是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。**secure 规定了 cookie 只能在确保安全的情况下传输**，**HttpOnly 规定了这个 cookie 只能被服务器访问**，不能使用 js 脚本访问。在发生 xhr 的跨域请求的时候，即使是同源下的 cookie，也不会被自动添加到请求头部，除非显示地规定。
 
+## 为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？
+
+模块化解决了命名冲突问题，可以提高代码的复用率，提高代码的可维护性。
+
+模块化的好处:
+
+- 避免命名冲突(减少命名空间污染)
+- 更好的分离, 按需加载
+- 更高复用性
+- 高可维护性
+
+**方式一：函数**
+
+最起初，实现模块化的方式使用函数进行封装。将不同功能的代码实现封装到不同的函数中。通常一个文件就是一个模块，有自己的作用域，只向外暴露特定的变量和函数。
+
+缺陷：容易发生命名冲突或者数据的不安全性。
+
+**方式二：立即执行函数**
+
+立即执行函数中的匿名函数中有独立的词法作用域，避免了外界访问此作用域的变量。通过函数作用域解决了命名冲突、污染全局作用域的问题
+
+缺陷：不能直接访问到内部的变量
+
+**方式三：CommonJS 规范**
+
+CommonJS 的规范主要用在 Node.js 中，为模块提供了四个接口： module、exports、require、global ， CommonJS 用同步的方式加载模块（服务器端），在浏览器端使用的是异步加载模块
+
+CommonJS 的特点
+
+- CommonJS 模块的加载机制是，输入的是被输出的值的拷贝。也就是说，一旦输出一个值，模块内部的变化就影响不到这个值。
+- 所有代码都运行在模块作用域，不会污染全局作用域。
+- 模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存。
+- 模块加载的顺序，按照其在代码中出现的顺序。
+
+**方式四：AMD 和 CMD**
+
+> 上边有我们的 CommonJS 规范了，为什么还出 AMD 规范，因为 CommonJS 是同步加载代码的，我们在浏览器中会发生堵塞问题，造成页面的无响应。所以浏览器不太适合使用 CommonJS 来加载。
+
+CommonJS 规范对浏览器和服务器端的不同之处。
+
+- 服务器端所有的模块都存放在本地硬盘中，可以同步加载完成，等待时间就是硬盘的读取时间。
+- 浏览器，所有的模块都放在服务器端，等待时间取决于网速的快慢，可能要等很长时间，浏览器处于”假死”状态
+
+AMD （ Asynchronous Module Definition ） ，即 "异步模块定义" 。它主要采用异步方式加载模块， 模块的加载不影响它后边语句的运行。所加载的模块，都会定义在回调函数中，加载完成，再执行回调 函数
+
+CMD (Common Module Definition) ，主要是 seajs 的规范。
+
+AMD 和 CMD 最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同，二者皆为异步加载模块
+
+- AMD 依赖前置， js 很方便的就知道要加载的是哪个模块了，因为已经在 define 的 dependencies 参数中就定义好了，会立即加载它。
+- CMD 是就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块。只有在用到某个模块的时候再去 require 。
+
+**方式五：ES6 Moudle**
+
+ES6 实现的模块非常简单，用于浏览器和服务器端。 import 命令会被 JavaScript 引擎静态分析，在编译时就引入模块代码
+
+**ES6 和 CommonJS 的区别**
+
+- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
+  - 所谓值的拷贝，原始类型的值被缓存，不随模块内部的改变而改变。
+  - ES6 模块是动态引用，不缓存值，模块内外是绑定的，而且是只读引用，不能修改值。ES6 的 js 引擎对脚本静态分析的时候，遇到加载命令模块 import ，就会生成一个只读引用，当真正用到模块里边的值的时候，就会去模块内部去取
+- CommonJS 模块是运行时加载， ES6 模块是编译时加载输出接口。
+- 运行时加载： CommonJS 模块就是对象；是先加载整个模块，生成一个对象，然后再从这个 对象上面读取方法，这种加载称为“运行时加载”。
+- 编译时加载： ES6 模块不是对象，而是通过 export 命令「显式指定输出的代码」。 import 时采用静态命令的形式，即在 import 指定「加载某个输出值」，而「不是加载整个 模块」，这种加载称为“编译时加载”。
+- CommonJs 导入的模块路径可以是一个表达式，因为它使用的是 require() 方法；而 ES6Modules 只能是字符串
+- CommonJS this 指向当前模块， ES6 Modules this 指向 undefined
+
 ## 模块化开发怎么做？
 
 我对模块的理解是，一个模块是实现一个特定功能的一组方法。在最开始的时候，js 只实现一些简单的功能，所以并没有模块的概念，但随着程序越来越复杂，代码的模块化开发变得越来越重要。由于函数具有独立作用域的特点，最原始的写法是使用函数来作为模块，几个函数作为一个模块，但是这种方式容易造成全局变量的污染，并且模块间没有联系。
@@ -1436,6 +1503,11 @@ function debounce(fn, wait) {
 }
 ```
 
+使用场景：
+
+- 搜索框请求资源。
+- window 触发 resize 的时候，不断的调整浏览器的窗口大小。
+
 函数节流的实现;
 
 ```js
@@ -1453,6 +1525,11 @@ function throttle(fn, delay) {
   };
 }
 ```
+
+使用场景：
+
+- 鼠标不停的点击按钮触发事件。
+- 监听滚动事件。
 
 回答：
 
@@ -1495,6 +1572,18 @@ escape 和 encodeURI 的作用相同，不过它们对于 unicode 编码为 0xff
 ## Unicode 和 和 UTF-8 之间的关系
 
 Unicode 是一种字符集合，现在可容纳 100 多万个字符。每个字符对应一个不同的 Unicode 编码，它只规定了符号的二进制代码，却没有规定这个二进制代码在计算机中如何编码传输。UTF-8 是一种对 Unicode 的编码方式，它是一种变长的编码方式，可以用 1~4 个字节来表示一个字符。
+
+## 执行上下文与执行栈
+
+执行上下文是一个抽象的概念，可以理解为是代码执行的一个环境。JS 的执行上下文分为三种，全局执行上下文、函数(局部)执行上下文、Eval 执行上下文。
+
+- 全局执行上下文：全局执行上下文指的是全局 this 指向的 window ，可以是外部加载的 JS 文件或者本地 `<scripe></script>` 标签中的代码。
+- 函数执行上下文：函数上下文也称为局部上下文，每个函数被调用的时候，都会创建一个新的局部上下文。
+- Eval 执行上下文： 这个不经常用，所以不多讨论
+
+执行栈，就是我们数据结构中的“栈”，它具有“先进后出”的特点，正是因为这种特点，在我们代码进行执行的时候，遇到一个执行上下文就将其依次压入执行栈中。
+
+当代码执行的时候，先执行位于栈顶的执行上下文中的代码，当栈顶的执行上下文代码执行完毕就会出栈，继续执行下一个位于栈顶的执行上下文
 
 ## js 的事件循环是什么？
 
@@ -2050,6 +2139,81 @@ X/index.node
 
 （4）抛出 "not found"
 
+## Generator 如何使用的？以及各个阶段的状态是如何变化的？
+
+使用生成器函数可以生成一组值的序列，每个值的生成是基于每次请求的，并不同于标准函数立即生成
+
+调用生成器不会直接执行，而是通过叫做迭代器的对象控制生成器执行
+
+```js
+function* WeaponGenerator() {
+  yield "1";
+  yield "2";
+  yield "3";
+}
+for (let item of WeaponGenerator()) {
+  console.log(item);
+}
+//1
+//2
+//3
+```
+
+**使用迭代器控制生成器**
+
+- 通过调用生成器返回一个迭代器对象，用来控制生成器的执行。
+- 调用迭代器的 next 方法向生成器请求一个值。
+- 请求的结果返回一个对象，对象中包含一个 value 值和 done 布尔值，告诉我们生成器是否还会生成值。
+- 如果没有可执行的代码，生成器就会返回一个 undefined 值，表示整个生成器已经完成
+
+```js
+function* WeaponGenerator() {
+  yield "1";
+  yield "2";
+  yield "3";
+}
+let weapon = WeaponGenerator();
+console.log(weapon.next());
+console.log(weapon.next());
+console.log(weapon.next());
+```
+
+状态变化如下：
+
+- 每当代码执行到 yield 属性，就会生成一个中间值，返回一个对象。
+- 每当生成一个值后，生成器就会非阻塞的挂起执行，等待下一次值的请求。
+- 再次调用 next 方法，将生成器从挂起状态唤醒，中断执行的生成器从上次离开的位置继续执行。
+- 直到遇到下一个 yield ，生成器挂起。
+- 当执行到没有可执行代码了，就会返回一个结果对象， value 的值为 undefined , done 的值为 true ，生成器执行完成
+
+**Generator 内部结构实现**
+
+生成器更像是一个状态运动的状态机。
+
+- 挂起开始状态——创建一个生成器处于未执行状态。
+- 执行状态——生成器的执行状态。
+- 挂起让渡状态——生成器执行遇到第一个 yield 表达式。
+- 完成状态——代码执行到 return 全部代码就会进入全部状态。
+
+```js
+function* WeaponGenerator(action) {
+  yield "1" + action;
+  yield "2";
+  yield "3";
+}
+let Iterator = WeaponGenerator("xiaolu");
+let result1 = Iterator.next();
+let result2 = Iterator.next();
+let result3 = Iterator.next();
+```
+
+- 在调用生成器之前的状态——只有全局执行上下文，全局环境中除了生成器变量的引用，其他的变量都为 undefined 。
+- 调用生成器并没有执行函数，而是返回一个 Iterator 迭代器对象并指向当前生成器的上下文。
+- 一般函数调用完成上下文弹出栈，然后被摧毁。当生成器的函数调用完成之后，**当前生成器的上下文出栈，但是在全局的迭代器对象还与保持着与生成器执行上下文引用，且生成器的词法环境还存在**。
+- 执行 next 方法，一般的函数会重新创建执行上下文。而生成器会重新激活对应的上下文并推入栈中（这也是为什么标准函数重复调用时，重新从头执行的原因所在。**与标准函数相比较，生成器暂时会挂起并将来恢复**）。
+- 当**遇到 yield 关键字的时候，生成器上下文出栈，但是迭代器还是保持引用，处于非阻塞暂时挂起的状态**。
+- 如果遇到 next 指向方法继续在原位置继续 执行，直到遇到 return 语句，并返回值结束生成器的执行，生成器进入结束状态。
+
 ## 什么是 Promise 对象，什么是 Promises/A+ 规范
 
 Promise 对象是异步编程的一种解决方案，最早由社区提出。**Promises/A+ 规范是 JavaScript Promise 的标准**，规定了一个 Promise 所必须具有的特性。
@@ -2225,6 +2389,88 @@ Promise.prototype._all = (interable) => {
     }
   });
 };
+```
+
+## async 及 await
+
+ES7 中的 async 及 await 就是 Generator 以及 Promise 的语法糖，内部的实现原理还是原来的，只不过是在写法上有所改变，这些实现一些异步任务写起来更像是执行同步任务
+
+**带 async 关键字的函数，它使得你的函数的返回值必定是 promise 对象**
+
+- 如果 async 关键字函数返回的不是 promise ，会自动用 Promise.resolve() 包装
+- 如果 async 关键字函数显式地返回 promise ，那就以你返回的 promise 为准
+
+```js
+async function fn1() {
+  return 123;
+}
+function fn2() {
+  return 123;
+}
+console.log(fn1()); // Promise {<resolved>: 123}
+console.log(fn2()); // 123
+```
+
+**await 等的是右侧「表达式」的结果**
+
+- 右侧如果是函数，那么函数的 return 值就是「表达式的结果」。
+- 右侧如果是一个 '123' 或者什么值，那表达式的结果就是 '123'。
+
+```js
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
+}
+async function async2() {
+  console.log("async2");
+}
+async1();
+console.log("script start");
+```
+
+结果：先打印 async2 ，后打印的 script start
+
+- 如果不是 promise , await 会阻塞后面的代码，先执行 async 外面的同步代码，同步代码执行完，再回到 async 内部，把这个非 promise 的东西，作为 await 表达式的结果
+- 如果它等到的是一个 promise 对象， await 也会暂停 async 后面的代码，先执行 async 外面的同步代码，等着 Promise 对象 fulfilled ，然后把 resolve 的参数作为 await 表达式的运算结果。
+
+```js
+async function async1() {
+  console.log("async1 start");
+  1;
+  await async2();
+  console.log("async1 end");
+  6;
+}
+async function async2() {
+  console.log("async2");
+  2;
+}
+console.log("script start");
+0;
+setTimeout(function() {
+  console.log("settimeout");
+  7;
+}, 0);
+async1();
+new Promise(function(resolve) {
+  console.log("promise1");
+  3;
+  resolve();
+}).then(function() {
+  console.log("promise2");
+  5;
+});
+console.log("script end");
+4;
+// script start
+// async1 start
+// async2
+// promise1
+// script end
+// promise2
+// async1 end
+// settimeout
 ```
 
 ## 如何检测浏览器所支持的最小字体大小？
