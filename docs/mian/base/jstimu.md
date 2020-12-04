@@ -30,7 +30,7 @@ function bigNumberAdd(number1, number2) {
 function flattenArray(array) {
   if (!Array.isArray(array)) return;
   let result = [];
-  result = array.reduce(function (pre, item) {
+  result = array.reduce(function(pre, item) {
     // 判断元素是否为数组，如果为数组则递归调用，如果不是则加入结果数组中
     return pre.concat(Array.isArray(item) ? flattenArray(item) : item);
   }, []);
@@ -41,7 +41,7 @@ function flattenArray(array) {
   return array
     .toString()
     .split(",")
-    .map(function (item) {
+    .map(function(item) {
       return +item;
     });
 }
@@ -53,7 +53,7 @@ function flattenArray(array) {
 function unique(array) {
   if (!Array.isArray(array) || array.length <= 1) return;
   var result = [];
-  array.forEach(function (item) {
+  array.forEach(function(item) {
     if (result.indexOf(item) === -1) {
       result.push(item);
     }
@@ -113,7 +113,10 @@ function indexFun(array, val) {
 function isPalindrome(str) {
   let reg = /[\W_]/g, // 匹配所有非单词的字符以及下划线
     newStr = str.replace(reg, "").toLowerCase(), // 替换为空字符并将大写字母转换为小写;
-    reverseStr = newStr.split("").reverse().join(""); // 将字符串反转
+    reverseStr = newStr
+      .split("")
+      .reverse()
+      .join(""); // 将字符串反转
   return reverseStr === newStr;
 }
 ```
@@ -123,16 +126,16 @@ function isPalindrome(str) {
 ```js
 function sum(...args) {
   let result = 0;
-  result = args.reduce(function (pre, item) {
+  result = args.reduce(function(pre, item) {
     return pre + item;
   }, 0);
-  let add = function (...args) {
-    result = args.reduce(function (pre, item) {
+  let add = function(...args) {
+    result = args.reduce(function(pre, item) {
       return pre + item;
     }, result);
     return add;
   };
-  add.valueOf = function () {
+  add.valueOf = function() {
     console.log(result);
   };
   return add;
@@ -144,14 +147,14 @@ function sum(...args) {
 ```js
 // forEach
 function forEachUseReduce(array, handler) {
-  array.reduce(function (pre, item, index) {
+  array.reduce(function(pre, item, index) {
     handler(item, index);
   });
 }
 // map
 function mapUseReduce(array, handler) {
   let result = [];
-  array.reduce(function (pre, item, index) {
+  array.reduce(function(pre, item, index) {
     let mapItem = handler(item, index);
     result.push(mapItem);
   });
@@ -160,7 +163,7 @@ function mapUseReduce(array, handler) {
 // filter
 function filterUseReduce(array, handler) {
   let result = [];
-  array.reduce(function (pre, item, index) {
+  array.reduce(function(pre, item, index) {
     if (handler(item, index)) {
       result.push(item);
     }
@@ -206,7 +209,7 @@ function findMostWord(article) {
     maxWord = "";
   article = " " + wordList.join(" ") + " ";
   // 遍历判断单词出现次数
-  wordList.forEach(function (item) {
+  wordList.forEach(function(item) {
     if (visited.indexOf(item) < 0) {
       let word = new RegExp(" " + item + " ", "g"),
         num = article.match(word).length;
@@ -218,4 +221,70 @@ function findMostWord(article) {
   });
   return maxWord + " " + maxNum;
 }
+```
+
+## 请用 js 去除字符串空格？
+
+答案：replace 正则匹配方法、str.trim()方法、JQ 方法：\$.trim(str)方法
+
+解析：
+
+方法一：replace 正则匹配方法
+
+```
+去除字符串内所有的空格：str = str.replace(/\s*/g,"");
+
+去除字符串内两头的空格：str = str.replace(/^\s*|\s*$/g,"");
+
+去除字符串内左侧的空格：str = str.replace(/^\s*/,"");
+
+去除字符串内右侧的空格：str = str.replace(/(\s*$)/g,"");
+```
+
+示例：
+
+```js
+var str = " 6 6 ";
+var str_1 = str.replace(/\s*/g, "");
+console.log(str_1); //66
+
+var str = " 6 6 ";
+var str_1 = str.replace(/^\s*|\s*$/g, "");
+console.log(str_1); //6 6//输出左右侧均无空格
+
+var str = " 6 6 ";
+var str_1 = str.replace(/^\s*/, "");
+console.log(str_1); //6 6 //输出右侧有空格左侧无空格
+
+var str = " 6 6 ";
+var str_1 = str.replace(/(\s*$)/g, "");
+console.log(str_1); // 6 6//输出左侧有空格右侧无空格
+```
+
+方法二：str.trim()方法
+
+trim()方法是用来删除字符串两端的空白字符并返回，trim 方法并不影响原来的字符串本身，它返回的是一个新的字符串。
+
+缺陷：只能去除字符串两端的空格，不能去除中间的空格
+
+示例：
+
+```js
+var str = " 6 6 ";
+var str_1 = str.trim();
+console.log(str_1); //6 6//输出左右侧均无空格
+```
+
+方法三：JQ 方法：\$.trim(str)方法
+
+\$.trim() 函数用于去除字符串两端的空白字符。
+
+注意：\$.trim()函数会移除字符串开始和末尾处的所有换行符，空格(包括连续的空格)和制表符。如果这些空白字符在字符串中间时，它们将被保留，不会被移除。
+
+示例：
+
+```js
+var str = " 6 6 ";
+var str_1 = $.trim(str);
+console.log(str_1); //6 6//输出左右侧均无空格
 ```

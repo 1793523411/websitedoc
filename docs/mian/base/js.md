@@ -1,6 +1,22 @@
+## js 是一门怎样的语言，它有什么特点
+
+1.脚本语言。JavaScript 是一种解释型的脚本语言,C、C++等语言先编译后执行,而 JavaScript 是在程序的运行过程中逐行进行解释。
+
+2.基于对象。JavaScript 是一种基于对象的脚本语言,它不仅可以创建对象,也能使用现有的对象。
+
+3.简单。JavaScript 语言中采用的是弱类型的变量类型,对使用的数据类型未做出严格的要求,是基于 Java 基本语句和控制的脚本语言,其设计简单紧凑。
+
+4.动态性。JavaScript 是一种采用事件驱动的脚本语言,它不需要经过 Web 服务器就可以对用户的输入做出响应。
+
+5.跨平台性。JavaScript 脚本语言不依赖于操作系统,仅需要浏览器的支持。
+
 ## js 的基本数据类型
 
 js 一共有六种基本数据类型，分别是 Undefined、Null、Boolean、Number、String，还有在 ES6 中新增的 Symbol 类型，代表创建后独一无二且不可变的数据类型，它的出现我认为主要是为了解决可能出现的全局变量冲突的问题
+
+## avascript 的 typeof 返回哪些数据类型
+
+7 种分别为 string、boolean、number、Object、Function、undefined、symbol(ES6)
 
 ## 值类型和引用类型有哪些区别
 
@@ -160,6 +176,35 @@ NaN 是一个特殊值，它和自身不相等，是唯一一个非自反（自�
 
 Array 构造函数只带一个数字参数的时候，该参数会被作为数组的预设长度（length），而非只充当数组中的一个元素。这样创建出来的只是一个空数组，只不过它的 length 属性被设置成了指定的值。构造函数 Array(..) 不要求必须带 new 关键字。不带时，它会被自动补上。
 
+## JavaScript 中如何检测一个变量是一个 String 类型？
+
+三种方法（typeof、constructor、Object.prototype.toString.call()）
+
+解析：
+
+①typeof
+
+```js
+typeof "123" === "string"; // true
+
+typeof "123" === "string"; // true
+```
+
+②constructor
+
+```js
+'123'.constructor === String // true
+
+
+③Object.prototype.toString.call()
+
+Object.prototype.toString.call('123') === '[object String]' // true
+```
+
+## 列举 3 种强制类型转换和 2 种隐式类型转换
+
+强制（parseInt,parseFloat,Number）、隐式（+ -）
+
 ## 其他值到字符串的转换规则
 
 规范的 9.8 节中定义了抽象操作 ToString ，它负责处理非字符串到字符串的强制类型转换。
@@ -173,6 +218,65 @@ Array 构造函数只带一个数字参数的时候，该参数会被作为数�
 （4）Symbol 类型的值直接转换，但是只允许显式强制类型转换，使用隐式强制类型转换会产生错误。
 
 （3）对普通对象来说，除非自行定义 `toString()` 方法，否则会调用 `toString()（Object.prototype.toString()）`来返回内部属性 `[[Class]]` 的值，如`"[objectObject]"`。如果对象有自己的 `toString()` 方法，字符串化时就会调用该方法并使用其返回值
+
+## 复杂数据类型如何转变为字符串
+
+- 首先，会调用 valueOf 方法，如果方法的返回值是一个基本数据类型，就返回这个值，
+- 如果调用 valueOf 方法之后的返回值仍旧是一个复杂数据类型，就会调用该对象的 toString 方法，
+- 如果 toString 方法调用之后的返回值是一个基本数据类型，就返回这个值，
+- 如果 toString 方法调用之后的返回值是一个复杂数据类型，就报一个错误。
+
+```js
+1;
+var obj = {
+  valueOf: function() {
+    return 1;
+  },
+};
+console.log(obj + ""); //'1'
+2;
+var obj = {
+  valueOf: function() {
+    return [1, 2];
+  },
+};
+console.log(obj + ""); //'[object Object]';
+3;
+var obj = {
+  valueOf: function() {
+    return [1, 2];
+  },
+  toString: function() {
+    return 1;
+  },
+};
+console.log(obj + ""); //'1';
+4;
+var obj = {
+  valueOf: function() {
+    return [1, 2];
+  },
+  toString: function() {
+    return [1, 2, 3];
+  },
+};
+console.log(obj + ""); // 报错 Uncaught TypeError: Cannot convert object to primitive value
+```
+
+拓展：
+
+```js
+var arr = [new Object(), new Date(), new RegExp(), new String(), new Number(), new Boolean(), new Function(), new Array(), Math] console.log(arr.length) // 9
+for (var i = 0; i < arr.length; i++) {
+	arr[i].valueOf = function() {
+		return [1, 2, 3]
+	}
+	arr[i].toString = function() {
+		return 'toString'
+	}
+	console.log(arr[i] + '')
+}
+```
 
 ## 其他值到数字值的转换规则？
 
@@ -338,15 +442,88 @@ function randomSort(array) {
 
 ## javascript 创建对象的几种方式
 
+Object 构造函数创建
+
+```js
+var Person = new Object();
+Person.name = "Nike";
+Person.age = 29;
+```
+
+使用对象字面量表示法
+
+```js
+var Person = {}; //相当于 var Person = new Object();
+var Person = {
+	name: 'Nike';
+	age: 29;
+}
+```
+
 我们一般使用字面量的形式直接创建对象，但是这种创建方式对于创建大量相似对象的时候，会产生大量的重复代码。但 js 和一般的面向对象的语言不同，在 ES6 之前它没有类的概念。但是我们可以使用函数来进行模拟，从而产生出可复用的对象创建方式，我了解到的方式有这么几种：
 
 （1）第一种是**工厂模式**，工厂模式的主要工作原理是用函数来封装创建对象的细节，从而通过调用函数来达到复用的目的。但是它有一个很大的问题就创建出来的对象无法和某个类型联系起来，**它只是简单的封装了复用代码，而没有建立起对象和类型间的关系**。
 
+```js
+function createPerson(name, age, job) {
+  var o = new Object();
+  o.name = name;
+  o.age = age;
+  o.job = job;
+  o.sayName = function() {
+    alert(this.name);
+  };
+  return o;
+}
+var person1 = createPerson("Nike", 29, "teacher");
+var person2 = createPerson("Arvin", 20, "student");
+```
+
 （2）第二种是**构造函数模式**。js 中每一个函数都可以作为构造函数，只要一个函数是通过 new 来调用的，那么我们就可以把它称为构造函数。执行构造函数首先会创建一个对象，然后将对象的原型指向构造函数的 prototype 属性，然后将执行上下文中的 this 指向这个对象，最后再执行整个函数，如果返回值不是对象，则返回新建的对象。因为 this 的值指向了新建的对象，因此我们可以使用 this 给对象赋值。构造函数模式相对于工厂模式的优点是，所**创建的对象和构造函数建立起了联系**，因此我们可以通过原型来识别对象的类型。但是构造函数存在一个缺点就是，**造成了不必要的函数对象的创建**，因为在 js 中函数也是一个对象，因此如果对象属性中如果包含函数的话，那么每次我们都会新建一个函数对象，浪费了不必要的内存空间，因为函数是所有的实例都可以通用的
+
+```js
+function Person(name, age, job) {
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayName = function() {
+    alert(this.name);
+  };
+}
+var person1 = new Person("Nike", 29, "teacher");
+var person2 = new Person("Arvin", 20, "student");
+```
 
 （3）第三种模式是**原型模式**，因为每一个函数都有一个 prototype 属性，这个属性是一个对象，它包含了通过构造函数创建的所有实例都能共享的属性和方法。因此我们可以使用原型对象来添加公用属性和方法，从而实现代码的复用。这种方式相对于构造函数模式来说，解决了函数对象的复用问题。但是这种模式也存在一些问题，一个是**没有办法通过传入参数来初始化值**，另一个是如果存在一个引用类型如 Array 这样的值，那么**所有的实例将共享一个对象，一个实例对引用类型值的改变会影响所有的实例**。
 
+```js
+function Person() {}
+Person.prototype.name = "Nike";
+Person.prototype.age = 20;
+Person.prototype.jbo = "teacher";
+Person.prototype.sayName = function() {
+  alert(this.name);
+};
+var person1 = new Person();
+person1.sayName();
+```
+
 （4）第四种模式是**组合使用构造函数模式和原型模式**，这是创建自定义类型的最常见方式。因为构造函数模式和原型模式分开使用都存在一些问题，因此我们可以组合使用这两种模式，通过构造函数来初始化对象的属性，通过原型对象来实现函数方法的复用。这种方法很好的解决了两种模式单独使用时的缺点，但是有一点不足的就是，因为**使用了两种不同的模式，所以对于代码的封装性不够好**。
+
+```js
+function Person(name, age, job) {
+	this.name = name;
+	this.age = age;
+	this.job = job;
+}
+Person.prototype = {
+	constructor: Person,
+	sayName: function() {
+		alert(this.name);
+	};
+}
+var person1 = new Person('Nike', 20, 'teacher');
+```
 
 （5）第五种模式是**动态原型模式**，这一种模式将原型方法赋值的创建过程移动到了构造函数的内部，通过对属性是否存在的判断，可以实现仅在第一次调用函数时对原型对象赋值一次的效果。**这一种方式很好地对上面的混合模式进行了封装**。
 
@@ -367,6 +544,51 @@ function randomSort(array) {
 （5）第五种方式是**寄生式继承**，寄生式继承的思路是创建一个用于封装继承过程的函数，通过传入一个对象，然后复制一个对象的副本，然后对象进行扩展，最后返回这个对象。这个扩展的过程就可以理解是一种继承。这种继承的优点就是对一个简单对象实现继承，如果这个对象不是我们的自定义类型时。缺点是没有办法实现函数的复用。
 
 （6）第六种方式是**寄生式组合继承**，组合继承的缺点就是使用超类型的实例做为子类型的原型，导致添加了不必要的原型属性。寄生式组合继承的方式是**使用超类型的原型的副本来作为子类型的原型，这样就避免了创建不必要的属性**
+
+---
+
+一、原型链继承
+
+缺点：
+
+1. 引用类型的属性被所有实例共享
+2. 在创建 Child 的实例时，不能向 Parent 传参
+
+二、借用构造函数(经典继承)
+
+优点：
+
+1. 避免了引用类型的属性被所有实例共享
+2. 可以在 Child 中向 Parent 传参
+   缺点：
+3. 方法都在构造函数中定义，每次创建实例都会创建一遍方法。
+
+三、组合继承
+
+优点：
+
+1. 融合原型链继承和构造函数的优点，是 JavaScript 中最常用的继承模式。
+
+四、原型式继承
+
+缺点：
+
+1. 包含引用类型的属性值始终都会共享相应的值，这点跟原型链继承一样。
+
+五、寄生式继承
+
+缺点：
+
+1. 跟借用构造函数模式一样，每次创建对象都会创建一遍方法。
+
+六、寄生组合式继承
+
+优点：
+
+1. 这种方式的高效率体现它只调用了一次 Parent 构造函数，并且因此避免了在 Parent.prototype 上面创建不必要的、多余的属性。
+2. 与此同时，原型链还能保持不变；
+3. 因此，还能够正常使用 instanceof 和 isPrototypeOf。
+4. 开发人员普遍认为寄生组合式继承是引用类型最理想的继承范式
 
 ## 寄生式组合继承的实现
 
@@ -395,6 +617,10 @@ Student.prototype.sayMyGrade = function() {
 作用域链的本质上是一个**指向变量对象的指针列表**。变量对象是一个包含了执行环境中所有变量和函数的对象。**作用域链的前端始终都是当前执行上下文的变量对象**。全局执行上下文的变量对象（也就是全局对象）始终是作用域链的最后一个对象。
 
 当我们查找一个变量时，如果当前执行环境中没有找到，我们可以沿着作用域链向后查找。作用域链的创建过程跟执行上下文的建立有关....
+
+## 什么是原型链？
+
+通过一个对象的**proto**可以找到它的原型对象，原型对象也是一个对象，就可以通过原型对象的**proto**，最后找到了我们的 Object.prototype,从实例的原型对象开始一直到 Object.prototype 就是我们的原型链
 
 ## 谈谈 This 对象的理解。
 
@@ -500,6 +726,78 @@ const EventUtils = {
 
 ## 事件委托是什么
 
+利用事件冒泡的原理，让自己的所触发的事件，让他的父元素代替执行！
+
+1、那什么样的事件可以用事件委托，什么样的事件不可以用呢？
+
+- 适合用事件委托的事件：click，mousedown，mouseup，keydown，keyup，keypress。
+- 值得注意的是，mouseover 和 mouseout 虽然也有事件冒泡，但是处理它们的时候需要特别的注意，因为需要经常计算它们的位置，处理起来不太容易。
+- 不适合的就有很多了，举个例子，mousemove，每次都要计算它的位置，非常不好把控，在不如说 focus，blur 之类的，本身就没用冒泡的特性，自然就不用事件委托了。
+
+2、为什么要用事件委托
+
+1.提高性能
+
+```js
+<ul>
+  <li>苹果</li>
+  <li>香蕉</li>
+  <li>凤梨</li>
+</ul>;
+// good
+document.querySelector("ul").onclick = (event) => {
+  let target = event.target;
+  if (target.nodeName === "LI") {
+    console.log(target.innerHTML);
+  }
+};
+
+// bad
+document.querySelectorAll("li").forEach((e) => {
+  e.onclick = function() {
+    console.log(this.innerHTML);
+  };
+});
+```
+
+2.新添加的元素还会有之前的事件。
+
+3、事件冒泡与事件委托的对比
+
+- 事件冒泡：box 内部无论是什么元素，点击后都会触发 box 的点击事件
+- 事件委托：可以对 box 内部的元素进行筛选
+  4、事件委托怎么取索引？
+
+```html
+<ul id="ul">
+  <li>aaaaaaaa</li>
+  <li>事件委托了 点击当前，如何获取 这个点击的下标</li>
+  <li>cccccccc</li>
+</ul>
+<script>
+  window.onload = function() {
+    var oUl = document.getElementById("ul");
+    var aLi = oUl.getElementsByTagName("li");
+    oUl.onclick = function(ev) {
+      var ev = ev || window.event;
+      var target = ev.target || ev.srcElement;
+      if (target.nodeName.toLowerCase() == "li") {
+        var that = target;
+        var index;
+        for (var i = 0; i < aLi.length; i++) if (aLi[i] === target) index = i;
+        if (index >= 0) alert("我的下标是第" + index + "个");
+        target.style.background = "red";
+      }
+    };
+  };
+</script>
+```
+
+拓展：
+
+键盘事件：keydown keypress keyup
+鼠标事件：mousedown mouseup mousemove mouseout mouseover
+
 事件委托本质上是利用了浏览器事件冒泡的机制。因为事件在冒泡过程中会上传到父节点，并且父节点可以通过事件对象获取到目标节点，因此可以把**子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件，这种方式称为事件代理**。使用事件代理我们可以不**必要为每一个子元素都绑定一个监听事件，这样减少了内存上的消耗**。**并且使用事件代理我们还可以实现事件的动态绑定**，比如说新增了一个子节点，我们并不需要单独地为它添加一个监听事件，它所发生的事件会交给父元素中的监听函数来处理
 
 ## ["1", "2", "3"].map(parseInt) 答案是多少
@@ -579,6 +877,54 @@ for (let i = 1; i <= 5; i++) {
   }, i * 1000);
 }
 ```
+
+## 你对闭包的理解？优缺点？
+
+概念：闭包就是能够读取其他函数内部变量的函数。
+
+三大特性：
+
+- 函数嵌套函数。
+- 函数内部可以引用外部的参数和变量。
+- 参数和变量不会被垃圾回收机制回收。
+
+优点：
+
+- 希望一个变量长期存储在内存中。
+- 避免全局变量的污染。
+- 私有成员的存在。
+
+缺点：
+
+- 常驻内存，增加内存使用量。
+- 使用不当会很容易造成内存泄露。
+
+示例：
+
+```js
+function outer() {
+  var name = "jack";
+  function inner() {
+    console.log(name);
+  }
+  return inner;
+}
+outer()(); // jack
+function sayHi(name) {
+  return () => {
+    console.log(`Hi! ${name}`);
+  };
+}
+const test = sayHi("xiaoming");
+test(); // Hi! xiaoming
+```
+
+虽然 sayHi 函数已经执行完毕，但是其活动对象也不会被销毁，因为 test 函数仍然引用着 sayHi 函数中的变量 name，这就是闭包。
+但也因为闭包引用着另一个函数的变量，导致另一个函数已经不使用了也无法销毁，所以闭包使用过多，会占用较多的内存，这也是一个副作用。
+
+解析：
+
+由于在 ECMA2015 中，只有函数才能分割作用域，函数内部可以访问当前作用域的变量，但是外部无法访问函数内部的变量，所以闭包可以理解成“定义在一个函数内部的函数，外部可以通过内部返回的函数访问内部函数的变量“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。
 
 ## javascript 的 代码中的 "use strict";
 
@@ -1093,6 +1439,34 @@ CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。CommonJ
 
 require.js 的核心原理是通过动态创建 script 脚本来异步引入模块，然后对每个脚本的 load 事件进行监听，如果每个脚本都加载完成了，再调用回调函数。
 
+## require 与 import 的区别
+
+两者的加载方式不同、规范不同
+
+第一、两者的加载方式不同，require 是在运行时加载，而 import 是在编译时加载
+
+```
+require('./a')(); // a 模块是一个函数，立即执行 a 模块函数
+
+var data = require('./a').data; // a 模块导出的是一个对象
+
+var a = require('./a')[0]; // a 模块导出的是一个数组 ======> 哪都行
+
+import $ from 'jquery';
+
+import * as _ from '_';
+
+import {a,b,c} from './a';
+
+import {default as alias, a as a_a, b, c} from './a'; ======>用在开头
+```
+
+第二、规范不同，require 是 CommonJS/AMD 规范，import 是 ESMAScript6+规范
+
+第三、require 特点：社区方案，提供了服务器/浏览器的模块加载方案。非语言层面的标准。只能在运行时确定模块的依赖关系及输入/输出的变量，无法进行静态优化。
+
+import 特点：语言规格层面支持模块功能。支持编译时静态分析，便于 JS 引入宏和类型检验。动态绑定。
+
 ## ECMAScript6 怎么写 class 现 ，为什么会出现 class 这种东西
 
 在我看来 ES6 新添加的 class 只是为了补充 js 中缺少的一些面向对象语言的特性，但本质上来说它只是一种语法糖，不是一个新的东西，其背后还是原型继承的思想。通过加入 class 可以有利于我们更好的组织代码。在 class 中添加的方法，其实是添加在类的原型上的。
@@ -1108,15 +1482,18 @@ innerHTML 的内容只是替代指定元素的内容，只会重写页面中的�
 （1）创建新节点
 
 ```js
-createDocumentFragment(node);
-createElement(node);
-createTextNode(text);
+createDocumentFragment(); //创建一个 DOM 片段
+createElement(); //创建一个具体的元素
+createTextNode(); //创建一个文本节点
 ```
 
 （2）添加、移除、替换、插入
 
 ```js
-appendChild(node)removeChild(node)replaceChild(new,old)insertBefore(new,old)
+appendChild(); //添加
+removeChild(); //移除
+replaceChild(); //替换
+insertBefore(); //插入
 ```
 
 （3）查找
@@ -2719,6 +3096,38 @@ for (var i = 0, j = 0; i < 5, j < 9; i++, j++) {
 // 当判断语句为空时，循环会一直进行。
 ```
 
+## for in 和 for of
+
+1、for in
+
+1. 一般用于**遍历对象的可枚举属性**。以及对象从构造函数原型中继承的属性。对于每个不同的属性，语句都会被执行。
+2. 不建议使用 for in 遍历数组，因为输出的顺序是不固定的。
+3. 如**果迭代的对象的变量值是 null 或者 undefined, for in 不执行循环体，建议在使用 for in 循环之前，先检查该对象的值是不是 null 或者 undefined**
+
+2、for of
+
+1. for…of 语句**在可迭代对象（包括 Array，Map，Set，String，TypedArray，arguments 对象等等）上创建一个迭代循环**，调用自定义迭代钩子，并为每个不同属性的值执行语句
+
+```js
+var s = {
+  a: 1,
+  b: 2,
+  c: 3,
+};
+var s1 = Object.create(s);
+for (var prop in s1) {
+  console.log(prop); //a b c
+  console.log(s1[prop]); //1 2 3
+}
+for (let prop of s1) {
+  console.log(prop); //报错如下 Uncaught TypeError: s1 is not iterable
+}
+for (let prop of Object.keys(s1)) {
+  console.log(prop); // a b c
+  console.log(s1[prop]); //1 2 3
+}
+```
+
 ## 一个列表，假设有 100000 个数据，这个该怎么办
 
 我们需要思考的问题：该处理**是否必须同步**完成？数据**是否必须按顺序**完成？
@@ -2783,3 +3192,13 @@ function findMostWord(article) {
   return maxWord + " " + maxNum;
 }
 ```
+
+## document load 和 document ready 的区别
+
+页面加载完成有两种事件
+
+1. load 是当页面所有资源全部加载完成后（包括 DOM 文档树，css 文件，js 文件，图片资源等），执行一个函数
+   问题：如果图片资源较多，加载时间较长，onload 后等待执行的函数需要等待较长时间，所以一些效果可能受到影响
+
+2. `$(document).ready()`是当 DOM 文档树加载完成后执行一个函数 （不包含图片，css 等）所以会比 load 较快执行
+   在原生的 js 中不包括`ready()`这个方法，只有 load 方法也就是 onload 事件
