@@ -234,6 +234,8 @@
 
 [css 实现上下固定中间自适应布局](https://www.jianshu.com/p/30bc9751e3e8)
 
+
+[去除 inline-block 元素间间距的 N 种方法](https://www.zhangxinxu.com/wordpress/2012/04/inline-block-space-remove-%E5%8E%BB%E9%99%A4%E9%97%B4%E8%B7%9D/)
 ## javascript
 
 [JavaScript 有几种类型的值？](https://blog.csdn.net/lxcao/article/details/52749421)

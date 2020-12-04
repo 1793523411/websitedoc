@@ -174,6 +174,7 @@ src 表示引用资源，替换当前元素，用在 img，script，iframe 上�
 - 加载顺序区别。加载页面时，link 标签引入的 CSS 被同时加载；@import 引入的 CSS 将在页面加载完毕后被加载。
 - 兼容性区别。@import 是 CSS2.1 才有的语法，故只可在 IE5+ 才能识别；link 标签作为 HTML 元素，不存在兼容性问题。
 - DOM 可控性区别。可以通过 JS 操作 DOM ，插入 link 标签来改变样式；由于 DOM 方法是基于文档的，无法使用 @import 的方式插入样式
+- Link 引入样式的权重大于@import 的引用（@import 是将引用的样式导入到当前的页面中）
 
 ## DOMContentLoaded 和 事件和 Load 事件的区别
 
