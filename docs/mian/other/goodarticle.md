@@ -372,9 +372,6 @@
 
 [ JS 模块加载器加载原理是怎么样的？](https://www.zhihu.com/question/21157540)
 
-[ECMAScript 6 实现了 class，对 JavaScript 前端开发有什么意义？](https://www.zhihu.com/question/29789315)
-
-[Class 的基本语法](https://es6.ruanyifeng.com/#docs/class)
 
 [简述 document.write 和 innerHTML的区别](https://www.nowcoder.com/questionTerminal/2c5d8105b2694d85b06eff85e871cf50)
 
@@ -500,9 +497,6 @@
 
 [`require()` 源码解读](http://www.ruanyifeng.com/blog/2015/05/require.html)
 
-[Promises/A+ 规范](https://www.ituring.com.cn/article/66566)
-
-[Promise](https://es6.ruanyifeng.com/#docs/promise)
 
 [`JavaScript` 专题之类型判断`(上)`](https://github.com/mqyqingfeng/Blog/issues/28)
 
@@ -530,9 +524,63 @@
 
 [进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)
 
+[zepto的tap事件的点透问题的几种解决方案](https://www.cnblogs.com/axl234/p/5554281.html)
+
+[移动端最小触控区域是多大](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)
+
+[HTML5 File api 实现断点续传](https://www.cnblogs.com/zhwl/p/3580776.html)
+
+[JavaScript 浮点数运算的精度问题](https://www.css88.com/archives/7340)
+
+[新鲜出炉的8月前端面试题](https://zhuanlan.zhihu.com/p/41479807)
+
+[Javascript正则构造函数与正则表达字面量&&常用正则表达式](https://www.cnblogs.com/coco1s/p/4008955.html)
+
+[dom0、dom2、dom3事件](https://www.jianshu.com/p/3acdf5f71d5b)
+
+[创建自定义事件](https://developer.mozilla.org/zh-CN/docs/Web/Guide/Events/Creating_and_triggering_events)
+
+[为什么for循环嵌套顺序会影响性能？](https://blog.csdn.net/weixin_42182143/article/details/98682537)
+
+[原生js实现轮播图原理分析](https://blog.csdn.net/konghouy/article/details/81407492)
+
+## es6
+
+[ECMAScript 6 实现了 class，对 JavaScript 前端开发有什么意义？](https://www.zhihu.com/question/29789315)
+
+[Class 的基本语法](https://es6.ruanyifeng.com/#docs/class)
+
+[对ES6的理解](https://www.cnblogs.com/heweijain/p/7073553.html)
 
 
+[Promises/A+ 规范](https://www.ituring.com.cn/article/66566)
 
+[Promise](https://es6.ruanyifeng.com/#docs/promise)
+
+[ES6-解构赋值及其原理-解构看完这篇足够了](https://blog.csdn.net/qq_17175013/article/details/81490923)
+
+[ES6之`Array.from()`方法](https://www.cnblogs.com/jf-67/p/8440758.html)
+
+[`Array.reduce()`学习](https://www.cnblogs.com/xuejiangjun/p/8523313.html)
+
+[ES6高频面试题目整理](https://www.cnblogs.com/fengxiongZz/p/8191503.html)
+
+[ES6中箭头函数注意事项](https://www.jianshu.com/p/bc28e4f67ef9)
+
+[ES6 如何动态加载 import](https://webpack.js.org/api/module-methods/#import)
+
+
+## nodejs
+
+[从原理上理解NodeJS的适用场景](https://www.cnblogs.com/kevin9103/p/5053517.html)
+
+[使用端口转发解决nodejs在80端口上的监听权限问题](https://blog.csdn.net/newborn2012/article/details/23860687)
+
+[理解Node.js的事件循环](https://blog.csdn.net/yanghua_kobe/article/details/12145537)
+
+[使用 npm shrinkwrap 来管理项目依赖](https://www.tuicool.com/articles/EBVNV37)
+
+[15个最好用的Node.JS后端框架](http://ourjs.com/detail/15%E4%B8%AA%E6%9C%80%E5%A5%BD%E7%94%A8%E7%9A%84node-js%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6)
 
 ## 安全
 

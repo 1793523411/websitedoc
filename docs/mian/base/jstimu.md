@@ -288,3 +288,9 @@ var str = " 6 6 ";
 var str_1 = $.trim(str);
 console.log(str_1); //6 6//输出左右侧均无空格
 ```
+
+## 快速的让一个数组乱序
+
+```js
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] console.log(arr.sort(() => 0.5 - Math.random()))
+```
