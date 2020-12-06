@@ -148,6 +148,7 @@ module.exports = {
             ["/mian/base/html2", "HTML"],
             ["/mian/base/css", "CSS"],
             ["/mian/base/js", "Javascript"],
+            ["/mian/base/Ajax", "Ajax"],
             ["/mian/base/es6", "ES6"],
             ["/mian/base/nodejs", "nodejs"],
             ["/mian/base/ts", "TypeScript"],

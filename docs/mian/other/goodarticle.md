@@ -328,6 +328,10 @@
 
 [传统 Ajax 已死，Fetch 永生](https://segmentfault.com/a/1190000003810652)
 
+[ajax readyState的五种状态详解](https://blog.csdn.net/u011565547/article/details/78979030)
+
+[什么是RESTFUL？REST的请求方法有哪些，有什么区别？](https://blog.csdn.net/jnshu_it/article/details/80203696)
+
 [浅谈浏览器缓存](https://segmentfault.com/a/1190000012573337)
 
 [前端优化：浏览器缓存技术介绍](https://juejin.cn/post/6844903672556552205)
