@@ -453,6 +453,8 @@
 
 [字符编码笔记：ASCII，Unicode 和 UTF-8](http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html)
 
+[Unicode 和 UTF-8 有什么区别？](https://www.zhihu.com/question/23374078/answer/69732605)
+
 [浏览器事件循环机制（event loop）](https://juejin.cn/post/6844903606466904078)
 
 [详解 JavaScript中的 Event Loop（事件循环）机制](https://zhuanlan.zhihu.com/p/33058983)
@@ -598,13 +600,17 @@
 
 [web 安全之--点击劫持攻击与防御技术简介](https://www.jianshu.com/p/251704d8ff18)
 
-[web 安全之--点击劫持攻击与防御技术简介](https://www.jianshu.com/p/251704d8ff18)
-
 [Web 安全漏洞之 SQL 注入](https://juejin.cn/post/6844903700901658632)
 
 [如何防范常见的 Web 攻击](http://blog.720ui.com/2016/security_web/)
 
 [HTTPS中间人攻击实践](https://www.cnblogs.com/lulianqi/p/10558719.html)
+
+[XSS跨站脚本攻击](https://www.cnblogs.com/phpstudy2015-6/p/6767032.html)
+
+[前端安全（XSS、CSRF防御）](https://www.cnblogs.com/443855539-wind/p/6055816.html)
+
+[XSS攻击](https://baike.baidu.com/item/XSS%E6%94%BB%E5%87%BB/954065?fr=aladdin)
 
 ## vue
 
@@ -671,6 +677,8 @@
 [前端构建工具发展及其比较](https://juejin.cn/post/6844903599999303694)
 
 [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
+
+[前端异常监控](https://blog.csdn.net/screaming/article/details/51726150)
 
 ## 设计模式
 
@@ -771,7 +779,15 @@
 
 [WebSocket 教程](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
 
+[set-cookie 选项](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Set-Cookie)
 
+[http协议缓存机制](https://segmentfault.com/a/1190000010690320)
+
+[HTTP面试题都在这里](https://zhuanlan.zhihu.com/p/33778904)
+
+[低版本浏览器使用WebSocket接收不到消息 ?](https://segmentfault.com/q/1010000005000671/a-1020000005003936)
+
+[解决浏览器不兼容websocket](https://blog.csdn.net/u011925826/article/details/17532465)
 
 ## 性能优化
 
@@ -782,6 +798,10 @@
 [基于用户行为的图片等资源预加载](https://www.zhangxinxu.com/wordpress/2016/06/image-preload-based-on-user-behavior/)
 
 [前端性能优化的七大手段](https://www.cnblogs.com/xiaohuochai/p/9178390.html)
+
+[前端性能优化三部曲(加载篇)](https://juejin.cn/post/6844903863963631623#heading-2)
+
+[首屏、白屏时间如何计算](https://developer.mozilla.org/zh-CN/docs/Web/API/Performance)
 
 ## 工具
 

@@ -165,6 +165,7 @@ module.exports = {
             ["/mian/base/jstimu", "js相关题目"],
             ["/mian/base/suanfa", "算法"],
             ["/mian/base/select", "选择题"],
+            ["/mian/base/shim", "兼容性问题"],
           ]
         },
         {
