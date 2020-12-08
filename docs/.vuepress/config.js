@@ -164,6 +164,7 @@ module.exports = {
             ["/mian/base/datastruct", "数据结构"],
             ["/mian/base/jstimu", "js相关题目"],
             ["/mian/base/suanfa", "算法"],
+            ["/mian/base/select", "选择题"],
           ]
         },
         {
