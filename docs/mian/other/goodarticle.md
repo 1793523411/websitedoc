@@ -640,6 +640,26 @@
 
 [vue中8种组件通信方式](https://juejin.cn/post/6844903887162310669)
 
+[Proxy文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+
+[基于Proxy来实现双向绑定](https://www.jianshu.com/p/860418f0785c)
+
+[vue 常用的修饰符](https://blog.csdn.net/qq_42238554/article/details/86592295)
+
+[Vue中监听键盘事件](https://blog.csdn.net/xiaxiangyun/article/details/80404768)
+
+[vue官网按键码](https://cn.vuejs.org/v2/guide/events.html#%E6%8C%89%E9%94%AE%E7%A0%81)
+
+[什么是虚拟DOM](https://www.cnblogs.com/gaosong-shuhong/p/9253959.html)
+
+[Vue 的 template 是如何编译成真正的 HTML](http://www.itcast.cn/news/20190110/15320198690.shtml)
+
+[vue项目实现按需加载的3种方式：vue异步组件、es提案的`import()`、webpack的`require.ensure()`](https://segmentfault.com/a/1190000011519350)
+
+## react
+
+[React实现一个防抖的模糊查询输入框](https://blog.csdn.net/cc18868876837/article/details/96303296)
+
 ## 工程化
 
 [不聊 webpack 配置，来说说它的原理](https://juejin.cn/post/6844903630554808334)

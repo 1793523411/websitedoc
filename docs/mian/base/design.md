@@ -7,9 +7,39 @@ MVC、MVP 和 MVVM 是三种常见的**软件架构设计模式**，主要通过
 
 **MVC** 通过分离 Model、View 和 Controller 的方式来组织代码结构。其中 View 负责页面的显示逻辑，Model 负责存储页面的业务数据，以及对相应数据的操作。并且 View 和 Model 应用了观察者模式，当 Model 层发生改变的时候它会通知有关 View 层更新页面。Controller层是 View 层和 Model 层的纽带，它主要负责用户与应用的响应操作，当用户与页面产生交互的时候，Controller 中的事件触发器就开始工作了，通过调用 Model 层，来完成对 Model 的修改，然后 Model 层再去通知 View 层更新。
 
+通信方式如下
+
+![架构_001](../../.vuepress/public/mvc.png)
+
+1. 视图（View）：用户界面。 传送指令到 Controller
+
+2. 控制器（Controller）：业务逻辑 完成业务逻辑后，要求 Model 改变状态
+
+3. 模型（Model）：数据保存 将新的数据发送到 View，用户得到反馈
+
+
 **MVP** 模式与 MVC 唯一不同的在于 Presenter 和 Controller。**在 MVC 模式中我们使用观察者模式**，来实现当 Model 层数据发生变化的时候，通知 View 层的更新。这样 View 层和Model 层耦合在一起，当项目逻辑变得复杂的时候，可能会造成代码的混乱，并且可能会对代码的复用性造成一些问题。**MVP 的模式通过使用 Presenter 来实现对 View 层和 Model 层的解耦**。MVC 中的Controller 只知道 Model 的接口，因此它没有办法控制 View 层的更新，MVP 模式中，View层的接口暴露给了 Presenter 因此我们可以**在 Presenter 中将 Model 的变化和 View 的变化绑定在一起，以此来实现 View 和 Model 的同步更新**。这样就实现了对 View 和 Model的解耦，Presenter 还包含了其他的响应逻辑。
 
+通信方式如下
+
+![架构_002](../../.vuepress/public/mvp.png)
+
+1. 各部分之间的通信，都是双向的。
+
+2. View 与 Model 不发生联系，都通过 Presenter 传递。
+
+3. View 非常薄，不部署任何业务逻辑，称为"被动视图"（Passive View），即没有任何主动性，而 Presenter 非常厚，所有逻辑都部署在那里。
+
+
 **MVVM** 模式中的 VM，指的是 ViewModel，**它和 MVP 的思想其实是相同的，不过它通过双向的数据绑定**，将 View 和 Model 的同步更新给自动化了。当 Model 发生变化的时候，ViewModel就会自动更新；ViewModel 变化了，View 也会更新。这样就将 Presenter 中的工作给自动化了。我了解过一点双向数据绑定的原理，比如 vue 是通过使用数据劫持和发布订阅者模式来实现的这一功能。
+
+MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致。通信方式如下
+
+![架构_003](../../.vuepress/public/mvvm2.png)
+
+唯一的区别是，它采用双向绑定（data-binding）：View 的变动，自动反映在 ViewModel，反之亦然。
+
+
 
 ## 单例模式模式是什么？
 

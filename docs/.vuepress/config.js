@@ -153,6 +153,8 @@ module.exports = {
             ["/mian/base/nodejs", "nodejs"],
             ["/mian/base/ts", "TypeScript"],
             ["/mian/base/vue", "vue"],
+            ["/mian/base/react", "react"],
+            ["/mian/base/wx", "微信小程序"],
             ["/mian/base/project", "工程化"],
             ["/mian/base/network", "计算机网络"],
             ["/mian/base/design", "设计模式"],
