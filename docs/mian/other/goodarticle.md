@@ -240,6 +240,8 @@
 
 [JavaScript 有几种类型的值？](https://blog.csdn.net/lxcao/article/details/52749421)
 
+[JavaScript 中的相等性判断](https://www.cnblogs.com/youyoui/p/8385542.html)
+
 [JavaScript 有几种类型的值？能否画一下它们的内存图](https://blog.csdn.net/jiangjuanjaun/article/details/80327342)
 
 [什么是堆？什么是栈？他们之间有什么区别和联系？](https://www.zhihu.com/question/19729973)
@@ -254,7 +256,7 @@
 
 [JavaScript 字符串间的比较](https://www.jeffjade.com/2015/08/28/2015-09-02-js-string-compare/)
 
-[详解 JS 中 Number()、parseInt() 和 parseFloat() 的区别](https://blog.csdn.net/m0_38099607/article/details/72638678)
+[详解 JS 中 `Number()`、`parseInt()` 和 `parseFloat()` 的区别](https://blog.csdn.net/m0_38099607/article/details/72638678)
 
 [前端表单验证常用的 15 个 JS 正则表达式](http://caibaojian.com/form-regexp.html)
 
@@ -276,7 +278,7 @@
 
 [JavaScript 深入理解之 this 详解](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8Bthis%E8%AF%A6%E8%A7%A3.html)
 
-[eval()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/eval)
+[`eval()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/eval)
 
 [DOM, DOCUMENT, BOM, WINDOW 有什么区别?](https://www.zhihu.com/question/33453164)
 
@@ -907,6 +909,8 @@
 [JavaScript 专题之数组去重](https://github.com/mqyqingfeng/Blog/issues/27)
 
 [JavaScript 专题之如何求数组的最大值和最小值](https://github.com/mqyqingfeng/Blog/issues/35)
+
+[关于setTimeout的面试题](https://www.cnblogs.com/adouwt/p/6481479.html)
 
 ## 算法
 

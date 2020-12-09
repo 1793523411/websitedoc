@@ -1691,6 +1691,20 @@ outerText：内部文本，content
 
 apply 接受两个参数，第一个参数指定了函数体内 this 对象的指向，第二个参数为一个带下标的集合，这个集合可以为数组，也可以为类数组，apply 方法把这个集合中的元素作为参数传递给被调用的函数。call 传入的参数数量不固定，跟 apply 相同的是，第一个参数也是代表函数体内的 this 指向，从第二个参数开始往后，每个参数被依次传入函数
 
+## 在 Javascript 中什么是伪数组？如何将伪数组转化为标准数组？
+
+伪数组（类数组）：无法直接调用数组方法或期望 length 属性有什么特殊的行为，但仍可以对真正数组遍历方法来遍历它们。典型的是函数的 argument 参数，还有像调用 getElementsByTagName,document.childNodes 之类的,它们都返回 NodeList 对象都属于伪数组。可以使用 Array.prototype.slice.call(fakeArray)将数组转化为真正的 Array 对象。
+
+假设我们要给每个 log 方法添加一个"(app)"前缀，比如'hello world!' ->'(app)hello world!'。方法如下：
+
+```js
+function log() {
+  var args = Array.prototype.slice.call(arguments); //为了使用unshift数组方法，将argument转化为真正的数组
+  args.unshift("(app)");
+  console.log.apply(console, args);
+}
+```
+
 ## JavaScript 类数组对象的定义
 
 一个**拥有 length 属性和若干索引属性的对象**就可以被称为类数组对象，类数组对象和数组类似，但是不能调用数组的方法。**常见的类数组对象有 arguments 和 DOM 方法的返回结果**，还有一个**函数也可以被看作是类数组对象，因为它含有 length 属性值，代表可接收的参数个数**。
@@ -2742,8 +2756,6 @@ tap(ele, function() {
 ```
 
 这样，过了 300ms，那么 click 事件就不会触发在下面的 a 标签上了。
-
-
 
 ## 如何测试前端代码 BDD, TDD, Unit Test 怎么测试你的前端工程(mocha, sinon, jasmin, qUnit..)
 
