@@ -1585,3 +1585,549 @@ Array.prototype.unique = function() {
   alert(newArr);
 })([1, 1, 22, 3, 4, 55, 66]);
 ```
+
+## 阶乘函数
+
+```js
+//原型方法
+Number.prototype.N = function() {
+  var re = 1;
+  for (var i = 1; i <= this; i++) {
+    re *= i;
+  }
+  return re;
+};
+var num = 5;
+alert(num.N());
+```
+
+## 下面输出多少？
+
+```js
+function changeObjectProperty(o) {
+  o.siteUrl = "http://www.csser.com/";
+  o = new Object();
+  o.siteUrl = "http://www.popcg.com/";
+}
+var CSSer = new Object();
+changeObjectProperty(CSSer);
+console.log(CSSer.siteUrl); //
+```
+
+如果 CSSer 参数是按引用传递的，那么结果应该是"http://www.popcg.com/"，但实际结果却仍是"http://www.csser.com/"。事实是这样的：在函数内部修改了引用类型值的参数，该参数值的原始引用保持不变。我们可以把参数想象成局部变量，当参数被重写时，这个变量引用的就是一个局部变量，局部变量的生存期仅限于函数执行的过程中，函数执行完毕，局部变量即被销毁以释放内存。 （补充：内部环境可以通过作用域链访问所有的外部环境中的变量对象，但外部环境无法访问内部环境。每个环境都可以向上搜索作用域链，以查询变量和函数名，反之向下则不能。）
+
+## 精度问题: JS 精度不能精确到 0.1 所以 。。。。同时存在于值和差值中
+
+```js
+var n = 0.3,
+  m = 0.2,
+  i = 0.2,
+  j = 0.1;
+alert(n - m == i - j); //false
+alert(n - m == 0.1); //false
+alert(i - j == 0.1); //true
+
+> 0.2-0.1
+0.1
+> 0.9-0.2
+0.7
+> 0.3-0.2
+0.09999999999999998
+> 0.5-0.4
+0.09999999999999998
+> 0.1+0.2
+0.30000000000000004
+> 0.1+0.3
+0.4
+>
+```
+
+## 计算字符串字节数
+
+```js
+new (function(s) {
+  if (!arguments.length || !s) return null;
+  if ("" == s) return 0;
+  var l = 0;
+  for (var i = 0; i < s.length; i++) {
+    if (s.charCodeAt(i) > 255) l += 2;
+    else l += 1; //charCodeAt()得到的是unCode码
+  } //汉字的unCode码大于 255bit 就是两个字节
+  alert(l);
+})("hello world!");
+```
+
+## 请问代码实现 outerHTML
+
+```js
+//说明：outerHTML其实就是innerHTML再加上本身；
+Object.prototype.outerHTML = function() {
+  var innerCon = this.innerHTML, //获得里面的内容
+    outerCon = this.appendChild(innerCon); //添加到里面
+  alert(outerCon);
+};
+```
+
+演示代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="outer">
+      hello
+    </div>
+    <script>
+      Object.prototype.outerHTML = function() {
+        var innerCon = this.innerHTML, //获得里面的内容
+          outerCon = this.appendChild(innerCon); //添加到里面
+        alert(outerCon);
+      };
+      function $(id) {
+        return document.getElementById(id);
+      }
+      alert($("outer").innerHTML);
+      alert($("outer").outerHTML);
+    </script>
+  </body>
+</html>
+```
+
+## JS 中的简单继承 call 方法
+
+```js
+//顶一个父母类，注意：类名都是首字母大写的哦！
+function Parent(name, money) {
+  this.name = name;
+  this.money = money;
+  this.info = function() {
+    alert("姓名： " + this.name + " 钱： " + this.money);
+  };
+} //定义孩子类
+function Children(name) {
+  Parent.call(this, name); //继承 姓名属性，不要钱。
+  this.info = function() {
+    alert("姓名： " + this.name);
+  };
+} //实例化类
+var per = new Parent("parent", 800000000000);
+var chi = new Children("child");
+per.info();
+chi.info();
+```
+
+## 解析 URL 成一个对象？
+
+```js
+String.prototype.urlQueryString = function() {
+  var url = this.split("?")[1].split("&"),
+    len = url.length;
+  this.url = {};
+  for (var i = 0; i < len; i += 1) {
+    var cell = url[i].split("="),
+      key = cell[0],
+      val = cell[1];
+    this.url["" + key + ""] = val;
+  }
+  return this.url;
+};
+var url = "?name=12&age=23";
+console.log(url.urlQueryString().age);
+```
+
+## 下面这个 ul，如何点击每一列的时候 alert 其 index?（闭包）
+
+```js
+<ul id="test">
+  <li>这是第一条</li>
+  <li>这是第二条</li>
+  <li>这是第三条</li>
+</ul>
+```
+
+答案：
+
+```js
+// 方法一：
+var lis = document.getElementById("test").getElementsByTagName("li");
+for (var i = 0; i < 3; i++) {
+  lis[i].index = i;
+  lis[i].onclick = function() {
+    alert(this.index);
+  };
+}
+//方法二：
+var lis = document.getElementById("test").getElementsByTagName("li");
+for (var i = 0; i < 3; i++) {
+  lis[i].index = i;
+  lis[i].onclick = (function(a) {
+    return function() {
+      alert(a);
+    };
+  })(i);
+}
+```
+
+## 实现一个函数 clone，可以对 JavaScript 中的 5 种主要的数据类型（包括 Numer、String、Object、Array、Boolean）进行值复制
+
+- 1：对于基本数据类型和引用数据类型在内存中存放的是值还是指针这一区别是否清楚
+- 2：是否知道如何判断一个变量是什么类型的
+- 3：递归算法的设计
+
+```js
+// 方法一：
+Object.prototype.clone = function() {
+  var o = this.constructor === Array ? [] : {};
+  for (var e in this) {
+    o[e] = typeof this[e] === "object" ? this[e].clone() : this[e];
+  }
+  return o;
+};
+/**
+ * 克隆一个对象
+ * @param Obj
+ * @returns
+ */
+//方法二：
+function clone(Obj) {
+  var buf;
+  if (Obj instanceof Array) {
+    buf = []; //创建一个空的数组
+    var i = Obj.length;
+    while (i--) {
+      buf[i] = clone(Obj[i]);
+    }
+    return buf;
+  } else if (Obj instanceof Object) {
+    buf = {}; //创建一个空对象
+    for (var k in Obj) {
+      //为这个对象添加新的属性
+      buf[k] = clone(Obj[k]);
+    }
+    return buf;
+  } else {
+    //普通变量直接赋值
+    return Obj;
+  }
+}
+```
+
+## 用 js 实现随机选取 10–100 之间的 10 个数字，存入一个数组，并排序。
+
+```js
+var iArray = [];
+function getRandom(istart, iend) {
+  var iChoice = iend - istart + 1;
+  return Math.floor(Math.random() * iChoice + istart);
+}
+for (var i = 0; i < 10; i++) {
+  iArray.push(getRandom(10, 100));
+}
+iArray.sort((a, b) => a - b);
+```
+
+## 输出今天的日期，以 YYYY-MM-DD 的方式，比如今天是 2014 年 9 月 26 日，则输出 2014-09-26
+
+```js
+var d = new Date();
+// 获取年，getFullYear()返回4位的数字
+var year = d.getFullYear();
+// 获取月，月份比较特殊，0是1月，11是12月
+var month = d.getMonth() + 1;
+// 变成两位
+month = month < 10 ? "0" + month : month;
+// 获取日
+var day = d.getDate();
+day = day < 10 ? "0" + day : day;
+alert(year + "-" + month + "-" + day);
+```
+
+## 下列 JavaScript 代码执行后，依次 alert 的结果是
+
+```js
+var obj = { proto: { a: 1, b: 2 } };
+function F() {}
+F.prototype = obj.proto;
+console.log(F.prototype === obj.proto); //true
+var f = new F();
+obj.proto.c = 3;
+console.log(f.__proto__ === obj); // false
+console.log(obj);
+obj.proto = { a: -1, b: -2 };
+// alert(f.a); //1
+// alert(f.c); //3
+// console.log(f)
+// console.log(obj)
+delete F.prototype["a"];
+alert(f.a); //undefined
+alert(obj.proto.a); // -1
+// console.log(obj.proto.c)
+```
+
+## js 中如何实现一个 map
+
+数组的 map 方法：
+
+```
+概述
+map() 方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。
+
+语法
+array.map(callback[, thisArg])
+
+参数
+callback
+
+原数组中的元素经过该方法后返回一个新的元素。
+
+currentValue
+
+callback 的第一个参数，数组中当前被传递的元素。
+
+index
+
+callback 的第二个参数，数组中当前被传递的元素的索引。
+
+array
+
+callback 的第三个参数，调用 map 方法的数组。
+
+thisArg
+
+执行 callback 函数时 this 指向的对象。
+```
+
+实现：
+
+```js
+Array.prototype.map2 = function(callback) {
+  for (var i = 0; i < this.length; i++) {
+    console.log(this);
+    this[i] = callback(this[i]);
+  }
+  return this;
+};
+```
+
+## 判断输出
+
+```js
+//考点：函数声明提前
+function bar() {
+  console.log(foo); //function foo(){}
+  foo = 111; //此时foo为函数内的变量
+  return foo;
+  //   foo = 10;
+  function foo() {}
+}
+alert(typeof bar()); //"function"
+```
+
+```js
+var foo = 1;
+function bar() {
+  foo = 10;
+  return;
+  function foo() {}
+}
+bar();
+alert(foo); //答案：1
+```
+
+## 只允许使用 `+ - _ /` 和 `Math._` ，求一个函数 `y = f(x, a, b);`当 `x > 100` 时返回 a 的值，否则返回 b 的值，不能使用 `if else` 等条件语句，也不能使用`|,?:,`数组
+
+```js
+function f(x, a, b) {
+  var temp = Math.ceil(Math.min(Math.max(x - 100, 0), 1));
+  return a * temp + b * (1 - temp);
+}
+console.log(f(-10, 1, 2));
+```
+
+## 求 num 的值
+
+```js
+// 面试题1
+var num = 123;
+function f1() {
+  console.log(num); // 123
+}
+function f2() {
+  var num = 456;
+  f1();
+}
+f2();
+
+// 面试题1 变式
+var num = 123;
+function f1(num) {
+  console.log(num); // 456
+}
+function f2() {
+  var num = 456;
+  f1(num);
+}
+f2();
+
+// 面试题1 变式
+var num = 123;
+function f1() {
+  console.log(num); // 456
+}
+f2();
+function f2() {
+  num = 456; //这里是全局变量
+  f1();
+}
+console.log(num); // 456
+```
+
+## 有一个函数，参数是一个函数，返回值也是一个函数，返回的函数功能和入参的函数相似，但这个函数只能执行 3 次，再次执行无效，如何实现
+
+这个题目是考察闭包的使用
+
+```js
+function sayHi(){
+  console.log("hi)
+}
+function threeTimes(fn){
+  let times = 0;
+  return () => {
+    if(times++ < 3) {
+      fn()
+    }
+  }
+}
+```
+
+通过闭包变量 times 来控制函数的执行
+
+## 实现 add 函数,让 add(a)(b)和 add(a,b)两种调用结果相同
+
+```js
+function add(a, b) {
+  if (b === undefined) {
+    return function(x) {
+      return a + x;
+    };
+  }
+  return a + b;
+}
+```
+
+## 格式化金钱，每千分位加逗号
+
+```js
+function format(str) {
+  let s = "";
+  let count = 0;
+  for (let i = str.length - 1; i >= 0; i--) {
+    s = str[i] + s;
+    count++;
+    if (count % 3 == 0 && i != 0) {
+      s = "," + s;
+    }
+  }
+  return s;
+}
+function format(str) {
+  return str.replace(/(\d)(?=(?:\d{3})+$)/g, "$1,");
+}
+```
+
+## 反转数组
+
+```js
+function reverseArry(arry) {
+  const str = arry.join(" ");
+  const result = [];
+  let word = "";
+  for (let i = 0, len = str.length; i < len; i++) {
+    if (str[i] != " ") {
+      word += str[i];
+    } else {
+      result.unshift(word);
+      word = "";
+    }
+  }
+
+  result.unshift(word);
+  return result;
+}
+
+console.log(reverseArry(["I", "am", "a", "student"]));
+// ["student", "a", "am", "I"]
+```
+
+```js
+function reverseArry(arry) {
+  const result = [];
+  const distance = arry.length - 1;
+  for (let i = distance; i >= 0; i--) {
+    result[distance - i] = arry[i];
+  }
+
+  return result;
+}
+```
+
+## 说出以下函数的作用是？空白区域应该填写什么？
+
+```js
+//define
+(function(window) {
+  function fn(str) {
+    this.str = str;
+  }
+  fn.prototype.format = function() {
+    var arg = ______; //arguments
+    return this.str.replace(_____, function(a, b) {
+      ///{(\d+)}/ig
+      return arg[b] || "";
+    });
+  };
+  window.fn = fn;
+})(window);
+//use
+(function() {
+  var t = new fn('<p><a href="{0}">{1}</a><span>{2}</span></p>');
+  console.log(t.format("http://www.alibaba.com", "Alibaba", "Welcome"));
+})();
+```
+
+访函数的作用是使用 format 函数将函数的参数替换掉{0}这样的内容，返回一个格式化后的结果： 第一个空是：arguments 第二个空是：/{(\d+)}/ig
+
+## 原生 JS 的 window.onload 与 Jquery 的\$(document).ready(function(){})有什么不同？如何用原生 JS 实现 Jq 的 ready 方法？
+
+```js
+function ready(fn) {
+  if (document.addEventListener) {
+    //标准浏览器
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+        //注销事件, 避免反复触发
+        document.removeEventListener(
+          "DOMContentLoaded",
+          arguments.callee,
+          false
+        );
+        fn(); //执行函数
+      },
+      false
+    );
+  } else if (document.attachEvent) {
+    //IE
+    document.attachEvent("onreadystatechange", function() {
+      if (document.readyState == "complete") {
+        document.detachEvent("onreadystatechange", arguments.callee);
+        fn(); //函数执行
+      }
+    });
+  }
+}
+```
