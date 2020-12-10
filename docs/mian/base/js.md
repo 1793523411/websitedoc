@@ -632,6 +632,134 @@ Student.prototype.sayMyGrade = function() {
 };
 ```
 
+## ES5/ES6 的继承除了写法以外还有什么区别？
+
+1. ES5 的继承实质上是先创建子类的实例对象，然后再将父类的方法添加到 this 上（Parent.apply(this)）.
+2. ES6 的继承机制完全不同，实质上是先创建父类的实例对象 this（所以必须先调用父类的 super()方法），然后再用子类的构造函数修改 this。
+3. ES5 的继承时通过原型或构造函数机制来实现。
+4. ES6 通过 class 关键字定义类，里面有构造方法，类之间通过 extends 关键字实现继承。
+5. 子类必须在 constructor 方法中调用 super 方法，否则新建实例报错。因为子类没有自己的 this 对象，而是继承了父类的 this 对象，然后对其进行加工。如果不调用 super 方法，子类得不到 this 对象。
+6. 注意 super 关键字指代父类的实例，即父类的 this 对象。
+7. 注意：在子类构造函数中，调用 super 后，才可使用 this 关键字，否则报错。
+
+**function 声明会提升，但不会初始化赋值。Foo 进入暂时性死区，类似于 let、const 声明变量**
+
+```js
+const bar = new Bar();
+function Bar() {
+  this.bar = 42;
+}
+const foo = new Foo(); //报错
+```
+
+**class 声明内部会启用严格模式**
+
+```js
+// 引用一个未声明的变量
+function Bar() {
+  baz = 42;
+  // it's ok
+}
+const bar = new Bar();
+class Foo {
+  constructor() {
+    fol = 42;
+    // ReferenceError: fol is not defined
+  }
+}
+const foo = new Foo();
+```
+
+**class 的所有方法（包括静态方法和实例方法）都是不可枚举的。**
+
+```js
+// 引用一个未声明的变量
+function Bar() {
+  this.bar = 42;
+}
+Bar.answer = function() {
+  return 42;
+};
+Bar.prototype.print = function() {
+  console.log(this.bar);
+};
+const barKeys = Object.keys(Bar);
+// ['answer']
+const barProtoKeys = Object.keys(Bar.prototype);
+// ['print']
+class Foo {
+  constructor() {
+    this.foo = 42;
+  }
+  static answer() {
+    return 42;
+  }
+  print() {
+    console.log(this.foo);
+  }
+}
+const fooKeys = Object.keys(Foo);
+// []
+const fooProtoKeys = Object.keys(Foo.prototype);
+// []
+```
+
+**class 的所有方法（包括静态方法和实例方法）都没有原型对象 prototype，所以也没有`[[construct]]`，不能使用 new 来调用**
+
+```js
+function Bar() {
+  this.bar = 42;
+}
+Bar.prototype.print = function() {
+  console.log(this.bar);
+};
+const bar = new Bar();
+const barPrint = new bar.print();
+// it's ok
+class Foo {
+  constructor() {
+    this.foo = 42;
+  }
+  print() {
+    console.log(this.foo);
+  }
+}
+const foo = new Foo();
+const fooPrint = new foo.print();
+// TypeError: foo.print is not a constructor
+// 必须使用 new 调用 class。
+function Bar() {
+  this.bar = 42;
+}
+const bar = Bar();
+// it's ok
+class Foo {
+  constructor() {
+    this.foo = 42;
+  }
+}
+const foo = Foo();
+// TypeError: Class constructor Foo cannot be invoked without 'new'
+// class 内部无法重写类名。
+function Bar() {
+  Bar = "Baz";
+  // it's ok this.bar = 42;
+}
+const bar = new Bar();
+// Bar: 'Baz'
+// bar: Bar {bar: 42}
+class Foo {
+  constructor() {
+    this.foo = 42;
+    Foo = "Fol";
+    // TypeError: Assignment to constant variable
+  }
+}
+const foo = new Foo();
+Foo = "Fol";
+// it's ok
+```
+
 ## Javascript 的作用域链？
 
 作用域链的作用是保证对执行环境有权访问的所有变量和函数的有序访问，通过作用域链，我们可以访问到外层环境的变量和函数。
@@ -2791,6 +2919,8 @@ function getFileExtension(filename) {
 ```
 
 ## 介绍一下 js 的节流与防抖
+
+[防抖节流代码](/mian/base/jstimu.html#手写防抖-debouncing-和节流-throttling)
 
 **高频率触发事件解决方案**
 

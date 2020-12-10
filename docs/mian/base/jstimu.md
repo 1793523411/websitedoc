@@ -2131,3 +2131,102 @@ function ready(fn) {
   }
 }
 ```
+
+## 介绍下深度优先遍历和广度优先遍历，如何实现？
+
+深度优先遍历——是指从某个顶点出发，首先访问这个顶点，然后找出刚访问这个结点的第一个未被访问的邻结点，然后再以此邻结点为顶点，继续找它的下一个顶点进行访问。重复此步骤，直至所有结点都被访问完为止。广度优先遍历——是从某个顶点出发，首先访问这个顶点，然后找出刚访问这个结点所有未被访问的邻结点，访问完后再访问这些结点中第一个邻结点的所有结点，重复此方法，直到所有结点都被访问完为止。
+
+```js
+//DFS递归
+function deepTraversal(node) {
+  let nodes = [];
+  if (node != null) {
+    nodes.push(node);
+    let childrens = node.children;
+    for (let i = 0; i < childrens.length; i++) {
+      deepTraversal(childrens[i]);
+    }
+    return nodes;
+  }
+}
+
+//DFS非递归
+function deepTraversal(node) {
+  let nodes = [];
+  if (node != null) {
+    let stack = [];
+    stack.push(node);
+    while (stack.length != 0) {
+      let item = stack.pop();
+      nodes.push(item);
+      let childrens = item.children;
+      for (let i = childrens.length - 1; i >= 0; i--) {
+        stack.push(childrens[i]);
+      }
+    }
+  }
+  return nodes;
+}
+
+//BFS递归
+function wideTraversal(node) {
+  let nodes = [],
+    i = 0;
+  if (node != null) {
+    nodes.push(node);
+    wideTraversal(node.nextElementSibling);
+    node = nodes[i++];
+    wideTraversal(node.firstElementChild);
+  }
+  return nodes;
+}
+
+//BFS非递归
+function wideTraversal() {
+  let nodes = [],
+    i = 0;
+  while (node != null) {
+    nodes.push(node);
+    node = nodes[i++];
+    let childrens = node.children;
+    for (let i = 0; i < childrens.length; i++) {
+      nodes.push(childrens[i]);
+    }
+  }
+  return nodes;
+}
+```
+
+## 异步笔试题请写出下面代码的运行结果
+
+```js
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
+}
+async function async2() {
+  console.log("async2");
+}
+console.log("script start");
+setTimeout(function() {
+  console.log("setTimeout");
+}, 0);
+async1();
+new Promise(function(resolve) {
+  console.log("promise1");
+  resolve();
+}).then(function() {
+  console.log("promise2");
+});
+console.log("script end");
+//输出
+//script start
+//async1 start
+//async2
+//promise1
+//script end //第一次事件循环的调用栈执行完，开始执行微任务
+//async1 end
+//promise2 //微任务执行完开始执行宏任务
+//setTimeout
+```

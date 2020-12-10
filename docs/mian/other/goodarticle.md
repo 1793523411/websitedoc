@@ -912,6 +912,8 @@
 
 [关于setTimeout的面试题](https://www.cnblogs.com/adouwt/p/6481479.html)
 
+[关于async/await、promise和setTimeout执行顺序](https://blog.csdn.net/yun_hou/article/details/88697954)
+
 ## 算法
 
 [漫画：什么是动态规划？（整合版）](https://mp.weixin.qq.com/s?__biz=MzI1MTIzMzI2MA==&mid=2650561168&idx=1&sn=9d1c6f7ba6d651c75399c4aa5254a7d8&chksm=f1feec13c6896505f7886d9455278ad39749d377a63908c59c1fdceb11241e577ff6d66931e4&scene=21)
