@@ -101,3 +101,12 @@ koa-jwt
 koa-helmet
 koa-convert
 ```
+
+## 介绍下 npm 模块安装机制, 为什么输入 npm install就可以自动安装对应的模块？
+
++ 发出npm install命令查询node_modules目录之中是否已经存在指定模块
++ 若存在，不再重新安装
++ 若不存在
++ npm 向 registry 查询模块压缩包的网址
++ 下载压缩包，存放在根目录下的.npm 目录里
++ 解压压缩包到当前项目的 node_modules 目录

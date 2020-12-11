@@ -182,6 +182,45 @@ React.createClass()、ES6 class 和无状态函数。
 
 因为 this.props 和 this.state 的更新可能是异步的，不能依赖它们的值去计算下一个 state。
 
+## React 中 中 e setState 什么时候是同步的, 什么时候是异步的
+
+1、由 React 控制的事件处理程序，以及生命周期函数调用 setState 不会同步更新 state 。
+
+2、React 控制之外的事件中调用 setState 是同步更新的。比如原生 js 绑定的事件，setTimeout/setInterval 等
+
+## 下面 react 代码输出什么
+
+```js
+class Example extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      val: 0,
+    };
+  }
+  componentDidMount() {
+    this.setState({ val: this.state.val + 1 });
+    console.log(this.state.val);
+    // 第 1 次 log
+    this.setState({ val: this.state.val + 1 });
+    console.log(this.state.val);
+    // 第 2 次 log
+    setTimeout(() => {
+      this.setState({ val: this.state.val + 1 });
+      console.log(this.state.val);
+      // 第 3 次 log
+      this.setState({ val: this.state.val + 1 });
+      console.log(this.state.val);
+      // 第 4 次 log
+    }, 0);
+  }
+  render() {
+    return null;
+  }
+}
+//0 0 1 2
+```
+
 ## 何为高阶组件(higher order component)
 
 高阶组件是一个以组件为参数并返回一个新组件的函数。HOC 运行你重用代码、逻辑和引导抽象。最常见的可能是 Redux 的 connect 函数。除了简单分享工具库和简单的组合，HOC 最好的方式是共享 React 组件之间的行为。如果你发现你在不同的地方写了大量代码来做同一件事时，就应该考虑将代码重构为可重用的 HOC。

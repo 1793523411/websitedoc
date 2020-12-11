@@ -169,6 +169,13 @@ var newArr2 = deRepeat(arr);
 alert(newArr2); //输出1,2,3,4,5,6,9,25
 ```
 
+## 编写一个程序将数组扁平化去并除其中重复部分数据，最终得到一个升序且不重复的数组
+
+```js
+var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
+Array.from(new Set(arr.flat(Infinity))).sort((a,b) => a-b)
+```
+
 ## 如何求数组的最大值和最小值
 
 ```js
@@ -1350,6 +1357,19 @@ function throttle(fn, delay) {
     }, delay);
   };
 }
+
+//红宝书：通过requestAnimationFrame
+let enabled = true;
+function expensiveOperation() {
+  console.log("Invoked at", Date.now());
+}
+window.addEventListener("scroll", () => {
+  if (enabled) {
+    enabled = false;
+    window.requestAnimationFrame(expensiveOperation);
+    window.setTimeout(() => (enabled = true), 50);
+  }
+});
 ```
 
 ## 手写一个 JS 深拷贝

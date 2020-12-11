@@ -2257,6 +2257,15 @@ var f1 = new f("martin");
 console.log(f1 instanceof f); //true
 ```
 
+```js
+var iframe = document.createElement('iframe')
+document.body.appendChild(iframe)
+xArray = window.frames[window.frames.length-1].Array;
+var arr = new xArray(1,2,3)
+console.log(Array.isArray(arr)) //true
+Object.prototype.toString.call(arr) //[object Array]
+```
+
 **Array.isArray()**
 
 - 功能：用来判断对象是否为数组
@@ -3494,6 +3503,27 @@ js 中的异步机制可以分为以下几种：
 第三种是使用 generator 的方式，它可以在函数的执行过程中，**将函数的执行权转移出去**，**在函数外部我们还可以将执行权转移回**来。当我们遇到异步函数执行的时候，将函数执行权转移出去，当异步函数执行完毕的时候我们再将执行权给转移回来。因此我**们在 generator 内部对于异步操作的方式，可以以同步的顺序来书写**。**使用这种方式我们需要考虑的问题是何时将函数的控制权转移回来，因此我们需要有一个自动执行 generator 的机制，比如说 co 模块等方式来实现 generator 的自动执行**。
 
 第四种是使用 async 函数的形式，**async 函数是 generator 和 promise 实现的一个自动执行的语法糖**，它**内部自带执行器**，当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。因此我们**可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行**。
+
+## JS 异步解决方案的发展历程以及优缺点
+
+1、回调函数（callback）
+
++ 优点：解决了同步的问题（只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。）
++ 缺点：回调地狱，不能用 try catch 捕获错误，不能 return
+
+2、Promise
+
++ 优点：解决了回调地狱的问题
++ 缺点：无法取消 Promise ，错误需要通过回调函数来捕获
+
+3、Generator
+
++ 特点：可以控制函数的执行，可以配合 co 函数库使用
+
+4、Async/await
+
++ 优点：代码清晰，不用像 Promise 写一大堆 then 链，处理了回调地狱的问题
++ 缺点：await 将异步代码改造成同步代码，如果多个异步操作没有依赖性而使用 await 会导致性能上的降低。
 
 ## Js 与 动画与 CSS 动画区别及相应实现
 

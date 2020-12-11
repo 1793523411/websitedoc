@@ -86,6 +86,8 @@
 
 [How Browser Work](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)
 
+[深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
+
 ## css
 
 [CSS 盒模型详解](https://juejin.cn/post/6844903505983963143)
@@ -681,6 +683,8 @@
 [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
 
 [前端异常监控](https://blog.csdn.net/screaming/article/details/51726150)
+
+[前端中的模块化](https://blog.csdn.net/dadadeganhuo/article/details/86777249)
 
 ## 设计模式
 
