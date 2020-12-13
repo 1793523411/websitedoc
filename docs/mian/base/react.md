@@ -63,6 +63,12 @@ React 只会匹配相同 class 的 component（这里面的 class 指的是组�
 
 选择性子树渲染。开发人员可以重写 shouldComponentUpdate 提高 diff 的性能。
 
+三种优化来降低复杂度：
+
+1. 如果父节点不同，放弃对子节点的比较，直接删除旧节点然后添加新的节点重新渲染；
+2. 如果子节点有变化，Virtual DOM 不会计算变化的是什么，而是重新渲染，
+3. 通过唯一的 key 策略
+
 ## react 生命周期函数
 
 - 初始化阶段：
@@ -300,3 +306,36 @@ React.cloneElement(element, [props], [...children]);
 4)	virtual DOM不一样,vue会跟踪每一个组件的依赖关系,不需要重新渲染整个组件树,而对于React而言,每当应用的状态被改变时,全部组件都会重新渲染,所以react中会需要shouldComponentUpdate这个生命周期函数方法来进行控制
 5)	React严格上只针对MVC的view层,Vue则是MVVM模式
 ```
+
+## react-router 的 里的`<Link>` 和 标签和`<a>`标签有什么
+
+如何禁掉 标签默认事件，禁掉之后如何实现跳转
+
+Link 点击事件 handleClick 部分源码：
+
+```js
+if (_this.props.onClick) _this.props.onClick(event);
+if (
+  !event.defaultPrevented &&
+  event.button === 0 &&
+  !_this.props.target &&
+  !isModifiedEvent(event)
+) {
+  event.preventDefault();
+  var history = _this.context.router.history;
+  var _this.$props = _this.props,
+    replace = _this$props.replace,
+    to = _this.$props.to;
+  if (replace) {
+    history.replace(to);
+  } else {
+    history.push(to);
+  }
+}
+```
+
+Link 做了 3 件事情：
+
++ 有 onclick 那就执行 onclick
++ click 的时候阻止 a 标签默认事件（这样子点击`<a href="/abc">123</a>`就不会跳转和刷新页面）
++ 再取得跳转 href（即是 to），用 history（前端路由两种方式之一，`history& hash`）跳转，此时只是链接变了，并没有刷新页面

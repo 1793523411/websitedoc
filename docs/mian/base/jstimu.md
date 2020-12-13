@@ -172,8 +172,8 @@ alert(newArr2); //输出1,2,3,4,5,6,9,25
 ## 编写一个程序将数组扁平化去并除其中重复部分数据，最终得到一个升序且不重复的数组
 
 ```js
-var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
-Array.from(new Set(arr.flat(Infinity))).sort((a,b) => a-b)
+var arr = [[1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10];
+Array.from(new Set(arr.flat(Infinity))).sort((a, b) => a - b);
 ```
 
 ## 如何求数组的最大值和最小值
@@ -1250,6 +1250,8 @@ var child = new Child("son", "汪某");
 
 ## 手写一个 Promise
 
+[手写 Promise](/mian/base/es6.html#手撕-promise-promise-all-或者-promise-race)
+
 ```js
 function myPromise(constructor) {
   let self = this;
@@ -1302,6 +1304,36 @@ var p = new myPromise(function(resolve, reject) {
 p.then(function(x) {
   console.log(x);
 });
+```
+
+## 设计并实现 Promise.race()
+
+```js
+Promise._race = (promises) =>
+  new Promise((resolve, reject) => {
+    promises.forEach((promise) => {
+      promise.then(resolve, reject);
+    });
+  });
+Promise.myrace = function(iterator) {
+  return new Promise((resolve, reject) => {
+    try {
+      let it = iterator[Symbol.iterator]();
+      while (true) {
+        let res = it.next();
+        console.log(res);
+        if (res.done) break;
+        if (res.value instanceof Promise) {
+          res.value.then(resolve, reject);
+        } else {
+          resolve(res.value);
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 ```
 
 ## 手写防抖(Debouncing)和节流(Throttling)
@@ -1372,6 +1404,30 @@ window.addEventListener("scroll", () => {
 });
 ```
 
+## input 搜索如何防抖，如何处理中文输入
+
+```html
+<div>
+  <input type="text" id="ipt" />
+</div>
+<script>
+  let ipt = document.getElementById("ipt");
+  let dbFun = debounce();
+  ipt.addEventListener("keyup", function(e) {
+    dbFun(e.target.value);
+  });
+  function debounce() {
+    let timer;
+    return function(value) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        console.log(value);
+      }, 500);
+    };
+  }
+</script>
+```
+
 ## 手写一个 JS 深拷贝
 
 ```js
@@ -1413,6 +1469,67 @@ function deepCopy(s) {
   return d;
 }
 ```
+
+## 模拟实现一个深拷贝，并考虑对象相互引用以及 Symbol 拷贝的情况
+
+一个不考虑其他数据类型的公共方法，基本满足大部分场景:
+
+```js
+function deepCopy(targer, cache = new Set()) {
+  if (typeof target !== "object" || cache.has(targer)) {
+    return targer;
+  }
+  if (Array.isArray(targer)) {
+    targer.map((t) => {
+      cache.add(t);
+      return t;
+    });
+  } else {
+    return [
+      Object.keys(targer),
+      ...Object.getOwnPropertySymbols(targer),
+    ].reduce(
+      (res, key) => {
+        cache.add(targer[key]);
+        res[key] = deepCopy(targer[key], cache);
+        return res;
+      },
+      targer.constructor !== Object
+        ? Object.create(targer.constructor.prototype)
+        : {}
+    );
+  }
+}
+```
+
+主要问题是
+
+- symbol 作为 key，不会被遍历到，所以 stringify 和 parse 是不行的
+- 有环引用，stringify 和 parse 也会报错
+
+我们另外用 getOwnPropertySymbols 可以获取 symbol key 可以解决问题 1，用集合记忆曾经遍历过的对象可以解决问题 2。当然，还有很多数据类型要独立去拷贝。比如拷贝一个 RegExp，lodash 是最全的数据类型拷贝了，有空可以研究一下
+
+另外，如果不考虑用 symbol 做 key，还有两种黑科技深拷贝，可以解决环引用的问题，比 stringify 和 parse 优雅强一些
+
+```js
+function deepCopyByHistory(target) {
+  const prev = history.state;
+  history.replaceState(target, document.title);
+  const res = history.state;
+  history.replaceState(prev, document.title);
+  return res;
+}
+
+async function deepCopyMessageChannel(target) {
+  return new Promise((reslove) => {
+    const channel = new MessageChannel();
+    channel.port2.onmessage = (ev) => reslove(ev.data);
+    channel.port1.postMessage(target);
+  }).then((data) => data);
+}
+```
+
+无论哪种方法，它们都有一个共性：失去了继承关系，所以剩下的需要我们手动补上去了，故有 `Object.create(target.constructor.prototype)`的操作
 
 ## 写一个通用的事件侦听器函数
 
@@ -2249,4 +2366,490 @@ console.log("script end");
 //async1 end
 //promise2 //微任务执行完开始执行宏任务
 //setTimeout
+```
+
+## 递归反转数字,必须返回字符串
+
+```js
+function fun(num) {
+  let num1 = num / 10;
+  let num2 = num % 10;
+  if (num1 < 1) {
+    return num;
+  } else {
+    num1 = Math.floor(num1);
+    return `${num2}${fun(num1)}`;
+  }
+}
+var a = fun(12345);
+console.log(a);
+console.log(typeof a);
+```
+
+## 给定两个大小为 m 和 n 组 的有序数组 nums1 和 nums2 。请找出这两个有序数组的中位数。要求算法的时间复杂为 度为 O(log(m+n))
+
+```ts
+const findMedianSortedArrays = function(nums1: number[], nums2: number[]) {
+  const lenN1 = nums1.length;
+  const lenN2 = nums2.length;
+  const median = Math.ceil((lenN1 + lenN2 + 1) / 2);
+  const isOddLen = (lenN1 + lenN2) % 2 === 0;
+  const result = new Array<number>(median);
+  let i = 0;
+  let j = 0;
+  for (let k = 0; k < median; k++) {
+    if (i < lenN1 && j < lenN2) {
+      if (nums1[i] < nums2[j]) {
+        result[i + j] = nums1[i++];
+      } else {
+        result[i + j] = nums2[j++];
+      }
+    } else if (i < lenN1) {
+      result[i + j] = nums1[i++];
+    } else if (j < lenN2) {
+      result[i + j] = nums2[j++];
+    }
+  }
+  if (isOddLen) {
+    return (result[median - 1] + result[median - 2]) / 2;
+  } else {
+    return result[median - 1];
+  }
+};
+```
+
+## 已知数据格式数 实现一个函数 fn 找出链条中所有的父级 idconst value = '112'
+
+`const fn = (value) => {...}fn(value) // 输出 [1， 11， 112]`
+
+```js
+const data = [
+  {
+    id: "1",
+    name: "test1",
+    children: [
+      {
+        id: "11",
+        name: "test11",
+        children: [
+          {
+            id: "111",
+            name: "test111",
+          },
+          {
+            id: "112",
+            name: "test112",
+          },
+        ],
+      },
+      {
+        id: "12",
+        name: "test12",
+        children: [
+          {
+            id: "121",
+            name: "test121",
+          },
+          {
+            id: "122",
+            name: "test122",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const find = (value) => {
+  let result = [];
+  let findArr = data;
+  let skey = "";
+  for (let i = 0, l = value.length; i < l; i++) {
+    skey += value[i];
+    let item = findArr.find((item) => {
+      return item.id == skey;
+    });
+    if (!item) {
+      return [];
+    }
+    result.push(item.id);
+    if (item.children) {
+      findArr = item.children;
+    } else {
+      if (i < l - 1) return [];
+      return result;
+    }
+  }
+};
+//调用看结果
+function testFun() {
+  console.log("1,11,111:", find("111"));
+  console.log("1,11,112:", find("112"));
+  console.log("1,12,121:", find("121"));
+  console.log("1,12,122:", find("122"));
+  console.log("[]:", find("113"));
+  console.log("[]:", find("1114"));
+}
+```
+
+## 实现模糊搜索结果的关键词高亮显示
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>auto complete</title>
+    <style>
+      bdi {
+        color: rgb(0, 136, 255);
+      }
+
+      li {
+        list-style: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input class="inp" type="text" />
+    <section>
+      <ul class="container"></ul>
+    </section>
+  </body>
+  <script>
+    function debounce(fn, timeout = 300) {
+      let t;
+      return (...args) => {
+        if (t) {
+          clearTimeout(t);
+        }
+        t = setTimeout(() => {
+          fn.apply(fn, args);
+        }, timeout);
+      };
+    }
+    function memorize(fn) {
+      const cache = new Map();
+      return (name) => {
+        if (!name) {
+          container.innerHTML = "";
+          return;
+        }
+        if (cache.get(name)) {
+          container.innerHTML = cache.get(name);
+          return;
+        }
+        const res = fn.call(fn, name).join("");
+        cache.set(name, res);
+        container.innerHTML = res;
+      };
+    }
+    function handleInput(value) {
+      const reg = new RegExp(`\(${value}\)`);
+      const search = data.reduce((res, cur) => {
+        if (reg.test(cur)) {
+          const match = RegExp.$1;
+          res.push(`<li>${cur.replace(match, "<bdi>$&</bdi>")}</li>`);
+        }
+        return res;
+      }, []);
+      return search;
+    }
+    const data = [
+      "上海野生动物园",
+      "上饶野生动物园",
+      "北京巷子",
+      "上海中心",
+      "上海黄埔江",
+      "迪士尼上海",
+      "陆家嘴上海中心",
+    ];
+    const container = document.querySelector(".container");
+    const memorizeInput = memorize(handleInput);
+    document.querySelector(".inp").addEventListener(
+      "input",
+      debounce((e) => {
+        memorizeInput(e.target.value);
+      })
+    );
+  </script>
+</html>
+```
+
+## 实现 convert 方法,把原始 list 转换成树形结构 ，要求尽可能降低时间复杂度
+
+```js
+let list = [
+  { id: 1, name: "部门 A", parentId: 0 },
+  { id: 2, name: "部门 B", parentId: 0 },
+  { id: 3, name: "部门 C", parentId: 1 },
+  { id: 4, name: "部门 D", parentId: 1 },
+  { id: 5, name: "部门 E", parentId: 2 },
+  { id: 6, name: "部门 F", parentId: 3 },
+  { id: 7, name: "部门 G", parentId: 2 },
+  { id: 8, name: "部门 H", parentId: 4 },
+];
+const result = convert(list); // 转换后的结果如下
+let result = [
+  {
+    id: 1,
+    name: "部门 A",
+    parentId: 0,
+    children: [
+      {
+        id: 3,
+        name: "部门 C",
+        parentId: 1,
+        children: [
+          {
+            id: 6,
+            name: "部门 F",
+            parentId: 3,
+          },
+          {
+            id: 16,
+            name: "部门 L",
+            parentId: 3,
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "部门 D",
+        parentId: 1,
+        children: [
+          {
+            id: 8,
+            name: "部门 H",
+            parentId: 4,
+          },
+        ],
+      },
+    ],
+  },
+];
+
+function convert(list) {
+  const res = [];
+  const map = list.reduce((res, v) => ((res[v.id] = v), res), {});
+  for (const item of list) {
+    if (item.parentId === 0) {
+      res.push(item);
+      Continue;
+    }
+    if (item.parentId in map) {
+      const parent = map[item.parentId];
+      parent.children = parent.children || [];
+      parent.children.push(item);
+    }
+  }
+  return res;
+}
+```
+
+## 在输入框中如何判断输入的是一个正确的网址
+
+```js
+function isUrl(url) {
+  const a = document.createElement("a");
+  a.href = url;
+  return (
+    [
+      /^(http|https):$/.test(a.protocol),
+      a.host,
+      a.pathname !== url,
+      a.pathname !== `/${url}`,
+    ].find((x) => !x) === undefined
+  );
+}
+```
+
+## 请实现一个 add 函数，满足以下功能
+
+```js
+add(1);
+// 1add(1)(2);
+// 3add(1)(2)(3)；
+// 6add(1)(2, 3);
+// 6add(1, 2)(3);
+// 6add(1, 2, 3);
+// 6
+```
+
+实现 1：
+
+```js
+function currying(fn, length) {
+  length = length || fn.length; // 注释 1
+  return function(...args) {
+    // 注释 2 return
+    args.length >= length // 注释 3
+      ? fn.apply(this, args) // 注释 4
+      : currying(fn.bind(this, ...args), length - args.length); // 注释
+    5;
+  };
+}
+```
+
+实现 2：
+
+```js
+const currying = (fn) =>
+  (judge = (...args) =>
+    args.length >= fn.length
+      ? fn(...args)
+      : (...arg) => judge(...args, ...arg));
+```
+
+## 打印出 1 1 - - 0 10000 之间的所有对称数
+
+```js
+[...Array(10000).keys()].filter((x) => {
+  return (
+    x.toString().length > 1 &&
+    x ===
+      Number(
+        x
+          .toString()
+          .split("")
+          .reverse()
+          .join("")
+      )
+  );
+});
+```
+
+## 输出以下代码运行结果
+
+```js
+// example 1
+var a = {},
+  b = "123",
+  c = 123;
+a[b] = "b";
+a[c] = "c";
+console.log(a[b]);
+---------------------
+  // example 2
+  var a={}, b=Symbol('123'), c=Symbol('123');
+  a[b] = "b";
+a[c] = "c";
+console.log(a[b]);
+---------------------
+  // example 3
+  var a={}, b={key:'123'}, c={key:'456'};
+  a[b] = "b";
+a[c] = "c";
+console.log(a[b]);
+```
+
+1. 对象的键名只能是字符串和 Symbol 类型。
+2. 其他类型的键名会被转换成字符串类型。
+3. 对象转字符串默认会调用 toString 方法。
+
+```js
+// example 1
+var a = {},
+  b = "123",
+  c = 123;
+a[b] = "b";
+// c 的键名会被转换成字符串'123'，这里会把 b 覆盖掉。a[c]='c';
+// 输出 cconsole.log(a[b]);
+// example 2
+var a = {},
+  b = Symbol("123"),
+  c = Symbol("123");
+// b 是 Symbol 类型，不需要转换。a[b]='b';
+// c 是 Symbol 类型，不需要转换。任何一个 Symbol 类型的值都是不相等的，所以不会覆盖掉 b。a[c]='c';
+// 输出 bconsole.log(a[b]);
+// example 3
+var a = {},
+  b = { key: "123" },
+  c = { key: "456" };
+// b 不是字符串也不是 Symbol 类型，需要转换成字符串。
+// 对象类型会调用 toString 方法转换成字符串 [object Object]。a[b]='b';
+// c 不是字符串也不是 Symbol 类型，需要转换成字符串。
+// 对象类型会调用 toString 方法转换成字符串 [object Object]。这里会把b 覆盖掉。a[c]='c';
+// 输出 cconsole.log(a[b]);
+```
+
+## 使用 JavaScript Proxy 实现简单的数据绑定
+
+```html
+<div id="app">
+  <input type="text" id="input" />
+  <div>
+    TODO:
+    <span id="text"></span>
+  </div>
+  <div id="btn">Add To Todo List</div>
+  <ul id="list"></ul>
+</div>
+```
+
+```js
+const input = document.getElementById("input");
+const text = document.getElementById("text");
+const list = document.getElementById("list");
+const btn = document.getElementById("btn");
+let render;
+const inputObj = new Proxy(
+  {},
+  {
+    get(target, key, receiver) {
+      return Reflect.get(target, key, receiver);
+    },
+    set(target, key, value, receiver) {
+      if (key === "text") {
+        input.value = value;
+        text.innerHTML = value;
+      }
+      return Reflect.set(target, key, value, receiver);
+    },
+  }
+);
+class Render {
+  constructor(arr) {
+    this.arr = arr;
+  }
+  init() {
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < this.arr.length; i++) {
+      const li = document.createElement("li");
+      li.textContent = this.arr[i];
+      fragment.appendChild(li);
+    }
+    list.appendChild(fragment);
+  }
+  addList(val) {
+    const li = document.createElement("li");
+    li.textContent = val;
+    list.appendChild(li);
+  }
+}
+const todoList = new Proxy([], {
+  get(target, key, receiver) {
+    return Reflect.get(target, key, receiver);
+  },
+  set(target, key, value, receiver) {
+    if (key !== "length") {
+      render.addList(value);
+    }
+    return Reflect.set(target, key, value, receiver);
+  },
+});
+window.onload = () => {
+  render = new Render([]);
+  render.init();
+};
+input.addEventListener("keyup", (e) => {
+  inputObj.text = e.target.value;
+});
+btn.addEventListener("click", () => {
+  todoList.push(inputObj.text);
+  inputObj.text = "";
+});
 ```
