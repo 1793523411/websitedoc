@@ -166,6 +166,7 @@ module.exports = {
             ["/mian/base/suanfa", "算法"],
             ["/mian/base/select", "选择题"],
             ["/mian/base/shim", "兼容性问题"],
+            ["/mian/base/niu", "牛客刷题"],
           ]
         },
         {
@@ -173,7 +174,7 @@ module.exports = {
           collapsable: true, //是否展开
           children: [
             ["/mian/other/es6", "es6标准入门笔记"],
-            ["/mian/other/goodarticle", "好的文章"],
+            ["/mian/other/goodarticle", "一些文章"],
             ["/mian/other/book", "读书清单"],
           ]
         },
