@@ -309,3 +309,256 @@ Hybrid APP 是 Native APP 上结合使用了 Web View （Native APP 的模块或
 - 相对不如 Native APP 性能良好、体验流畅
 
 - Web 技术在 APP 中操作权限有限，需要 APP 同步支持
+
+## 阿里巴巴 2016 前端开发工程师笔试(二)
+
+**下列哪个操作是 W3C 标准定义的阻止事件向父容器传递：**
+
+```
+e.preventDefault()
+e.cancelBubble=true
+e.stopPropagation() √
+e.stopImmediatePropagation()
+```
+
+- DOM 中的事件对象：（符合 W3C 标准）
+  - preventDefault() 取消事件默认行为
+  - stopImmediatePropagation() 取消事件冒泡同时阻止当前节点上的事件处理程序被调用。
+  - stopPropagation() 取消事件冒泡对当前节点无影响。
+- IE 中的事件对象：
+  - cancelBubble() 取消事件冒泡
+  - returnValue() 取消事件默认行为
+
+---
+
+**以下关于盒子模型描述正确的是：**
+
+```
+标准盒子模型中：盒子的总宽度 ＝ 左右margin + 左右border + 左右padding + width √
+IE盒子模型中：盒子总宽度 ＝ 左右margin + 左右border + width
+标准盒子模型中：盒子的总宽度 ＝ 左右margin + 左右border + width
+IE盒子模型中：盒子总宽度 ＝ width
+```
+
+---
+
+**使用 CSS 的 flexbox 布局，不能实现以下哪一个效果：**
+
+```
+三列布局，随容器宽度等宽弹性伸缩
+多列布局，每列的高度按内容最高的一列等高
+三列布局，左列宽度像素数确定，中、右列随容器宽度等宽弹性伸缩
+多个宽高不等的元素，实现无缝瀑布流布局 √
+```
+
+```html
+<h1>不等宽不等高（定宽）</h1>
+<div class="box box1">
+  <div class="flex-box" style="width:100px;height:100px;">1</div>
+  <div class="flex-box" style="width:250px;height:250px;">3</div>
+  <div class="flex-box" style="width:200px;height:200px;">2</div>
+  <div class="flex-box" style="width:350px;height:350px;">5</div>
+  <div class="flex-box" style="width:400px;height:400px;">4</div>
+  <div class="flex-box" style="width:500px;height:500px;">7</div>
+  <div class="flex-box" style="width:450px;height:450px;">6</div>
+</div>
+<h1>不 等宽 等高（ 定宽+变宽）</h1>
+<div class="box box2">
+  <div class="left flex-box">left</div>
+  <div class="center flex-box">center</div>
+  <div class="right flex-box">right</div>
+</div>
+<h1>等宽 等高（变宽）</h1>
+<div class="box box3">
+  <div class="flex-box">1</div>
+  <div class="flex-box">2</div>
+  <div class="flex-box">3</div>
+</div>
+<h1>等宽不等高 （定宽）</h1>
+<div class="box box4">
+  <div class="flex-box" style="height:100px;">1</div>
+  <div class="flex-box" style="height:250px;">2</div>
+  <div class="flex-box" style="height:400px;">3</div>
+  <div class="flex-box" style="height:350px;">4</div>
+  <div class="flex-box" style="height:300px;">5</div>
+  <div class="flex-box" style="height:500px;">6</div>
+  <div class="flex-box" style="height:450px;">7</div>
+</div>
+```
+
+```css
+.box {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.flex-box {
+  height: 200px;
+  width: 500px;
+  background-color: #ddd;
+  border: 1px solid #fff;
+}
+.box1 .flex-box {
+  background-color: #e0bcdb;
+}
+.box2 .flex-box {
+  background-color: #e0b6b6;
+  width: 800px;
+}
+.left {
+  flex-shrink: 0; //空间不足时不允许左侧缩小
+}
+.box3 .flex-box {
+  background-color: #abd9e0;
+  width: 900px;
+}
+.box4 {
+  flex-wrap: wrap; //空间不足换行
+}
+.box4 .flex-box {
+  background-color: #dadada;
+}
+```
+
+![](https://uploadfiles.nowcoder.com/images/20160727/213669_1469613379347_52FD5713A5B0985484D21130708A3279)
+
+**关于 HTML 语义化，以下哪个说法是正确的？**
+
+```
+语义化的HTML有利于机器的阅读，如PDA手持设备、搜索引擎爬虫；但不利于人的阅读
+Table 属于过时的标签，遇到数据列表时，需尽量使用 div 来模拟表格
+语义化是HTML5带来的新概念，此前版本的HTML无法做到语义化
+header、article、address都属于语义化明确的标签  √
+```
+
+---
+
+**关于 HTTP 协议，下面哪个说法是正确的？**
+
+```
+HTTP协议是有状态协议。
+以下是一个Http链接的response 的响应头： GET /xxx/xxx/js/lib/test.js HTTP/1.1 Host: 127.0.0.1 Connection: keep-alive Pragma: no-cache Cache-Control: no-cache Accept: */*
+RESTful 接口中，利用HTTP协议的method字段来描述要对资源操作的方式，比如GET表示获取资源，POST表示新增一个资源，PUT表示更新资源,DELETE 表示删除资源等等。 √
+一个HTTP请求返回的HTTP状态码中，304表示临时重定向。
+```
+
+- A 错误，http 是无状态的
+- B 错误，后面的是 request 头
+- C 正确，GET 表示获取资源，POST 表示新增一个资源，PUT 表示更新资源,DELETE 表示删除资源等等
+- D 错误，状态码 304 表示：如果客户端发送了一个带条件的 GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个状态码。307 表示临时重定向！！！
+
+**使用 for in 循环数组中的元素会枚举原型链上的所有属性，过滤这些属性的方式是使用 1 函数**
+
+`hasOwnProperty`
+
+拼写正确
+
+---
+
+**代码填空记得加分号**
+
+---
+
+**写一个求和的函数 sum，达到下面的效果**
+
+```js
+// Should equal 15
+sum(1, 2, 3, 4, 5);
+// Should equal 0
+sum(5, null, -5);
+// Should equal 10
+sum(
+  "1.0",
+  false,
+  1,
+  true,
+  1,
+  "A",
+  1,
+  "B",
+  1,
+  "C",
+  1,
+  "D",
+  1,
+  "E",
+  1,
+  "F",
+  1,
+  "G",
+  1
+);
+// Should equal 0.3, not 0.30000000000000004
+sum(0.1, 0.2);
+```
+
+```js
+function sum() {
+  var nResult = 0;
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    nResult += window.parseFloat(arguments[i]) || 0;
+  }
+  return (nResult.toFixed(3) * 1000) / 1000;
+}
+```
+
+**请写一个表格以及对应的 CSS，使表格奇数行为白色背景，偶数行为灰色背景，鼠标移上去时为黄色背景。**
+
+```html
+<table class="table">
+  <tr>
+    <td>第一行</td>
+  </tr>
+  <tr>
+    <td>第二行</td>
+  </tr>
+  <tr>
+    <td>第三行</td>
+  </tr>
+  <tr>
+    <td>第四行</td>
+  </tr>
+</table>
+
+<style>
+  .table tr:nth-child(2n-1) {
+    background-color: white;
+  }
+  .table tr:nth-child(2n) {
+    background-color: grey;
+  }
+  .table tr:hover {
+    background-color: yellow;
+  }
+</style>
+```
+
+---
+
+**写一个 traverse 函数，输出所有页面宽度和高度大于 50 像素的节点。**
+
+```js
+function traverse(oNode) {
+  var aResult = [];
+  oNode = oNode || document.body;
+  if (oNode.style) {
+    var nWidth = window.parseInt(oNode.style.width, 10) || 0;
+    var nHeight = window.parseInt(oNode.style.height, 10) || 0;
+    if (nWidth > 50 && nHeight > 50) {
+      aResult.push(oNode);
+    }
+  }
+  var aChildNodes = oNode.childNodes;
+  if (aChildNodes.length > 0) {
+    for (var i = 0, l = aChildNodes.length; i < l; i++) {
+      var oTmp = aChildNodes[i];
+      aResult = aResult.concat(traverse(oTmp));
+    }
+  }
+  return aResult;
+}
+```
