@@ -562,3 +562,206 @@ function traverse(oNode) {
   return aResult;
 }
 ```
+
+## 阿里巴巴 2016 前端开发工程师笔试(一)
+
+**contextmenu 是当浏览者按下鼠标右键出现菜单时或者通过键盘的按键触发页面菜单时触发的事件**
+
+---
+
+**下面关于 CSS 布局的描述，不正确的是？**
+
+```
+块级元素实际占用的宽度与它的 width 属性有关；
+块级元素实际占用的宽度与它的 border 属性有关；
+块级元素实际占用的宽度与它的 padding 属性有关；
+块级元素实际占用的宽度与它的 background 属性有关。 √
+```
+
+注意是不正确的是！！！
+
+块级元素的总的宽度=左右 padding+左右 border+内容区的 width，我们实际设置的 width 指的就是内容区的 width，所以当改变 padding、border、width 中的任一项的时候，块元素的总宽度都会发生变化
+
+---
+
+**下面有关 html 的描述，不推荐的是？**
+
+```
+在页面顶部添加 doctype声明；
+在 </head> … <body> 中间插入 HTML 代码； √
+避免使用 <font> 标签；
+使用 <table> 元素展现学生成绩表等数据。
+```
+
+HTML 代码是插入在`<body>..</body>`之间，因为 body 是页面的主体部分，我们浏览网页的时候除了标题之外的东西都是在 body 中呈现的
+
+---
+
+**浏览器在一次 HTTP 请求中，需要传输一个 4097 字节的文本数据给服务端，可以采用那些方式?**
+
+```
+存入 IndexdDB
+写入 COOKIE
+放在 URL 参数
+写入 Session
+使用 POST  √
+放在 Local Storage
+```
+
+- IndexdDB 是 HTML5 的本地存储，把一些数据存储到浏览器（客户端）中，当与网络断开时，可以从浏览器中读取数据，用来做一些离线应用。
+
+- Cookie 通过在客户端 ( 浏览器 ) 记录信息确定用户身份，最大为 4 kb 。
+
+- url 参数用的是 get 方法，从服务器上获取数据，大小不能大于 2 kb 。
+
+- Session 是服务器端使用的一种记录客户端状态的机制 。
+
+- post 是向服务器传送数据，数据量较大。
+
+- local Storage 也是 HTML5 的本地存储，将数据保存在客户端中（一般是永久的）。
+
+---
+
+**下面哪个属性不会让 div 脱离文档流（normal flow）？**
+
+```
+position: absolute;
+position: fixed;
+position: relative; √
+float: left;
+```
+
+```
+在css的定位机制有三种，分别是1：文档流，2：浮动（float），3定位（position）
+其中文档流的意义就是按照HTML里面的写法就是从上到下，从左到右的排版布局;
+在4答案选项中的属性，float（浮动）和position（定位）了
+A：position: absolute;
+生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位；都绝对定位了，肯定脱离了文档流。。
+B:position: fixed;
+生成绝对定位的元素，相对于浏览器窗口进行定位;相对于浏览器了，也和正常顺序排下来没什么关系。。
+C:position: relative;
+生成相对定位的元素，相对于其正常位置进行定位。生成相对定位，也就是说还在原本的上下左右之间，上下左右的元素都不变，so这个没有能脱离文档流。。就这个了
+D:float: left;都浮动出去了，还上哪保持原位置去。。
+最终答案选择C。
+```
+
+---
+
+javascript 语言特性中，有很多方面和我们接触的其他编程语言不太一样，比如说，javascript 语言实现继承机制的核心就是**1**，而不是 Java 语言那样的类式继承。Javascript 解析引擎在读取一个 Object 的属性的值时，会沿着**2**向上寻找，如果最终没有找到，则该属性值为 **3**； 如果最终找到该属性的值，则返回结果。与这个过程不同的是，当 javascript 解析引擎执行“给一个 Object 的某个属性赋值”的时候，如果当前 Object 存在该属性，则改写该属性的值，如果当前的 Object 本身并不存在该属性，则赋值该属性的值
+
+```
+(1) prototype
+(2) 原型链
+(3) undefined
+```
+
+---
+
+**填写内容让下面代码支持 a.name = “name1”; b.name = “name2”;**
+
+```js
+function obj(name){
+    1
+}
+obj.2= "name2";
+var a = obj("name1");
+var b = new obj;
+```
+
+```js
+(1)
+if (name) {
+var obj = {};
+obj.name = name;
+return obj;
+}
+(2) prototype.name
+```
+
+------------------------
+
+**请实现一个fibonacci函数，要求其参数和返回值如下所示：**
+
+```js
+function getNthFibonacci(count) {
+    if(count === 0 || count === 1) return 1
+    return getNthFibonacci(count) + getNthFibonacci(count-1)
+}
+
+```
+
+----------------
+
+**实现如下页面布局。核心区域左侧自适应，右侧固定宽度 200px**
+
+![](http://uploadfiles.nowcoder.com/images/20150817/59_1439818277101_910920EB8AD84E02EEE1AB7C27D2E2CC)
+
+
+```css
+body {
+    margin: 0;
+}
+.fn-clear:after {
+    content: " ";
+    clear: both;
+    display: block;
+    font-size: 0;
+    visibility: hidden;
+    height: 0;
+}
+.fn-clear {
+    zoom: 1;
+}
+.container {
+    padding: 10px;
+}
+.header {
+    background: #eee;
+    position: relative;
+    margin-bottom: 10px;
+}
+.logo {
+    width: 100px;
+    height: 100px;
+    float: left;
+    background: #f60;
+}
+.username {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.main {
+    margin-bottom: 10px;
+}
+.side-bar {
+    width: 200px;
+    float: right;
+    background: #ccc;
+}
+.content {
+    margin-right: 200px;
+    background: #f6f6f6;
+}
+.footer {
+    background: #999;
+}
+```
+
+```html
+<div class="container">
+        <div class="header fn-clear">
+            <div class="logo">logo</div>
+            <div
+  class="username">zhoumingXXX@163.com</div>
+        </div>
+        <div class="main">
+            <div
+  class="side-bar">menu</div>
+            <div class="content">左侧内容</div>
+        </div>
+        <div class="footer">
+            footer
+        </div>
+</div>
+```
