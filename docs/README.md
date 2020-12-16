@@ -52,7 +52,7 @@ footerWrap:
 
 </a-row>
 <a-tag color="pink">
-<a href="/mian/" style="color:pink;">面试</a>
+<a href="https://github.com/zpfz/vuepress-theme-antdocs" style="color:pink;">面试</a>
       </a-tag>
       <a-tag color="red">
         red

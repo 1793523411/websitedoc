@@ -170,6 +170,14 @@ module.exports = {
           ]
         },
         {
+          title: "面经（校招）",
+          collapsable: true, //是否展开
+          children: [
+            ["/mian/exprese/ali", "阿里"],
+            ["/mian/exprese/zijie", "字节跳动"],
+          ]
+        },
+        {
           title: "其他",
           collapsable: true, //是否展开
           children: [
