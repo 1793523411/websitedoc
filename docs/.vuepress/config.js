@@ -37,6 +37,7 @@ module.exports = {
       { text: "首页", link: "/" },
       { text: "面试", link: "/mian/index" },
       { text: "Demo", link: "/Demo/index" },
+      { text: "收集", link: "/collection/index" },
       {
         text: "其他",
         items: [
@@ -134,6 +135,34 @@ module.exports = {
             ["/Demo/other/app/one", "时间管理"],
           ]
         },
+      ],
+      '/collection/':[
+        {
+          title:'2021',
+          collection:false,
+          children: [
+            ['/collection/2021/vue',"vue"]
+          ]
+        },
+        {
+          title:'2020',
+          collection:false,
+          children: [
+            ['/collection/2020/html',"html/浏览器相关"],
+            ['/collection/2020/css',"css"],
+            ['/collection/2020/js',"JavaScript"],
+            ['/collection/2020/nodejs',"nodejs"],
+            ['/collection/2020/vue',"vue"],
+            ['/collection/2020/react',"react"],
+            ['/collection/2020/project',"工程化"],
+            ['/collection/2020/better',"性能优化"],
+            ['/collection/2020/go',"go"],
+            ['/collection/2020/end',"后端相关"],
+            ['/collection/2020/ecs',"部署"],
+            ['/collection/2020/interest',"有趣"],
+            ['/collection/2020/other',"其他"],
+          ]
+        }
       ],
       '/mian/': [
         {

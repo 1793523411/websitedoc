@@ -1,0 +1,9 @@
+# react
+
+[跟着官方文档能学懂 React 就怪了](https://mp.weixin.qq.com/s?__biz=MzUyNDYxNDAyMg==&mid=2247487413&idx=1&sn=c220ad27008d85a3e38d424de114f754&chksm=fa2bef5ccd5c664a82694365d431836da10272519dfbb4a086439641c45dfb818f58f2496ca2&scene=126&sessionid=1608191188&key=e5a6f4840bcd614cafbf39f3712f57ad5cf432bc9d862d285345e3496105973c087d2bfec7f6141e809d8475922adf4de08c05ce08cc7fb4ba7165d5afcc639b2500bef7678cc6366498a76d54af496680b4153120c4969c52eb28bd1979a67c2cd0ee18af5a2076b0559915b497936fe8eb81144cab703ed699e5c6cf183b7a&ascene=1&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=AxYH6Zt6zwbeAW616bwQlfg%3D&pass_ticket=sU5YMpGD3HAtizhOOKwhBidWxja5%2FiXWfFY8%2FxXhyFFjWwFHbCOMrAyC2wluKMlW&wx_header=0)
+
+[React 灵魂 23 问，你能答对几个？](https://mp.weixin.qq.com/s?__biz=MzI1ODk2Mjk0Nw==&mid=2247487275&idx=1&sn=508c6fb9ab53b328fd580d6b1eb3bf83&chksm=ea016c47dd76e551215b605e554ebc922c55c2d7409a5220f8fbab0eb16c2b879d191d3362fb&mpshare=1&scene=24&srcid=1209xE5Go24nYucnSTzRm0tK&sharer_sharetime=1607487052112&sharer_shareid=18af4598a510ab1911de864d55f65d3a&key=ea7446b0013173847cde109de6ed4edc3112ae17f4b936731f040506e29c2f334bc65a6a00a9abe68827b336737cac1d8189e813aefcf03ae95783143798ea6082ca61ec076ff0b17f64b3e8e852462789e5bebbbfd5da6ea3b2b21c66ecbb7ba5e82659a31d1653da9215aaafd6fb378fff7101489986be8dc0feae5786baf4&ascene=14&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A6YmCxKTH8hMp2baUb4qpaU%3D&pass_ticket=sU5YMpGD3HAtizhOOKwhBidWxja5%2FiXWfFY8%2FxXhyFFjWwFHbCOMrAyC2wluKMlW&wx_header=0)
+
+[react配置代理，解决跨域](https://www.cnblogs.com/anin/p/13558961.html)
+
+[React 虚拟 Dom 和 diff 算法](https://juejin.cn/post/6844903529161850893)
