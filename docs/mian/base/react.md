@@ -156,6 +156,52 @@ Flux 的最大特点，就是数据的"单向流动"。
 - redux 是一个应用数据流框架，主要是解决了组件间状态共享的问题，原理是集中式管理，主要有三个核心方法，action，store，reducer，工作流程是 view 调用 store 的 dispatch 接收 action 传入 store，reducer 进行 state 操作，view 通过 store 提供的 getState 获取最新的数据，flux 也是用来进行数据操作的，有四个组成部分 action，dispatch，view，store，工作流程是 view 发出一个 action，派发器接收 action，让 store 进行数据更新，更新完成以后 store 发出 change，view 接受 change 更新视图。Redux 和 Flux 很像。**主要区别在于 Flux 有多个可以改变应用状态的 store，在 Flux 中 dispatcher 被用来传递数据到注册的回调事件，但是在 redux 中只能定义一个可更新状态的 store，redux 把 store 和 Dispatcher 合并,结构更加简单清晰**
 - 新增 state,对状态的管理更加明确，通过 redux，流程更加规范了，减少手动编码量，提高了编码效率，同时缺点时当数据更新时有时候组件不需要，但是也要重新绘制，有些影响效率。一般情况下，我们在构建多交互，多数据流的复杂项目应用时才会使用它们
 
+## redux 数据流向,和核心 api
+
+**单一数据源**
+
+在传统的 MVC 框架中，我们可以根据需要创建无数个 Model，而 Model 之间可以互相监听、触发事件甚至循环或嵌套触发事件，这些在 Redux 中都是不允许的。
+因为在 Redux 的思想里，一个应用永远只有唯一的数据源。我们的第一反应可能是：如果一个复杂应用，强制要求唯一的数据源岂不是会产生一个特别庞大的 JavaScript 对象。
+
+实际上，使用单一的数据源的好处在于整个应用状态保存在一个对象中，这样我们随时可以提取出整个应用的状态进行持久化。此外，这样的设计也为服务端渲染提供了可能。
+
+至于我们担心的数据源对象过于庞大的问题，我们可以通过 combineReducers 化解。
+
+**Redux 核心 API**
+
+Redux 的核心是一个 store，这个 store 由 Redux 提供的 createStore 方法生成。要想生成 store，必须传入 reducers。
+在 Redux 里，负责响应 action 并修改数据的角色是 reducer。reducer 本质上是一个纯函数，它有两个参数 state 和 action。reducer 的职责就是根据 state 和 action 计算出新的 state。
+
+在实际应用中，reducer 在处理 state 时，还需要有一个特殊的非空判断。很显然，reducer 第一次执行的时候，并没有任何的 state，而 reducer 的最终职责是返回新的 state，因此需要在这种特殊情况下返回一个定义好的 state。这也就是我们会定义一个 defaultState 的原因。
+
+下面来介绍一下 Redux 中最核心的 API--createStore：
+
+```js
+import { createStore } from "redux";
+const store = createStore(reducers);
+```
+
+复制代码通过 createStore 方法创建的 store 是一个对象，它本身包含 4 个方法。
+
+- getState()：获取 store 中当前的状态。
+- dispatch(action)：分发一个 action，并返回这个 action，这是唯一能改变 store 中数据的方式。
+- subscribe(listener)：注册一个监听者，它在 store 发生变化时被调用。
+- replaceReducer(nextReducer)：更新当前 store 里的 reducer，一般只会在开发模式中调用该方法。
+- 在实际开发中，我们最常用的是 getState()和 dispatch()这两个方法。至于 subscribe()和 replaceReducer()方法，一般会在 Redux 与某个系统做桥接的时候使用。
+
+**redux的另外两个原则**
+
+**状态是只读的**
+
+在Redux中，我们并不会自己用代码来定义一个store。取而代之的是，我们定义一个reducer，它的功能是根据当前触发的action对当前应用的状态进行迭代，这里我们并没有直接修改应用的状态，而是返回了一份全新的状态。
+
+Redux提供的createStore方法会根据reducer生成store。最后，我们可以利用store.dispatch方法来达到修改状态的目的。
+
+**状态修改均由纯函数完成**
+
+在Redux里，我们通过定义reducer来确认状态的修改，而每一个reducer都是纯函数，这意味着它没有副作用，即接受一定的输入，必定会得到一定的输出。
+这样设计的好处不仅在于reducer里对状态的修改变得简单、纯粹、可测试，更有意思的是，Redux利用每次新返回的状态生成酷炫的时间旅行调试方式，让跟踪每一次因为触发action而改变状态的结果成为了可能。
+
 ## React 中有三种构建组件的方式
 
 React.createClass()、ES6 class 和无状态函数。
@@ -336,6 +382,6 @@ if (
 
 Link 做了 3 件事情：
 
-+ 有 onclick 那就执行 onclick
-+ click 的时候阻止 a 标签默认事件（这样子点击`<a href="/abc">123</a>`就不会跳转和刷新页面）
-+ 再取得跳转 href（即是 to），用 history（前端路由两种方式之一，`history& hash`）跳转，此时只是链接变了，并没有刷新页面
+- 有 onclick 那就执行 onclick
+- click 的时候阻止 a 标签默认事件（这样子点击`<a href="/abc">123</a>`就不会跳转和刷新页面）
+- 再取得跳转 href（即是 to），用 history（前端路由两种方式之一，`history& hash`）跳转，此时只是链接变了，并没有刷新页面

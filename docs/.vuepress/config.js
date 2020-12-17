@@ -61,6 +61,13 @@ module.exports = {
           ]
         },
         {
+          title: "博客",
+          collapsable: true, //是否展开
+          children: [
+            ["/Demo/front/home/three", "整体流程"],
+          ]
+        },
+        {
           title: "文档",
           collapsable: true, //是否展开
           children: [
@@ -126,6 +133,7 @@ module.exports = {
           collapsable: true, //是否展开
           children: [
             ["/Demo/other/workbench/one", "社团管理后台示例"],
+            ["/Demo/other/workbench/two", "云开发征文活动：使用Antv"],
           ]
         },
         {

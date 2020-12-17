@@ -56,6 +56,8 @@
 
 [微信扫描二维码登录网页](https://www.zhihu.com/question/20368066)
 
+[说说微信扫码登录背后的实现原理](https://zhuanlan.zhihu.com/p/266465699)
+
 [协议相对 URL](https://www.ludou.org/the-protocol-relative-url.html)
 
 [100*100的 canvas 占多少内存](https://www.jianshu.com/p/27dd0e802809)
@@ -669,6 +671,8 @@
 ## react
 
 [React实现一个防抖的模糊查询输入框](https://blog.csdn.net/cc18868876837/article/details/96303296)
+
+[理解Redux数据流和核心API](https://juejin.cn/post/6844904191324848135)
 
 ## 工程化
 
