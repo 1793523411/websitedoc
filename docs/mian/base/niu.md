@@ -678,90 +678,242 @@ return obj;
 (2) prototype.name
 ```
 
-------------------------
+---
 
-**请实现一个fibonacci函数，要求其参数和返回值如下所示：**
+**请实现一个 fibonacci 函数，要求其参数和返回值如下所示：**
 
 ```js
 function getNthFibonacci(count) {
-    if(count === 0 || count === 1) return 1
-    return getNthFibonacci(count) + getNthFibonacci(count-1)
+  if (count === 0 || count === 1) return 1;
+  return getNthFibonacci(count) + getNthFibonacci(count - 1);
 }
-
 ```
 
-----------------
+---
 
 **实现如下页面布局。核心区域左侧自适应，右侧固定宽度 200px**
 
 ![](http://uploadfiles.nowcoder.com/images/20150817/59_1439818277101_910920EB8AD84E02EEE1AB7C27D2E2CC)
 
-
 ```css
 body {
-    margin: 0;
+  margin: 0;
 }
 .fn-clear:after {
-    content: " ";
-    clear: both;
-    display: block;
-    font-size: 0;
-    visibility: hidden;
-    height: 0;
+  content: " ";
+  clear: both;
+  display: block;
+  font-size: 0;
+  visibility: hidden;
+  height: 0;
 }
 .fn-clear {
-    zoom: 1;
+  zoom: 1;
 }
 .container {
-    padding: 10px;
+  padding: 10px;
 }
 .header {
-    background: #eee;
-    position: relative;
-    margin-bottom: 10px;
+  background: #eee;
+  position: relative;
+  margin-bottom: 10px;
 }
 .logo {
-    width: 100px;
-    height: 100px;
-    float: left;
-    background: #f60;
+  width: 100px;
+  height: 100px;
+  float: left;
+  background: #f60;
 }
 .username {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 .main {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 .side-bar {
-    width: 200px;
-    float: right;
-    background: #ccc;
+  width: 200px;
+  float: right;
+  background: #ccc;
 }
 .content {
-    margin-right: 200px;
-    background: #f6f6f6;
+  margin-right: 200px;
+  background: #f6f6f6;
 }
 .footer {
-    background: #999;
+  background: #999;
 }
 ```
 
 ```html
 <div class="container">
-        <div class="header fn-clear">
-            <div class="logo">logo</div>
-            <div
-  class="username">zhoumingXXX@163.com</div>
-        </div>
-        <div class="main">
-            <div
-  class="side-bar">menu</div>
-            <div class="content">左侧内容</div>
-        </div>
-        <div class="footer">
-            footer
-        </div>
+  <div class="header fn-clear">
+    <div class="logo">logo</div>
+    <div class="username">zhoumingXXX@163.com</div>
+  </div>
+  <div class="main">
+    <div class="side-bar">menu</div>
+    <div class="content">左侧内容</div>
+  </div>
+  <div class="footer">
+    footer
+  </div>
 </div>
+```
+
+## 途虎养车 2021 秋招前端笔试试卷 B
+
+**产生系统死锁的原因是由于**
+
+```
+进程释放资源
+一个进程进入死循环
+多个进程竞争，资源出现循环等待 √
+多个进程竞争共享型设备
+```
+
+---
+
+**对于 HTTPS 建立连接的过程，下面描述正确的是**
+
+```
+TLS  DNS  TCP  HTTP
+DNS  TLS  TCP  HTTP
+DNS  TCP  HTTP  TLS
+DNS  TCP  TLS  HTTP √
+```
+
+---
+
+**对以下代码的事件复杂度为多少（^符号表示幂）**
+
+```c++
+int x = 0, a = 1, b = 2;
+for (i = 1; i <= N; i++) {
+    for (j = 1; j < i; j++) {
+        for (k = 1; k <= N; k++) {
+              x += a * b;
+        }
+    }
+}
+
+```
+
+O(N^3)
+
+---
+
+**以下关于 Javascript 执行引擎描述正确的是：**
+
+```
+ECMAScript 2015中规定了执行引擎需要实现EventLoop机制
+V8作为最先进的Javascript执行引擎，可以在执行阶段对所有代码进行优化。
+Node.js通过V8实现异步I/O。
+Node.js的Buffer类型对象在创建时内存不会分配到V8堆上。 √
+Chakra是Firefox内嵌的Javascript执行引擎。
+代码正确的情况下，垃圾回收不会导致有内存无法回收。
+```
+
+---
+
+**对于解构一下说法错误的是：**
+
+```
+不完全结构，也会成功，不会报错。
+只要支持Iterator接口，都可以被结构赋值。
+null可以替代默认值，而成功的结构赋值。
+结构中不定参数可以出现在除第一个以外的其它的其他位置。√
+解构是先找到同名的属性，然后再赋给对应的变量。
+默认值可以引用结构赋值的其他变量，但该变量必须已经声明。
+```
+
+---
+
+**下列对 css 外边距描述正确的是（不考虑 BFC 对边距的影响）**
+
+```
+外边距的css代码是padding
+两个上下相邻的同级元素Div1，Div2。Div1的下边距是10px，Div2的上边距是10px。Div1和Div2的间距是20px
+两个上下相邻的同级元素Div1，Div2。Div1的下边距是20px，Div2的上边距是10px。Div1和Div2的间距是20px  √
+
+外边距的值为（10px 20px 30px）。所以其上边距为10px，下边距为20px，左边距为30px，右边距为30px
+一个空元素的高度，边框，内边距都是0，上下外边距为20px，那么这个空元素的框模型的高度为40px
+一个空元素的高度，边框，内边距都是0，上下外边距为20px，那么这个空元素的框模型的高度为20px
+```
+
+---
+
+**下面哪些是浏览器的缓存相关功能？**
+
+```
+indexDB  √
+
+localStorage   √
+
+sessionStorage   √
+
+applicationCache   √
+
+File System API
+Cache API   √
+```
+
+File System API 是文件系统相关 API
+
+---
+
+**下面关于 DNS 说法正确的是（）**
+
+```
+DNS的作用是域名和IP地址的相互映射
+DNS协议运行在UDP协议之上
+DNS协议端口号为53
+DNS的默认缓存时间为1小时
+```
+
+- A. DNS（Domain Name System，域名系统），因特网上作为域名和 IP 地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的 IP 数串。
+- BC.DNS 协议运行在 UDP 协议之上，使用端口号 53。
+- D. 浏览器：chrome 对每个域名会默认缓存 60s，IE 将 DNS 缓存 30min，Firefox 对 DNS 缓存功能，但是默认缓存时间只有 1 分钟，safari 约为 10s。windows DNS 缓存的默认值是 MaxCacheTTL，它的默认值是 86400s，也就是一天。浏览器 DNS 缓存的时间跟 ttl 值无关，每种浏览器都使用一个固定值。
+
+---
+
+**TCP 协议通过使用 1 和 2，来保证数据传输的正确性，从而提供可靠的传输**
+
+- (1) 连续 ARQ 协议
+- (2) 滑动窗口协议
+
+---
+
+**给你一个数组，请你将每个元素用它右边最大的元素替换，如果是最后一个元素，用替换。**
+
+[将每个元素替换为右侧最大元素](https://github.com/1793523411/leetcode/blob/master/four/%E9%9D%A2%E8%AF%95%E4%B8%AD%E8%A2%AB%E9%97%AE%E8%BF%87%E7%9A%84/%E5%B0%86%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0%E6%9B%BF%E6%8D%A2%E4%B8%BA%E5%8F%B3%E4%BE%A7%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/index.js)
+
+```js
+const searchInsert = (nums, target) => {
+  for (let i = 0; i < nums.length; i++) {
+    if (target <= nums[i]) {
+      return i;
+    }
+  }
+  return nums.length;
+};
+```
+
+---
+
+**给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。**
+
+[搜索插入位置](https://github.com/1793523411/leetcode/blob/master/four/%E9%9D%A2%E8%AF%95%E4%B8%AD%E8%A2%AB%E9%97%AE%E8%BF%87%E7%9A%84/%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/index.js)
+
+```js
+var searchInsert = function(nums, target, l = 0, r = nums.length - 1) {
+  while (l <= r) {
+    var m = (l + r) >>> 1;
+    if (nums[m] === target) return m;
+    else if (nums[m] > target) r = m - 1;
+    else l = m + 1;
+  }
+  return l;
+};
 ```
