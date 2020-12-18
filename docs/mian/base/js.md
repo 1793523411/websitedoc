@@ -14,7 +14,7 @@
 
 js 一共有六种基本数据类型，分别是 Undefined、Null、Boolean、Number、String，还有在 ES6 中新增的 Symbol 类型，代表创建后独一无二且不可变的数据类型，它的出现我认为主要是为了解决可能出现的全局变量冲突的问题
 
-## avascript 的 typeof 返回哪些数据类型
+## javascript 的 typeof 返回哪些数据类型
 
 7 种分别为 string、boolean、number、Object、Function、undefined、symbol(ES6)
 
@@ -1676,7 +1676,7 @@ b.doSomething();
 // ...});
 ```
 
-## ES6 与 模块与 CommonJS 模块、AMD 、CMD 的差异
+## ES6 与 模块与 CommonJS 模块
 
 CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用,CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值。ES6 模块的运行机制与 CommonJS 不一样。JS 引擎对脚本静态分析的时候，遇到模块加载命令 import，就会生成一个只读引用。等到脚本真正执行时，再根据这个只读引用，到被加载的那个模块里面去取值。
 

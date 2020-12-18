@@ -57,6 +57,14 @@ fs.readFile(filePath, function(err, data) {
 
 至少从开发者的角度来看，Node.js 是单线程运行的。底层使用 libuv 使用多线程。 每一个 I/O 操作都需要一个回调，一旦操作完成会被事件循环执行
 
+[事件循环 -- nodejs官网](http://nodejs.cn/learn/the-nodejs-event-loop)
+
+## setImmdiate 和 process.nextTick
+
+[setimmediate--nodejs 官网](http://nodejs.cn/learn/understanding-setimmediate)
+
+[process-nexttick --nodejs 官网](http://nodejs.cn/learn/understanding-process-nexttick)
+
 ## 使用什么工具检查代码风格？
 
 - JSLint by Douglas Crockford

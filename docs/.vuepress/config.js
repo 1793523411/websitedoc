@@ -212,6 +212,7 @@ module.exports = {
           children: [
             ["/mian/exprese/ali", "阿里"],
             ["/mian/exprese/zijie", "字节跳动"],
+            ["/mian/exprese/jd", "京东"],
           ]
         },
         {
