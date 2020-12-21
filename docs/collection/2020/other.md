@@ -1,5 +1,11 @@
 # 其他
 
+[10 个 GitHub 上最火的程序员简历项目，2021 金三银四必备！](https://mp.weixin.qq.com/s/gjS_SriLH8ypdQ-UgiIbFg)
+
+[今天被公司安排给候选者进行初面，分享我的6道面试题](https://mp.weixin.qq.com/s/qorNgvqlTdXsnSOpUUcriw)
+
+[设计灵感：12个App的登录注册界面案例参](https://mp.weixin.qq.com/s/ivJQ7fGZbd8AVzM0mLS3BA)
+
 [开源！一文了解阿里一站式图计算平台GraphScope](https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247501458&idx=1&sn=22bf5523ec0c03c9cc1f9627f6f2aac2&chksm=e92afb9dde5d728b8235446141e4ab95301622c71c9e43746ad0aab7eeae78d97841922c8ac7&scene=126&sessionid=1608266060&key=b32b778d3cd3c4263e207ec8ab9d2b18e46056f49ae1646b205d10e56ebf2412c2bcd6e069913e349ee26441cbd958593d118c09b9d6a7284b4e4745374386e8fe65ec01f0dc84d780b0110d79ad6b6fe367016ddf63463af9bd64b77280f1869a8fbc8df09c179907ead4e648c367dfc3568c165663fa790d33e45952531b23&ascene=1&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=Ayd4WST%2FMHD8Trg5HP7iPnw%3D&pass_ticket=DwgVNSSUlPdP0Oz%2FhiWdUHhMDl%2Fbr1k%2BKUVWM5PaLxPRpZq47fp88jOXm5t8m7mm&wx_header=0)
 
 [用EVA开发游戏是怎样的体验 - D2的EVA展台小游戏开发小记](https://mp.weixin.qq.com/s?__biz=MzI5NjM5NDQxMg==&mid=2247488351&idx=1&sn=5a90de7572f32f2e93a5459d16742c3b&chksm=ec44589cdb33d18a6ca6e59c00e95162889e5c8f13774e71f4589487388d0940a1a9329b3fc1&scene=126&sessionid=1608266091&key=3712d248eda753bf2fd3954f166ee08ca2708f40a2d61b780eaf627ed9d6aaa270a61d5c9c16e2a34187cf425a4c6fc9d3806ebbc1eb44cc46ae7c14d934befe34a16ef11c4dcbe9d191b1910355fa7d31ba74d02f46dc2918bd2140a06be7422ca82cb5732314e6b7a60ec85aae6b629dbc8fd6f82f9d0d5656361f5adbbd17&ascene=1&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A2sp8MAnMdmf7lLIyfBY%2BDQ%3D&pass_ticket=DwgVNSSUlPdP0Oz%2FhiWdUHhMDl%2Fbr1k%2BKUVWM5PaLxPRpZq47fp88jOXm5t8m7mm&wx_header=0)

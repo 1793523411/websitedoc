@@ -1,5 +1,9 @@
 # Javascript 
 
+[12 个 GitHub 上超火的 JavaScript 奇技淫巧项目，找到写 JavaScript 的灵感！](https://mp.weixin.qq.com/s/N0XFx4vUbw2YdAuw7TBDkA)
+
+[「一次写过瘾」手写Promise全家桶+Generator+async/await](https://mp.weixin.qq.com/s/1VqhYUKIsUXGtJZOXksX4A)
+
 [这样写的 JS 代码看着就很舒服](https://mp.weixin.qq.com/s?__biz=MzUxNzk1MjQ0Ng==&mid=2247489288&idx=1&sn=25beef871caecb8cccf07bf013b669f9&chksm=f99111d9cee698cf68c674bafb25ad0cb46886abf79f66e737a2bf7a0cd659ef89141409361e&scene=126&sessionid=1608265791&key=b32b778d3cd3c42649cb8312cf7df787463c43f2556c026dfa8b51f1ee748b1e835f106ce177003390a56624adedb9f009532be30a45bf25887af92de673548fa6af4d3d146ed59b8f2d2b6d2e73e4efc62cc62889b44b111b1ab475ed6c407a4603e077bee29942e9802c651139106fa34c144de764a6fb77fea6d0779d88b1&ascene=1&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A5YYlYwTFgcdgAKQJAs8a0E%3D&pass_ticket=DwgVNSSUlPdP0Oz%2FhiWdUHhMDl%2Fbr1k%2BKUVWM5PaLxPRpZq47fp88jOXm5t8m7mm&wx_header=0)
 
 [44个有用的JavaScript技巧与最佳实践](https://mp.weixin.qq.com/s?__biz=Mzg2NDAzMjE5NQ==&mid=2247487442&idx=2&sn=f8d75b9f08206c604745d4758270ad6c&chksm=ce6ecb7ef91942686272bb59c10fc3b0662d86b3f348d45a5e4688088031ce1f5f9e8d5f5cc9&scene=126&sessionid=1608191664&key=e5a6f4840bcd614c4c527a3dc64234c05b0fadf8db155f7ea84a2adef648ec068374317adc6d79531c962f2e50133c45457edb9a711056898e0d5d9f3a9c9e97612c8562e950b73149b2a01db3baa5d006a5c4dd671d4e6d73858d9a8ebbfd90219588066ac60b230769673d80844f2292560254520c074097e298661f5a90b4&ascene=1&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A3MRfQI29425y3dXFntiNcc%3D&pass_ticket=sU5YMpGD3HAtizhOOKwhBidWxja5%2FiXWfFY8%2FxXhyFFjWwFHbCOMrAyC2wluKMlW&wx_header=0)
