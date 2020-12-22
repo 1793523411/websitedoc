@@ -2,13 +2,13 @@
 
 ## 前端
 
-《javascript语言精粹》
+《javascript语言精粹》（蝴蝶书）
 
 《vue.js实战》
 
 《es6标准入门第三版》
 
-《javascript权威指南第六版》
+《javascript权威指南第六版》（犀牛书）
 
 《深入浅出Nodejs》
 
@@ -27,6 +27,8 @@
 《学习javascript数据结构与算法》
 
 《深入浅出vuejs》
+
+《javascript高级语言程序设计》(红宝书)
 
 ## linux
 

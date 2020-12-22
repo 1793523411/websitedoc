@@ -193,7 +193,7 @@ module.exports = {
             ["/mian/base/react", "react"],
             ["/mian/base/wx", "微信小程序"],
             ["/mian/base/project", "工程化"],
-            ["/mian/base/network", "计算机网络"],
+            ["/mian/base/network", "网络"],
             ["/mian/base/design", "设计模式"],
             ["/mian/base/safe", "安全"],
             ["/mian/base/better", "性能优化"],
