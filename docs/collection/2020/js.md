@@ -1,5 +1,11 @@
 # Javascript 
 
+[TypeScript：一个好泛型的价值](https://mp.weixin.qq.com/s/WE8cJlfv9t__vddufKI2mw)
+
+[9 个极其强大的 JavaScript 技巧](https://mp.weixin.qq.com/s/dpqkUxQZEAC8Zaa8YO58XQ)
+
+[一文讲懂什么是函数柯里化，柯里化的目的及其代码实现](https://mp.weixin.qq.com/s/2nW4gOLrZ9oI-jvfDk3Dig)
+
 [12 个 GitHub 上超火的 JavaScript 奇技淫巧项目，找到写 JavaScript 的灵感！](https://mp.weixin.qq.com/s/N0XFx4vUbw2YdAuw7TBDkA)
 
 [「一次写过瘾」手写Promise全家桶+Generator+async/await](https://mp.weixin.qq.com/s/1VqhYUKIsUXGtJZOXksX4A)
