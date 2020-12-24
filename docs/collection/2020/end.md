@@ -1,5 +1,7 @@
 # 后端相关
 
+[聊一聊 HTTPS 的工作原理](https://mp.weixin.qq.com/s/IOnlgxj4_De_ObuyC5W2Hw)
+
 [面试：Socket详解](https://github.com/CyC2018/CS-Notes/blob/master/notes/Socket.md)
 
 [面试：http详解](https://camo.githubusercontent.com/34cc60de23ad2228d3877e97ed1605fa9b858dda8610de5e3201144e3b35983a/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f486f772d48545450532d576f726b732e706e67)

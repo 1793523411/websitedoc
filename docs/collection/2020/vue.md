@@ -1,5 +1,7 @@
 # vue
 
+[基于 Vue 的前端架构，我做了这 15 点](https://mp.weixin.qq.com/s/SyekNT9nNi3OGIEnLwq1kA)
+
 [为 Vue 的惰性加载加一个进度条](https://mp.weixin.qq.com/s?__biz=Mzg5ODA5NTM1Mw==&mid=2247491297&idx=1&sn=255cd85e28fe81da2351a33db213426b&chksm=c0669f77f71116616f5d42e12d6783e7672f0c3f480cedc3ae353b1cfff387780091aafbea90&scene=126&sessionid=1608266067&key=e5a6f4840bcd614c57077bbd39fda5c7f4eeafccf764be097b1a61dbfe27d8f462ff97569b8a7085ad6d71e79ee299975232e2e7145227d5cf9559ab24ec863b0b669b296acf9babd9e95df115844a610c658ba5b708e3c5844e07fabd11aa2fe0f5ac0aefcb849778f1478fe0ab43c37a8293402cbff0b298fefd84e19e99d3&ascene=1&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A8ZnPiFE2koZgZhq9z%2BUKrE%3D&pass_ticket=DwgVNSSUlPdP0Oz%2FhiWdUHhMDl%2Fbr1k%2BKUVWM5PaLxPRpZq47fp88jOXm5t8m7mm&wx_header=0)
 
 [Vue 在哪些方面比 React 做得更好？](https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651563906&idx=1&sn=0d47a66598c5e6beb174d56145561d8a&chksm=80257043b752f955fecba191b6dee1aa08f601c97bb811e60c972699d9f64498ac412f867f7e&scene=21#wechat_redirect)

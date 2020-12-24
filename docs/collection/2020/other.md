@@ -1,5 +1,9 @@
 # 其他
 
+[前端开发者手册2019](https://frontendmasters.com/books/front-end-handbook/2019/)
+
+[正则极简教程，再也不会学了忘](https://mp.weixin.qq.com/s/TUuAw5tIfV2k4SBxsB3YDA)
+
 [10 个 GitHub 上最火的程序员简历项目，2021 金三银四必备！](https://mp.weixin.qq.com/s/gjS_SriLH8ypdQ-UgiIbFg)
 
 [今天被公司安排给候选者进行初面，分享我的6道面试题](https://mp.weixin.qq.com/s/qorNgvqlTdXsnSOpUUcriw)
