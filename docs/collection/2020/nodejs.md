@@ -1,5 +1,7 @@
 # nodejs
 
+[c++插件--nodejs官网](http://nodejs.cn/api/addons.html)
+
 [Nodejs Native AddOn的编写](https://blog.csdn.net/wangjia184/article/details/18940165)
 
 [前端使用 node-gyp 构建 Native Addon](https://www.cnblogs.com/BigJ/p/Cxx2JS.html)
