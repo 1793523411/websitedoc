@@ -1,5 +1,9 @@
 # Javascript 
 
+[JavaScript 设计模式学习总结与感悟(开发&面试必备)](https://mp.weixin.qq.com/s/n5R5W40ve0nuwXE9CKxu8Q)
+
+[从V8引擎来看JS中这个"假数组"](https://mp.weixin.qq.com/s/upBuynJbSHZQcdmb7NHZMQ)
+
 [TypeScript：一个好泛型的价值](https://mp.weixin.qq.com/s/WE8cJlfv9t__vddufKI2mw)
 
 [9 个极其强大的 JavaScript 技巧](https://mp.weixin.qq.com/s/dpqkUxQZEAC8Zaa8YO58XQ)

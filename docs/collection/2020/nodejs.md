@@ -1,5 +1,11 @@
 # nodejs
 
+[Nodejs Native AddOn的编写](https://blog.csdn.net/wangjia184/article/details/18940165)
+
+[前端使用 node-gyp 构建 Native Addon](https://www.cnblogs.com/BigJ/p/Cxx2JS.html)
+
+[都 2020 年了，该如何开发 Node.js Native Add-on?](https://mp.weixin.qq.com/s/64xAhAyrzuaW_NwcB99nzA)
+
 [复盘node项目中遇到的13+常见问题和解决方案](https://mp.weixin.qq.com/s/nIWVKFViqAcKmVxMpzr0Lw)
 
 [前端 mock 完美解决方案实战](https://mp.weixin.qq.com/s/ZQPeQI7elKJpIf0P5ZQB3w)
