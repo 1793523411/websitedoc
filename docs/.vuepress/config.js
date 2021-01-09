@@ -149,7 +149,17 @@ module.exports = {
           title:'2021',
           collection:false,
           children: [
-            ['/collection/2021/vue',"vue"]
+            ['/collection/2021/css',"css"],
+            ['/collection/2021/js',"javascript"],
+            ['/collection/2021/ts',"typescript"],
+            ['/collection/2021/vue',"vue"],
+            ['/collection/2021/react',"react"],
+            ['/collection/2021/node',"node"],
+            ['/collection/2021/project',"project"],
+            ['/collection/2021/better',"性能优化"],
+            ['/collection/2021/network',"网络"],
+            ['/collection/2021/os',"操作系统"],
+            ['/collection/2021/other',"other"],
           ]
         },
         {
