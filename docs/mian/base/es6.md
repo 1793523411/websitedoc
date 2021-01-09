@@ -1386,3 +1386,199 @@ console.log("script end");
 // async1 end
 // settimeout
 ```
+
+## Promise 和 async-await 的区别
+
+Promise 和 async-await 都是优化异步编程体验的解决方案。
+
+|                                                                                                           Promise                                                                                                           |                                                                                                   async-await                                                                                                    |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| promise 出现解决了传统 callback 函数回调地域的问题，支持链式调用可以停.then,promise 分别有 3 种状态一旦函数执行 promise 有了结果就无法改变，遇到复杂的业务逻辑 promise 显然不是那么方便需要不停 then 这样语法显然也不美观。 | async,await 是基于 promise 实现的，它是基于 Generator 函数的语法糖，它拥有内置执行器，它返回的是一个 promise 对象，可以使异步代码看起来像同步代码一样，更方便阅读和理解代码，解决了 promise 里面不停.then 的问题 |
+
+不同的场景要用合适的方法，就像 For 和 foreach，效率要考虑，简洁要考虑，更要因为业务场景不同选择合适的方法
+
+::: tip 为什么 Async/Await 更好？
+使用 async 函数可以让代码简洁很多，不需要像 Promise 一样需要些 then，不需要写匿名函数处理 Promise 的 resolve 值，也不需要定义多余的 data 变量，还避免了嵌套代码
+
+错误处理：Async/Await 让 try/catch 可以同时处理同步和异步错误。在下面的 promise 示例中，try/catch 不能处理 JSON.parse 的错误，因为它在 Promise 中。我们需要使用 .catch，这样错误处理代码非常冗余。并且，在我们的实际生产代码会更加复杂。
+:::
+
+```js
+const makeRequest = () => {
+  try {
+    getJSON().then((result) => {
+      // JSON.parse可能会出错
+      const data = JSON.parse(result);
+      console.log(data);
+    });
+    // 取消注释，处理异步代码的错误
+    // .catch((err) => {
+    //   console.log(err)
+    // })
+  } catch (err) {
+    console.log(err);
+  }
+};
+```
+
+### Async 捕获异常
+
+使用 aync/await 的话，catch 能处理 JSON.parse 错误:
+
+```js
+const makeRequest = async () => {
+  try {
+    // this parse may fail
+    const data = JSON.parse(await getJSON());
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+```
+
+条件语句也和错误捕获是一样的，在 Async 中也可以像平时一般使用条件语句:
+
+```js
+const makeRequest = async () => {
+  const data = await getJSON();
+  if (data.needsAnotherRequest) {
+    const moreData = await makeAnotherRequest(data);
+    console.log(moreData);
+    return moreData;
+  } else {
+    console.log(data);
+    return data;
+  }
+};
+```
+
+对比 promise
+
+```js
+const makeRequest = () => {
+  return getJSON().then((data) => {
+    if (data.needsAnotherRequest) {
+      return makeAnotherRequest(data).then((moreData) => {
+        console.log(moreData);
+        return moreData;
+      });
+    } else {
+      console.log(data);
+      return data;
+    }
+  });
+};
+```
+
+async/await 中的错误栈会指向错误所在的函数。在开发环境中，这一点优势并不大。但是，当你分析生产环境的错误日志时，它将非常有用。这时，知道错误发生在 makeRequest 比知道错误发生在 then 链中要好
+
+```js
+const makeRequest = async () => {
+  await callAPromise();
+  await callAPromise();
+  await callAPromise();
+  await callAPromise();
+  await callAPromise();
+  throw new Error("oops");
+};
+
+makeRequest().catch((err) => {
+  console.log(err);
+  // output
+  // Error: oops at makeRequest (index.js:7:9)
+});
+```
+
+async/await 能够使得代码调试更简单。2 个理由使得调试 Promise 变得非常痛苦:
+
+- 不能在返回表达式的箭头函数中设置断点
+- 如果你在.then 代码块中设置断点，使用 Step Over 快捷键，调试器不会跳到下一个.then，因为它只会跳过异步代码。
+
+使用 await/async 时，你不再需要那么多箭头函数，这样你就可以像调试同步代码一样跳过 await 语句
+
+**在调用的地方处理**
+
+```js
+async function task() {
+  const fileA = await readFileA();
+  const fileB = await readFileB(fileA);
+  return fileB;
+}
+task().catch(() => {
+  console.log("read file error");
+});
+```
+
+**使用 try catch**
+
+```js
+async function task() {
+  try {
+    const fileA = await readFileA();
+    const fileB = await readFileB(fileA);
+  } catch (e) {
+    return "read file error";
+  }
+}
+```
+
+集中处理比较方便，但没有细粒度。有时我们想要更细的区别错误的话，可以试下下面的单独处理
+
+```js
+async function task() {
+  let fileA;
+  try {
+    fileA = await readFileA();
+  } catch (e) {
+    return "read file A error";
+  }
+  try {
+    const fileB = await readFileB(fileA);
+  } catch (e) {
+    return "read file B error";
+  }
+}
+```
+
+但如果异步任务太多，篇幅会很长，代码不美观、不优雅。这时可以试下下面的方式。
+
+**返回一个数组**
+
+```js
+async function task() {
+  const [errorA, fileA] = await readFileA()
+    .then((res) => [null, res])
+    .catch((e) => [e, null]);
+  if (errorA) {
+    return "read file A error";
+  }
+  const [errorB, fileB] = await readFileB(fileA)
+    .then((res) => [null, res])
+    .catch((e) => [e, null]);
+  if (errorB) {
+    return "read file B error";
+  }
+  return fileB;
+}
+```
+
+可以把返回数组的这部分代码抽象一下：
+
+```js
+function smartPromise(promise) {
+  return promise.then((res) => [null, res]).catch((e) => [e, null]);
+}
+
+async function task() {
+  const [errorA, fileA] = await smartPromise(readFileA());
+  if (errorA !== null) {
+    return "read file A error";
+  }
+  const [errorB, fileB] = await smartPromise(readFileB());
+  if (errorB !== null) {
+    return "read file B error";
+  }
+  return fileB;
+}
+```

@@ -1,6 +1,6 @@
 # 字节面经
 
-## 字节前端实习面经（1-3面）
+## 字节前端实习面经（1-3 面）
 
 **总的来说，这三场，面试官会首先根据简历内容来一波，或者操作系统、计网开局，之后会问一些前端的基础，最后写个题**
 
@@ -130,7 +130,6 @@ function solution(arr){
 
 6. 算法题 和大于等于 s 的子数组最短长度，问我有没有做过，做过的话说思路
 
-
 ```js
 //滑动窗口
 function minimuSize(nums, s) {
@@ -167,3 +166,224 @@ function minimuSize(nums, s) {
 之前还面了字节商业化，挂在二面，可能是跟字节无缘了吧
 
 [手撕-promise-promise-all-或者-promise-race](/mian/base/es6.html#手撕-promise-promise-all-或者-promise-race)
+
+## 字节前端实习面经(1-3-面)
+
+**一面（1h）**
+
+1. 自我介绍
+
+2. 进程和线程区别？
+
+[进程和线程区别](/mian/base/network.html#线程与进程的区别)
+
+[更多操作系统的知识](http://qimo.ygjie.icu/)
+
+3. 数据库事务是什么？
+
+[数据库事务](/mian/base/db.html#数据库事务是什么)
+
+4. 为什么用 Vue 框架？好处？
+
+[为什么使用 Vue？](/mian/base/vue.html#为什么使用-vue)
+
+框架的好处：
+
+[渐进式](/mian/base/vue.html#对于-vue-是一套渐进式框架的理解)
+
+[vue 的优点](/mian/base/vue.html#vue-的优点是什么)
+
+[MVVM](/mian/base/vue.html#对-mvvm-的理解)
+
+5. Vue 的生命周期是什么？
+
+[vue-的生命周期是什么](/mian/base/vue.html#vue-的生命周期是什么)
+
+[vue-的各个生命阶段是什么](/mian/base/vue.html#vue-的各个生命阶段是什么)
+
+6. 用的最多的 Vue 钩子是什么？
+
+[vue-router-中的导航钩子函数](/mian/base/vue.html#vue-router-中的导航钩子函数)
+
+`created` ,`mounted` ,`beforeDestroy`等
+
+7. V-show 和 V-if 区别？
+
+[请问-v-if-和-v-show-有什么区别](/mian/base/vue.html#请问-v-if-和-v-show-有什么区别)
+
+8. CSS 的选择器有哪些？优先级？
+
+[css-选择符有哪些-哪些属性可以继承-优先级算法如何计算-css3-新增伪类有那些](/mian/base/css.html#css-选择符有哪些-哪些属性可以继承-优先级算法如何计算-css3-新增伪类有那些)
+
+9.  伪类选择器举个例子
+
+[css3-新增伪类有那些](/mian/base/css.html#css3-新增伪类有那些)
+
+10. CSS 哪些元素可以继承？
+
+[css-中哪些属性可以继承](/mian/base/css.html#css-中哪些属性可以继承)
+
+11. 网络分层
+
+[计算机网络相关](http://qimo.ygjie.icu/)
+
+12. UDP/TCP 的区别
+
+[tcp-和-udp-区别有哪些](/mian/base/network.html#tcp-和-udp-区别有哪些)
+
+13. 浏览器缓存解释一下
+
+[请求时浏览器缓存-from-memory-cache-和-from-disk-cache-的依据是什么-哪些数据什么时候存放在-memory-cache-和-disk-cache-中](/mian/base/browser.html#请求时浏览器缓存-from-memory-cache-和-from-disk-cache-的依据是什么-哪些数据什么时候存放在-memory-cache-和-disk-cache-中)
+
+14. http 状态码说一下
+
+[http-状态码](/mian/base/Ajax.html#http-状态码)
+
+[http-的状态码-301-和-302-的区别](/mian/base/network.html#http-的状态码-301-和-302-的区别)
+
+15. JS 事件循环说一下
+
+[什么是事件循环-event-loop](/mian/base/nodejs.html#什么是事件循环-event-loop)
+
+[js-的事件循环是什么](/mian/base/js.html#js-的事件循环是什么)
+
+16. JS 事件循环输出题
+
+[异步笔试题请写出下面代码的运行结果](/mian/base/jstimu.html#异步笔试题请写出下面代码的运行结果)
+
+[async-及-await](/mian/base/es6.html#async-及-await)
+
+17. 手写二叉树前序（递归和非递归）
+
+[手写二叉树前序（递归和非递归）](https://github.com/1793523411/leetcode/blob/master/four/%E9%9D%A2%E8%AF%95%E4%B8%AD%E8%A2%AB%E9%97%AE%E8%BF%87%E7%9A%84/%E6%89%8B%E5%86%99%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%EF%BC%88%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92%EF%BC%89/index.js)
+
+18. 你有什么想问我的？
+
+**二面**
+
+1. 自我介绍
+2. 为什么研究生选分布式？
+
+···
+
+3. 分布式两台服务器怎么通讯？
+
+···
+
+4. Webpack 如何优化速度？
+
+[如何用-webpack-优化前端性能](/mian/base/project.html#webpack-性能优化)
+
+5. 函数式编程了解吗？
+
+[函数式编程](/mian/base/js.html#函数式编程)
+
+[说下函数式编程的理解](/mian/base/js.html#说下函数式编程的理解)
+
+6. JS 数组如何比较？
+
+[判断数组相等-对象相等-比较数组](/mian/base/jstimu.html#判断数组相等-对象相等-比较数组)
+
+7. 如何实现一个深拷贝？
+
+[手写一个-js-深拷贝](/mian/base/jstimu.html#手写一个-js-深拷贝)
+
+[模拟实现一个深拷贝-并考虑对象相互引用以及-symbol-拷贝的情况](/mian/base/jstimu.html#模拟实现一个深拷贝-并考虑对象相互引用以及-symbol-拷贝的情况)
+
+[深拷贝的实现](/mian/base/js.html#深拷贝的实现)
+
+8. Promise 和 Async/Await 区别
+
+[promise-和-async-await-的区别](/mian/base/es6.html#promise-和-async-await-的区别)
+
+9.  Async 如何捕获异常？
+
+[async-捕获异常](/mian/base/es6.html#async-捕获异常)
+
+10. Generator 了解吗？
+
+[generator-如何使用的-以及各个阶段的状态是如何变化的](/mian/base/es6.html#generator-如何使用的-以及各个阶段的状态是如何变化的)
+
+[generator-函数的语法](/mian/other/es6.html#generator-函数的语法)
+
+[generator-函数的异步应用](/mian/other/es6.html#generator-函数的异步应用)
+
+11. Proxy 和 Reflect 了解吗？
+
+[什么是-proxy](/mian/base/es6.html#什么是-proxy)
+
+[什么是-proxy](/mian/base/vue.html#什么是-proxy)
+
+[proxy](/mian/other/es6.html#proxy)
+
+[reflect-对象创建目的](/mian/base/es6.html#reflect-对象创建目的)
+
+[reflect](/mian/other/es6.html#reflect)
+
+12. 一道 JS 数组连续元素相关的手写题
+
+[连续子数组的最大和](https://github.com/1793523411/leetcode/blob/master/four/%E9%9D%A2%E8%AF%95%E4%B8%AD%E8%A2%AB%E9%97%AE%E8%BF%87%E7%9A%84/%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/index.js)
+
+13. 手写二叉树叶节点之和
+
+```js
+var leafSum = (root) => {
+   if(root === null) return 0
+  let sum = 0
+  let leafSum = (node) => {
+    if (node) {
+      if(root.left === null && root.right === null) sum += root.val
+      leafSum(node.left);
+      leafSum(node.right);
+    }
+  };
+  leafSum(root);
+  return sum;
+};
+```
+
+```js
+var leafSum = (root) => {
+    const sum = 0
+    const stack = []
+    if (root) stack.push(root)
+    while (stack.length > 0) {
+        const curNode = stack.pop()
+        if(curNode.left === null && curNode.right === null) sum += curNode.val
+        if (curNode.right != null) {
+            stack.push(curNode.right)
+        }
+        if (curNode.left != null) {
+            stack.push(curNode.left)
+        }
+    }
+    return list;
+}
+```
+
+14. 最近在学什么新的技术
+
+···
+
+15. 你有什么想问我的？
+
+···
+
+
+**三面（20min）**
+1. 实习一周能来几天？多久？
+2. 你认为做的最好的项目是什么？
+3. 说一下项目里的难点
+4. 动画了解吗？用CSS实现一个转圈的Loading
+
+[CSS3实现18种Loading效果](https://www.jianshu.com/p/6ac3e3e12d61)
+
+5. 跨域有几种？
+
+[如何解决跨域问题](/mian/base/js.html#如何解决跨域问题)
+
+6. 你觉得前端你最擅长什么技术？
+
+PS: 一面和二面是在同一天，一面结束面试官就让我等半个小时进行二面，三面约在了另一天。三面特别短，主要是围绕项目，我做的项目面试官说都不算难，凉了...继续加油吧
+
+## 续
