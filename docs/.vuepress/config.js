@@ -1,34 +1,39 @@
 module.exports = {
   title: "跌倒的小黄瓜",
-  logo:"https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/my-website/logo.png",
+  logo: "https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/my-website/logo.png",
   description: "这儿将描述一些东西···💤",
   theme: 'antdocs',
+  plugins: [
+    ['@vuepress/search', {
+      searchMaxSuggestions: 8
+    }]
+  ],
   themeConfig: {
     sidebar: 'auto',
     backToTop: true,
-    ads:{
-      style: 2, 
+    ads: {
+      style: 2,
       speed: 2000,
-      items:[
+      items: [
         {
           text: 'Ads details here',
-          image:'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/4173c34f96e93981fd435e36b01b96f9.jpeg',
+          image: 'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/4173c34f96e93981fd435e36b01b96f9.jpeg',
           link: 'http://doc1.ygjie.icu/'
         },
-     
+
         {
           text: 'Ads details here',
-          image:'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/5b98420cfdce4a50987d5b137da4fa08.jpg',
-          link: 'http://doc1.ygjie.icu/'
-        },
-        {
-          text: 'Ads details here',
-          image:'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/5699abf03eb19.jpg',
+          image: 'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/5b98420cfdce4a50987d5b137da4fa08.jpg',
           link: 'http://doc1.ygjie.icu/'
         },
         {
           text: 'Ads details here',
-          image:'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/timg8.gif',
+          image: 'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/5699abf03eb19.jpg',
+          link: 'http://doc1.ygjie.icu/'
+        },
+        {
+          text: 'Ads details here',
+          image: 'https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/wx-image/doc/timg8.gif',
           link: 'http://doc1.ygjie.icu/'
         }
       ]
@@ -38,6 +43,7 @@ module.exports = {
       { text: "面试", link: "/mian/index" },
       { text: "Demo", link: "/Demo/index" },
       { text: "收集", link: "/collection/index" },
+      { text: "笔记", link: "/notes/index" },
       {
         text: "其他",
         items: [
@@ -46,7 +52,7 @@ module.exports = {
         ],
       },
     ],
-    sidebar:{
+    sidebar: {
       '/Demo/': [
         {
           title: "前台",
@@ -98,7 +104,7 @@ module.exports = {
         },
         {
           title: "其他",
-  
+
           collapsable: false,
         },
         {
@@ -144,41 +150,45 @@ module.exports = {
           ]
         },
       ],
-      '/collection/':[
+      '/collection/': [
         {
-          title:'2021',
-          collection:false,
+          title: "收藏",
+          collapsable: false,
+        },
+        {
+          title: '2021',
+          collection: false,
           children: [
-            ['/collection/2021/css',"css"],
-            ['/collection/2021/js',"javascript"],
-            ['/collection/2021/ts',"typescript"],
-            ['/collection/2021/vue',"vue"],
-            ['/collection/2021/react',"react"],
-            ['/collection/2021/node',"node"],
-            ['/collection/2021/project',"project"],
-            ['/collection/2021/better',"性能优化"],
-            ['/collection/2021/network',"网络"],
-            ['/collection/2021/os',"操作系统"],
-            ['/collection/2021/other',"other"],
+            ['/collection/2021/css', "css"],
+            ['/collection/2021/js', "javascript"],
+            ['/collection/2021/ts', "typescript"],
+            ['/collection/2021/vue', "vue"],
+            ['/collection/2021/react', "react"],
+            ['/collection/2021/node', "node"],
+            ['/collection/2021/project', "project"],
+            ['/collection/2021/better', "性能优化"],
+            ['/collection/2021/network', "网络"],
+            ['/collection/2021/os', "操作系统"],
+            ['/collection/2021/other', "other"],
           ]
         },
         {
-          title:'2020',
-          collection:false,
+          title: '2020',
+          collection: false,
           children: [
-            ['/collection/2020/html',"html/浏览器相关"],
-            ['/collection/2020/css',"css"],
-            ['/collection/2020/js',"JavaScript"],
-            ['/collection/2020/nodejs',"nodejs"],
-            ['/collection/2020/vue',"vue"],
-            ['/collection/2020/react',"react"],
-            ['/collection/2020/project',"工程化"],
-            ['/collection/2020/better',"性能优化"],
-            ['/collection/2020/go',"go"],
-            ['/collection/2020/end',"后端相关"],
-            ['/collection/2020/ecs',"部署"],
-            ['/collection/2020/interest',"有趣"],
-            ['/collection/2020/other',"其他"],
+            ['/collection/2020/html', "html/浏览器相关"],
+            ['/collection/2020/css', "css"],
+            ['/collection/2020/js', "JavaScript"],
+            ['/collection/2020/nodejs', "nodejs"],
+            ['/collection/2020/vue', "vue"],
+            ['/collection/2020/react', "react"],
+            ['/collection/2020/project', "工程化"],
+            ['/collection/2020/better', "性能优化"],
+            ['/collection/2020/go', "go"],
+            ['/collection/2020/end', "后端相关"],
+            ['/collection/2020/ecs', "部署"],
+            ['/collection/2020/interest', "有趣"],
+            ['/collection/2020/other', "其他"],
           ]
         }
       ],
@@ -223,6 +233,7 @@ module.exports = {
           children: [
             ["/mian/exprese/ali", "阿里"],
             ["/mian/exprese/zijie", "字节跳动"],
+            ["/mian/exprese/tecent", "腾讯"],
             ["/mian/exprese/jd", "京东"],
           ]
         },
@@ -236,7 +247,27 @@ module.exports = {
           ]
         },
       ],
+      '/notes/': [
+        {
+          title: "笔记",
+          collapsable: false,
+        },
+        {
+          title: "前端高手进阶",
+          collapsable: true,
+          children: [
+            ["/notes/lagou/01", "前端核心基础知识(上)"]
+          ]
+        },
+        {
+          title: "前端高手进阶",
+          collapsable: true,
+          children: [
+            ["/notes/lagou/01", "前端核心基础知识"]
+          ]
+        },
+      ]
     },
-     sidebarDepth: 3,
+    sidebarDepth: 3,
   },
 };
