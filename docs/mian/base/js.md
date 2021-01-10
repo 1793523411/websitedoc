@@ -18,6 +18,16 @@ js 一共有六种基本数据类型，分别是 Undefined、Null、Boolean、Nu
 
 7 种分别为 string、boolean、number、Object、Function、undefined、symbol(ES6)
 
+## typeof原理
+
+typeof(null) === 'object'，关于原因，在小黄书《你不知道的JavaScript》中有这么一段解释：
+
+原理是这样的， 不同的对象在底层都表示为二进制， 在 JavaScript 中二进制前三位都为 0 的话会被判断为 object 类型， null 的二进制表示是全 0， 自然前三位也是 0， 所以执行 typeof 时会返回“object”。
+
+[typeof最新原理解析](https://cloud.tencent.com/developer/article/1362660)
+
+[typeof的原理？](https://www.cnblogs.com/xuzishuai/p/9081944.html)
+
 ## 如何判断 JS 变量的一个类型（至少三种方式）
 
 typeof、instanceof、 constructor、 prototype

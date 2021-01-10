@@ -2861,6 +2861,7 @@ JavaScript 是不能用==或===操作符直接比较两个数组是否相等的,
 **通过序列化来比较不准确**这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用
 
 数组相等
+
 ```js
 // Warn if overriding existing method
 if (Array.prototype.equals)
@@ -2944,4 +2945,41 @@ Object.prototype.equals = function(object2) {
   //If everything passed, let's say YES
   return true;
 };
+```
+
+## 手写 instanceof 的实现
+
+首先 instanceof 左侧必须是对象, 才能找到它的原型链
+
+instanceof 右侧必须是函数, 函数才会 prototype 属性
+
+迭代 , 左侧对象的原型不等于右侧的 prototype 时, 沿着原型链重新赋值左侧
+
+```js
+// [1,2,3] instanceof Array ---- true
+
+// L instanceof R
+// 变量R的原型 存在于 变量L的原型链上
+function instance_of(L, R) {
+  // 验证如果为基本数据类型，就直接返回false
+  const baseType = ["string", "number", "boolean", "undefined", "symbol"];
+  if (baseType.includes(typeof L)) {
+    return false;
+  }
+
+  let RP = R.prototype; //取 R 的显示原型
+  L = L.__proto__; //取 L 的隐式原型
+  while (true) {
+    // 无线循环的写法（也可以使 for(;;) ）
+    if (L === null) {
+      //找到最顶层
+      return false;
+    }
+    if (L === RP) {
+      //严格相等
+      return true;
+    }
+    L = L.__proto__; //没找到继续向上一层原型链查找
+  }
+}
 ```

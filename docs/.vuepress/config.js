@@ -234,6 +234,7 @@ module.exports = {
             ["/mian/exprese/ali", "阿里"],
             ["/mian/exprese/zijie", "字节跳动"],
             ["/mian/exprese/tecent", "腾讯"],
+            ["/mian/exprese/meituan", "美团"],
             ["/mian/exprese/jd", "京东"],
           ]
         },
@@ -260,10 +261,11 @@ module.exports = {
           ]
         },
         {
-          title: "前端高手进阶",
+          title: "vue源码初步学习",
           collapsable: true,
           children: [
-            ["/notes/lagou/01", "前端核心基础知识"]
+            ["/notes/lagou/vue2", "vue2"],
+            ["/notes/lagou/vue3", "vue3"]
           ]
         },
       ]
