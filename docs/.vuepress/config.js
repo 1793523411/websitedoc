@@ -257,7 +257,9 @@ module.exports = {
           title: "前端高手进阶",
           collapsable: true,
           children: [
-            ["/notes/lagou/01", "前端核心基础知识(上)"]
+            ["/notes/lagou/01", "前端核心基础知识(上)"],
+            ["/notes/lagou/02", "前端核心基础知识(中)"],
+            ["/notes/lagou/03", "前端核心基础知识(下)"]
           ]
         },
         {
