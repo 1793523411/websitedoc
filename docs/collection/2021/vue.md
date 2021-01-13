@@ -1,5 +1,11 @@
 # vue
 
+[Vue CLI 是如何实现的 -- 终端命令行工具篇](https://mp.weixin.qq.com/s/Kw9oUxgCpZBr43DRjQirMQ)
+
+[vue3.0团队内部分享总结](https://mp.weixin.qq.com/s/cifT6ceqrTnnirnuv8ZeCQ)
+
+[极为细致的Vue的Diff流程详解——以流程图表达](https://mp.weixin.qq.com/s/qCQYdegMduJrxLL6NEzOcA)
+
 [Vue.js开发移动端经验总结](https://mp.weixin.qq.com/s/R9ie_F4FhBgzzDscIqcX8A)
 
 [Vue.js巧妙运用修饰符，帮你后期维护代码省下大量的时间](https://mp.weixin.qq.com/s?__biz=MzIwNTc4OTU2NA==&mid=2247487265&idx=1&sn=3db633413c3dcd507d0a491359d3271d&chksm=972acf32a05d46245b345b297fa2bab452098d32d673b3870ea88f07df5be6638978d2b671ac&mpshare=1&scene=24&srcid=01041OuYGWUuTOZIDbOxBBAZ&sharer_sharetime=1609753022616&sharer_shareid=18af4598a510ab1911de864d55f65d3a&key=e5a6f4840bcd614c419008d5b7276352e0f3a4181c455a35d2c6d21dba08714c2c4251416473bdd3c1a390def5e1f4a4b5245bedb3546bce78ae3d4f37322efb82779e2f344d6f24ebc7f8b0a2693a7406d45e73c23712cf8268d1644b1fb286ffc8ef79be146dc7fb9ec94705d515629c10a69d06122d737de2c4991c5cdb8d&ascene=14&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A0gRwazDxQuji6NQu8Mv974%3D&pass_ticket=uG0ITW7VbQre912sCs3w03oa5DNRIG3UHrL1%2FYIYsorCPizXQjGGAVEkkNHwDWci&wx_header=0)

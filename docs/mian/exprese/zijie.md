@@ -461,6 +461,8 @@ console.log('end')  //begin //end //setTimeout 1 //promise 1 //promise 2 //setTi
 
 - 比较版本号 version1 > version 2 return 1 , version1 < version 2 return -1, 其他返回 0.
 
+
+
 - 如何快速判断一个 ip 地址是否属于国内？已知 db 中有几十万个国内 ip 地址段。
 
 

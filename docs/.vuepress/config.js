@@ -166,7 +166,10 @@ module.exports = {
             ['/collection/2021/react', "react"],
             ['/collection/2021/node', "node"],
             ['/collection/2021/project', "project"],
+            ['/collection/2021/wx', "小程序"],
             ['/collection/2021/better', "性能优化"],
+            ['/collection/2021/rule', "规范"],
+            ['/collection/2021/mian', "面试"],
             ['/collection/2021/network', "网络"],
             ['/collection/2021/os', "操作系统"],
             ['/collection/2021/other', "other"],
@@ -190,7 +193,7 @@ module.exports = {
             ['/collection/2020/interest', "有趣"],
             ['/collection/2020/other', "其他"],
           ]
-        }
+        },
       ],
       '/mian/': [
         {

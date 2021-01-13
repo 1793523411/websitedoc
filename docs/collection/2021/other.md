@@ -1,5 +1,17 @@
 # other
 
+[浅谈移动端开发技术](https://mp.weixin.qq.com/s/yegI1oXndv9exhF0Uc-S3g)
+
+[程序员面试 10 大潜规则，千万不要踩坑！](https://mp.weixin.qq.com/s/Rqg6d_7go81495VKZhocsA)
+
+[让我们来构建一个浏览器引擎吧（建议收藏）](https://mp.weixin.qq.com/s/6-p0LXlz2r7MiNdDEmWiuQ)
+
+[灵感 | 12组文件管理网页设计灵感](https://mp.weixin.qq.com/s/BIMJtNhfpShEh5kwgZhupA)
+
+[2021 年前端趋势预测](https://mp.weixin.qq.com/s/wS9uDeNp5jf7oopNRd3Y0Q)
+
+[前端海报生成的不同方案和优劣](https://segmentfault.com/a/1190000038910770)
+
 [前端简历到底怎么写才能成为大厂敲门砖](https://mp.weixin.qq.com/s?__biz=MzA4Nzg0MDM5Nw==&mid=2247490921&idx=1&sn=0c1c20d95e2f7882f6fa3340fe83bedf&chksm=90321e8ba745979dba45ca6ddf0af2efa57386372cda801da74d1429943eb4ad5d620e1f0bc6&mpshare=1&scene=24&srcid=01097j6HVcbCxnvEpCyNf2f0&sharer_sharetime=1610199820674&sharer_shareid=18af4598a510ab1911de864d55f65d3a&key=fac416e293c6ddd1c78dad7fa9550f42c96c197119d10a4c6b4769d321f4fe1d02f510a6f1eca311f37986115a6d6696f45c82ea236950980dd02dfeeb2546dea1eff5bf1093665f8dc25c0595618796c7b9c0063ebbf2cff53df5d646ca9fbecbf84d2d42d7121a606f52fee7d084fbbbe5d69c8016cf6b540ce7f91a42ac6b&ascene=14&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A4Y5n1YOmApefMHPT2vH5GE%3D&pass_ticket=uG0ITW7VbQre912sCs3w03oa5DNRIG3UHrL1%2FYIYsorCPizXQjGGAVEkkNHwDWci&wx_header=0)
 
 [VSCode 花式玩法（摸鱼）了解一下](https://mp.weixin.qq.com/s?__biz=MzI1ODk2Mjk0Nw==&mid=2247487354&idx=2&sn=e7f9eeece0d05cc3b7fc8a4f91fa6bbf&chksm=ea016c16dd76e5000db311de7fae2a05b4e8b136e5459ee6ecb129988e2415374079a1b73326&scene=126&sessionid=1610198026&key=e5a6f4840bcd614c352c8f4fbcc8e7c747e98f85db0c48176fffd7f7f4b7d663dec0548950119d772c439fb7173dd200d79600782ee6398d91dc8c8675e4bbe26ebeb743ed598ccaf645a4d77782a81c62f131e850e767d7f7f943969bb16c97067b6e966c20e890fa55138897e0302257f62be82c18878048406abf8114aaea&ascene=1&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A4lf8basSojl4c68cRITEOk%3D&pass_ticket=uG0ITW7VbQre912sCs3w03oa5DNRIG3UHrL1%2FYIYsorCPizXQjGGAVEkkNHwDWci&wx_header=0)

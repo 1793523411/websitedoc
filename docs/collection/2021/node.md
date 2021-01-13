@@ -1,5 +1,11 @@
 # nodejs
 
+[Node+Redis进行API速率限制的方法介绍](https://mp.weixin.qq.com/s/2rBT_B9iaTvaTNffD6_URQ)
+
+[封装 axios 取消重复请求](https://mp.weixin.qq.com/s/nDPM6HzLKkAIqmW91I9W-A)
+
+[2021再看Deno（关于CDN for JavaScript modules的思考）](https://mp.weixin.qq.com/s?__biz=MzAxMTU0NTc4Nw==&mid=2661157880&idx=1&sn=0a002f0548b30319f5e2c45dbf40dfb8&scene=21#wechat_redirect)
+
 [4 万 Star！最全面的 Node.js 资源汇总](https://mp.weixin.qq.com/s?__biz=MzAxMDM0MzQ4Mg==&mid=303578860&idx=1&sn=8839ab1de0e8388d2466dd4c0f2b26ed&chksm=0cbd5bb93bcad2afc44daba2b2ef4917cdd2eca1b105b5d13b20e1e25ae86604c59ea8b35f05&mpshare=1&scene=24&srcid=1227J14pE2YEW2CnsvT9jEdH&sharer_sharetime=1609043282731&sharer_shareid=18af4598a510ab1911de864d55f65d3a&key=e5a6f4840bcd614c0500b9e7a32de0ab04c501224946fa8010e384c6da9b86708257d15ff1a6fc1d05d16fb2edc63c41a85b4bc678834e0584aec380b3c460ac2f0600da260cb0ea71366a159d249088bd70af8b1d587a9ad7cf8ad6b888901d61b847e41e227776029f9087dc185860af604136a982adf2b8da0e97751164a4&ascene=14&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=Azdgq68iGsCNR76Tm%2F8IcAo%3D&pass_ticket=uG0ITW7VbQre912sCs3w03oa5DNRIG3UHrL1%2FYIYsorCPizXQjGGAVEkkNHwDWci&wx_header=0)
 
 [(实战)Node.js 实现抢票小工具&短信通知提醒](https://mp.weixin.qq.com/s?__biz=MzUzNjk5MTE1OQ==&mid=2247494988&idx=1&sn=587b1592781185f36a0dff9473e5f87a&chksm=faef6994cd98e082ce499d0bf0f9d4bbddb4f92467acf41d56a9dde07d625ab3f68874a11d25&mpshare=1&scene=24&srcid=0101y3kJN9spzefkwapyl9jq&sharer_sharetime=1609513129801&sharer_shareid=18af4598a510ab1911de864d55f65d3a&key=7326df0a627d9fb5dbf3cf53318f37032e4a49295149c9ad7e65a0c814a54beff69a509a100695ac4748c16b320582c62c2f35ee0873c3b0c20d1738f3f07488c7af68aa6a42041d7a387355592b1383ee007e65092522ddf8bf5fe797b107d1cd533fb459c38f0ce6171e156b302fe4b45214d799d54f4097c48d283ed1ef83&ascene=14&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AzhECp%2BYzNQSZYjagsXxWak%3D&pass_ticket=uG0ITW7VbQre912sCs3w03oa5DNRIG3UHrL1%2FYIYsorCPizXQjGGAVEkkNHwDWci&wx_header=0)

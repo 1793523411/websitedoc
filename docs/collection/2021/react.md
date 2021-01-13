@@ -1,5 +1,11 @@
 # react
 
+[探寻 Redux useSelector 更新机制](https://mp.weixin.qq.com/s/RwNEEh-zEjMxGgi7r1dG7A)
+
+[不用try catch，如何机智的捕获错误](https://mp.weixin.qq.com/s/eCw9zc_20y-AX0yfty0Cvw)
+
+[顶级React组件库推荐](https://mp.weixin.qq.com/s/vghvzjYELfdu3RjChqEvCg)
+
 [React 灵魂 23 问，你能答对几个？](https://mp.weixin.qq.com/s?__biz=MzUxNzk1MjQ0Ng==&mid=2247489463&idx=1&sn=54685960428f0200f9b5feefcbec17fa&chksm=f9911166cee69870649aa9574b8323822171f323a56dbf35a771ef3b09e36618213af22c34a1&mpshare=1&scene=24&srcid=1227VJvbhjUfavD6OOtl428s&sharer_sharetime=1609043499358&sharer_shareid=18af4598a510ab1911de864d55f65d3a&key=ea7446b0013173847508610d9e93d8a92f204f90f47e3a39ce252f2f85e2d5a864a7c77211baf1f9e882e8f69da3ae8f0a2089c4a4755f348365c743f9ba59b50a29d22e9b0639755e14e06f2c37a268eea1b6ff4c4afbe556cfca27d26e6cfd7aeaa79fc721342b9b7fecfc53ce8915f74a01031884a1d48292f104a8a0ae92&ascene=14&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A5XQY%2F0ShDlTblLE78fNfdc%3D&pass_ticket=uG0ITW7VbQre912sCs3w03oa5DNRIG3UHrL1%2FYIYsorCPizXQjGGAVEkkNHwDWci&wx_header=0)
 
 [从业务案例来讲 React Hook 系列 - 一个复制按钮](https://mp.weixin.qq.com/s?__biz=MzA4Nzg0MDM5Nw==&mid=2247490359&idx=1&sn=4834b9ccae12f4c7b0a5ed40726ce594&chksm=903218d5a74591c3e53ea491f2525ff4ad7101f39fb5c4d29846003fc394c93123fa7413bfbf&mpshare=1&scene=24&srcid=0101WO0rqKwRwh0D043IDdsU&sharer_sharetime=1609513415379&sharer_shareid=18af4598a510ab1911de864d55f65d3a&key=7326df0a627d9fb59c1b32838cbac9331f3863232eb5f97589b9f89e1039f55a75b27b080ff5bc80b3ff056b36e3a456bebe1b58e52da0212b6c16896da26ba596117674313d5cf5939b010b6ffe851c88bd201530f4d580679ddb648f4cb23af46241554b017d9ee6b6e82d50c475d13917597b9070398ec5bdf17599fe775a&ascene=14&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AwfVJmvCr5ScrO8xZ%2FbA%2BFU%3D&pass_ticket=uG0ITW7VbQre912sCs3w03oa5DNRIG3UHrL1%2FYIYsorCPizXQjGGAVEkkNHwDWci&wx_header=0)
