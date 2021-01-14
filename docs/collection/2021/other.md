@@ -1,5 +1,11 @@
 # other
 
+[你到底需要搭载Apple M1处理器的新Mac吗](https://mp.weixin.qq.com/s/McZ_1u-VEye7ZgM6ot21qQ)
+
+[Eclipse 出品，10 万 Star！网友说要干掉 VS Code 的新工具](https://mp.weixin.qq.com/s/cz4ISr_Vyf9UZTTINRg28g)
+
+[带你实现完整的视频弹幕系统](https://mp.weixin.qq.com/s/0JrjT8x7XoamLwK23XWaUw)
+
 [浅谈移动端开发技术](https://mp.weixin.qq.com/s/yegI1oXndv9exhF0Uc-S3g)
 
 [程序员面试 10 大潜规则，千万不要踩坑！](https://mp.weixin.qq.com/s/Rqg6d_7go81495VKZhocsA)

@@ -1,5 +1,11 @@
 # nodejs
 
+[新来的妹纸问我 AJAX 请求为什么不安全？没有回答出来。。。](https://mp.weixin.qq.com/s/VVbi7mFhGdsmom-kraq_bg)
+
+[Nodejs Stream pipe 的使用与实现原理分析](https://mp.weixin.qq.com/s/NoIMXpI4buTVaXGFVhD8tA)
+
+[node_modules 困境](https://mp.weixin.qq.com/s/u92k389qtoSfENT9BfOcOg)
+
 [Node+Redis进行API速率限制的方法介绍](https://mp.weixin.qq.com/s/2rBT_B9iaTvaTNffD6_URQ)
 
 [封装 axios 取消重复请求](https://mp.weixin.qq.com/s/nDPM6HzLKkAIqmW91I9W-A)

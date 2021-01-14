@@ -1,5 +1,7 @@
 # project
 
+[2.6 万 Star！Web 已进化，前端测试工具也该变了](https://mp.weixin.qq.com/s?__biz=MzAxMDM0MzQ4Mg%3D%3D&mid=2451062796&idx=1&sn=6d3ba2b548ab09005c935441502913de&scene=45#wechat_redirect)
+
 [面试官：SSR解决了什么问题？有做过SSR吗？你是怎么做的？](https://mp.weixin.qq.com/s/wARktKyXpGb1RtDk2ybDOA)
 
 [babel原理&plugin实战](https://mp.weixin.qq.com/s?__biz=MzI1ODk2Mjk0Nw==&mid=2247487312&idx=1&sn=5a6c5a721c728baf2dfdaa3d94d5f400&chksm=ea016c3cdd76e52a2348203d3e32eeb1d319a3070d106b953305584bc178f215a41d8da59c08&scene=126&sessionid=1610198026&key=3712d248eda753bf037aa153861493deb1e418429087cec3f1128faf57159a128490aba2e76705d6e502fdfafe43a48c8795b2771f7fb172da6a8802ee7526e12a5d1378b31837ebabec4d6c0deeb901191293ec13da9e19ed2944b61380e93f8abc3f32d34d7435e7cba10ef356ea4058eff0602c71f1f3af35cb31f8023bcc&ascene=1&uin=Mzc2MjkyMjk0MQ%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=AyyOCj6xOah9EuLZemPSQLI%3D&pass_ticket=uG0ITW7VbQre912sCs3w03oa5DNRIG3UHrL1%2FYIYsorCPizXQjGGAVEkkNHwDWci&wx_header=0)

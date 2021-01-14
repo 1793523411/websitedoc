@@ -232,6 +232,7 @@ module.exports = {
             ['/collection/2021/project', "project"],
             ['/collection/2021/wx', "小程序"],
             ['/collection/2021/better', "性能优化"],
+            ['/collection/2021/ecs', "部署"],
             ['/collection/2021/rule', "规范"],
             ['/collection/2021/mian', "面试"],
             ['/collection/2021/network', "网络"],

@@ -1,5 +1,15 @@
 # javascript
 
+[了不起的 JavaScript 内存学习指南](https://mp.weixin.qq.com/s/9yibACTP1sTAn16jeWueOQ)
+
+[手写一个 Array.prototype.splice](https://mp.weixin.qq.com/s/wJhr1BufXNnfmCwCjLuaMw)
+
+[ES2020 骚操作：可选链 "?."](https://mp.weixin.qq.com/s/jfUE86cOnedeHCFgpCaTMA)
+
+[实现一个数组（包含对象等类型元素）去重函数](https://mp.weixin.qq.com/s/UAnAMDMt2dAsYMFXYn5G9Q)
+
+[RxJS：给你如丝一般顺滑的编程体验](https://mp.weixin.qq.com/s/KaLjNOAOW7OY0TvMVL3q3g)
+
 [重磅！超详细的 JS 数组方法整理出来了](https://mp.weixin.qq.com/s/66LpzgXqzNEm7T8Nqta8Qg)
 
 [原生JS基础巩固](https://mp.weixin.qq.com/s/wErTKOOdSEbGNNXtJE_xOw)

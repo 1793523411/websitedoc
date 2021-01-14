@@ -1,5 +1,9 @@
 # react
 
+[助力 SSR，使用 concent 为 Next.js 应用加点料](https://mp.weixin.qq.com/s/MWwauOETdI46WZS3BMLVdg)
+
+[如何开发一个 Antd 级联多选控件](https://mp.weixin.qq.com/s/h3jmOMgj-iey4Aaex-c54g)
+
 [探寻 Redux useSelector 更新机制](https://mp.weixin.qq.com/s/RwNEEh-zEjMxGgi7r1dG7A)
 
 [不用try catch，如何机智的捕获错误](https://mp.weixin.qq.com/s/eCw9zc_20y-AX0yfty0Cvw)
