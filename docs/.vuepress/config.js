@@ -70,7 +70,22 @@ module.exports = {
       ],
     },],
     'vuepress-plugin-catalog-graph',
-    'img-lazy'
+    'img-lazy',
+    ['graysite', {
+      startDate: '2021-04-03 00:00:00',
+      endDate: '2021-04-04 23:59:59'
+    }],
+    ['homebadge', {
+      selector: '.hero',
+      repoLink: 'https://github.com/1793523411/websitedoc',
+      badgeLink: 'https://img.shields.io/github/stars/1793523411/websitedoc?style=social',
+      badgeGroup: [
+        'https://img.shields.io/github/issues/1793523411/websitedoc',
+        'https://img.shields.io/github/forks/1793523411/websitedoc',
+        'https://img.shields.io/github/license/1793523411/websitedoc',
+        'https://img.shields.io/twitter/url?style=social'
+      ]
+    }]
   ],
   themeConfig: {
     sidebar: 'auto',

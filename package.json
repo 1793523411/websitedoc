@@ -22,6 +22,8 @@
     "moment": "^2.29.1",
     "vuepress-plugin-catalog-graph": "^0.2.8",
     "vuepress-plugin-code-copy": "^1.0.6",
+    "vuepress-plugin-graysite": "^0.1.0",
+    "vuepress-plugin-homebadge": "^0.1.0",
     "vuepress-plugin-img-lazy": "^1.0.4",
     "vuepress-plugin-reading-progress": "^1.0.10",
     "vuepress-plugin-redirect": "^1.2.5",

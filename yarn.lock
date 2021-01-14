@@ -8163,6 +8163,16 @@ vuepress-plugin-dynamic-title@^1.0.0:
   resolved "https://registry.npm.taobao.org/vuepress-plugin-dynamic-title/download/vuepress-plugin-dynamic-title-1.0.0.tgz#867e7a8b821ad35ccfaaafc2358bc129817d422f"
   integrity sha1-hn56i4Ia01zPqq/CNYvBKYF9Qi8=
 
+vuepress-plugin-graysite@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npm.taobao.org/vuepress-plugin-graysite/download/vuepress-plugin-graysite-0.1.0.tgz#5d05df4f7ac13825a54a8b29b62630a1674330f3"
+  integrity sha1-XQXfT3rBOCWlSosptiYwoWdDMPM=
+
+vuepress-plugin-homebadge@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npm.taobao.org/vuepress-plugin-homebadge/download/vuepress-plugin-homebadge-0.1.0.tgz#940022dfe0f0c4da28f139afba34595a8d62e0d5"
+  integrity sha1-lAAi3+DwxNoo8TmvujRZWo1i4NU=
+
 vuepress-plugin-img-lazy@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npm.taobao.org/vuepress-plugin-img-lazy/download/vuepress-plugin-img-lazy-1.0.4.tgz#f444c1e21a2c95117f1bcb97a0962660362fa181"
