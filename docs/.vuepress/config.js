@@ -68,7 +68,9 @@ module.exports = {
           ],
         },
       ],
-    },]
+    },],
+    'vuepress-plugin-catalog-graph',
+    'img-lazy'
   ],
   themeConfig: {
     sidebar: 'auto',
