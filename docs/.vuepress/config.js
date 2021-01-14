@@ -327,7 +327,9 @@ module.exports = {
           children: [
             ["/notes/lagou/01", "前端核心基础知识(上)"],
             ["/notes/lagou/02", "前端核心基础知识(中)"],
-            ["/notes/lagou/03", "前端核心基础知识(下)"]
+            ["/notes/lagou/03", "前端核心基础知识(下)"],
+            ["/notes/lagou/04", "前端实际应用场景解析(上)"],
+            ["/notes/lagou/05", "前端实际应用场景解析(下)"],
           ]
         },
         {
