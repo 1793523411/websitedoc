@@ -11,10 +11,19 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vuepress": "^1.7.1"
+    "@vuepress/plugin-nprogress": "^1.8.0",
+    "vuepress": "^1.7.1",
+    "vuepress-plugin-copyright": "^1.0.2",
+    "vuepress-plugin-dynamic-title": "^1.0.0"
   },
   "dependencies": {
+    "@vuepress/plugin-medium-zoom": "^1.8.0",
     "core-js": "2.6.11",
+    "moment": "^2.29.1",
+    "vuepress-plugin-code-copy": "^1.0.6",
+    "vuepress-plugin-reading-progress": "^1.0.10",
+    "vuepress-plugin-redirect": "^1.2.5",
+    "vuepress-plugin-smooth-scroll": "^0.0.10",
     "vuepress-theme-antdocs": "^1.2.2"
   }
 }

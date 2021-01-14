@@ -6,7 +6,69 @@ module.exports = {
   plugins: [
     ['@vuepress/search', {
       searchMaxSuggestions: 8
-    }]
+    }],
+    [
+      '@vuepress/last-updated',
+      {
+        transformer: (timestamp, lang) => {
+          // 不要忘了安装 moment
+          const moment = require('moment')
+          moment.locale(lang)
+          return moment(timestamp).fromNow()
+        }
+      }
+    ],
+    '@vuepress/nprogress',
+    [
+      'vuepress-plugin-copyright',
+      {
+        noCopy: true, // the selected text will be uncopiable
+        minLength: 100, // if its length is greater than 100
+      },
+    ],
+    ['vuepress-plugin-code-copy', {
+      // selector: String,
+      align: 'bottom',
+      color: '#A3E4D7',
+      backgroundTransition: true,
+      backgroundColor: '#FDFEFE',
+      successText: '复制成功'
+    }],
+    [
+      "dynamic-title",
+      {
+        showIcon: "https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/my-website/logo.png",
+        showText: "(/≧▽≦/)欢迎回来！",
+        hideIcon: "https://wx-xly-1301545895.cos.ap-beijing.myqcloud.com/my-website/logo.png",
+        hideText: "(●—●)不要走~~~",
+        recoverTime: 2000
+      }
+    ],
+    'reading-progress',
+    ['@vuepress/medium-zoom', {
+      selector: '.theme-antdocs-content :not(a) > img',
+      options: {
+        margin: 16
+      }
+    }],
+    'vuepress-plugin-smooth-scroll',
+    ['redirect', {
+      redirectors: [
+        // customize your redirectors
+        {
+          base: '/', // automatically redirect `/my-plugins/` to a subpage
+          storage: true, // save the result of the last visit to `localStorage` for the next redirect
+          alternative: [
+            // provide an alternate list
+            // if no page was matched, you will get a "404 not found"
+            'mian', // equivalent to `/my-plugins/mathjax/`
+            'Demo',
+            'collection',
+            'notes',
+          ],
+        },
+      ],
+    },]
   ],
   themeConfig: {
     sidebar: 'auto',
