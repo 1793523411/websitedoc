@@ -345,6 +345,8 @@ module.exports = {
             ["/notes/lagou/03", "前端核心基础知识(下)"],
             ["/notes/lagou/04", "前端实际应用场景解析(上)"],
             ["/notes/lagou/05", "前端实际应用场景解析(下)"],
+            ["/notes/lagou/06", "综合能力提升(上)"],
+            ["/notes/lagou/07", "综合能力提升(下)"],
           ]
         },
         {
