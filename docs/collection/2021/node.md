@@ -1,5 +1,7 @@
 # nodejs
 
+[前端 CLI 脚手架思路解析](https://mp.weixin.qq.com/s/Rfov1ZMwS2g_2p-aOMEHbQ)
+
 [新来的妹纸问我 AJAX 请求为什么不安全？没有回答出来。。。](https://mp.weixin.qq.com/s/VVbi7mFhGdsmom-kraq_bg)
 
 [Nodejs Stream pipe 的使用与实现原理分析](https://mp.weixin.qq.com/s/NoIMXpI4buTVaXGFVhD8tA)

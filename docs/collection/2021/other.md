@@ -1,5 +1,9 @@
 # other
 
+[不能因为你没有新产出，就意味着你没有提供价值](https://mp.weixin.qq.com/s/nsKLOMHRFbfQbvusCNZdYA)
+
+[创业年入过百万的前端大佬 Scott 的年终总结](https://mp.weixin.qq.com/s/ubIIYyrugYHPlUaXFgfPPQ)
+
 [你到底需要搭载Apple M1处理器的新Mac吗](https://mp.weixin.qq.com/s/McZ_1u-VEye7ZgM6ot21qQ)
 
 [Eclipse 出品，10 万 Star！网友说要干掉 VS Code 的新工具](https://mp.weixin.qq.com/s/cz4ISr_Vyf9UZTTINRg28g)

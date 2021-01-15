@@ -1,5 +1,9 @@
 # vue
 
+[从0到1封装表单组件（TypeScript + Vue3.0 版）](https://mp.weixin.qq.com/s/4pwzyQKgYupS8JaOQHeKSA)
+
+[面试官：Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？](https://mp.weixin.qq.com/s/MyRhh7W4m1GaoE--HqpFpQ)
+
 [Vue CLI 是如何实现的 -- 终端命令行工具篇](https://mp.weixin.qq.com/s/Kw9oUxgCpZBr43DRjQirMQ)
 
 [vue3.0团队内部分享总结](https://mp.weixin.qq.com/s/cifT6ceqrTnnirnuv8ZeCQ)
