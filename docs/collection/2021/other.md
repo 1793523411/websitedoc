@@ -1,5 +1,17 @@
 # other
 
+[「多图预警」那些年，被blob虐过的程序猿觉醒了！](https://mp.weixin.qq.com/s/oXc31L5PJSplOdYhC7d0jA)
+
+[设计灵感：12组玻璃拟物化风格APP设计](https://mp.weixin.qq.com/s/dji0KI42KBFaZf1nrXWpTg)
+
+[设计灵感：12 组架构清晰的仪表盘页面设计](https://mp.weixin.qq.com/s/gzlAsbxLjW445xpas7KYfA)
+
+[设计灵感：12 组金融理财类 APP 界面设计](https://mp.weixin.qq.com/s/BIIshYJ8ooKuNRhgOIAUOQ)
+
+[深入理解Chrome V8垃圾回收机制](https://mp.weixin.qq.com/s/YAvBfY7cF8WUm5XuJDoYTg)
+
+[设计灵感：12 组简洁大气的家具 APP 设计](https://mp.weixin.qq.com/s/ZIkD0kBxbkeElp7Qu03thg)
+
 [不能因为你没有新产出，就意味着你没有提供价值](https://mp.weixin.qq.com/s/nsKLOMHRFbfQbvusCNZdYA)
 
 [创业年入过百万的前端大佬 Scott 的年终总结](https://mp.weixin.qq.com/s/ubIIYyrugYHPlUaXFgfPPQ)

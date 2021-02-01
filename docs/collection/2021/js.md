@@ -1,5 +1,7 @@
 # javascript
 
+[JavaScript两个快速调试的技巧](https://mp.weixin.qq.com/s/GcoQj_M9kI-RRgzbCqyMzQ)
+
 [了不起的 JavaScript 内存学习指南](https://mp.weixin.qq.com/s/9yibACTP1sTAn16jeWueOQ)
 
 [手写一个 Array.prototype.splice](https://mp.weixin.qq.com/s/wJhr1BufXNnfmCwCjLuaMw)
