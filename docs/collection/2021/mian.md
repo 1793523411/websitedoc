@@ -1,5 +1,9 @@
 # 面试
 
+[2021 阿里字节快手面经 & 个人成长经验分享](https://mp.weixin.qq.com/s/B3SXH3P69hrx4yNkF-tm-w)
+
+[如何写「前端简历」，能敲开字节跳动的大门？](https://mp.weixin.qq.com/s/E3vYXnXFShqQ3g62YXU3Mg)
+
 [从外包到字节跳动](https://mp.weixin.qq.com/s/ZyMtMyqKzAQHeXARjHqsUQ)
 
 [面试官：Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？](https://mp.weixin.qq.com/s/MyRhh7W4m1GaoE--HqpFpQ)

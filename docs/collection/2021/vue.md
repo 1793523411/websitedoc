@@ -1,5 +1,9 @@
 # vue
 
+[在Vue里用Throttle居然这么黑盒？](https://mp.weixin.qq.com/s/if6bearX6LJPgfbJVXamKA)
+
+[Vue实现原理+前端性能优化](https://mp.weixin.qq.com/s/vQlqQqXhARS_8EKa1qEaDg)
+
 [从0到1封装表单组件（TypeScript + Vue3.0 版）](https://mp.weixin.qq.com/s/4pwzyQKgYupS8JaOQHeKSA)
 
 [面试官：Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？](https://mp.weixin.qq.com/s/MyRhh7W4m1GaoE--HqpFpQ)

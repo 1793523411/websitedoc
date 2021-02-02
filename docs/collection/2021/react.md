@@ -1,5 +1,7 @@
 # react
 
+[跟我一起走进React核心团队](https://mp.weixin.qq.com/s/3F018eGvRkZvFzJbfn5E5w)
+
 [我与hooks的这一年, 万字长文总结](https://juejin.cn/post/6912309761066729485)
 
 [助力 SSR，使用 concent 为 Next.js 应用加点料](https://mp.weixin.qq.com/s/MWwauOETdI46WZS3BMLVdg)

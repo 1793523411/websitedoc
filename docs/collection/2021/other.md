@@ -1,5 +1,13 @@
 # other
 
+[2020 年的 JavaScript 后起之秀](https://mp.weixin.qq.com/s/w7ByOnIdZogAUs0ln6AROw)
+
+[漫画 | Bug是如何产生的？](https://mp.weixin.qq.com/s/Vh8Qc2yUbduxkVelovAztg)
+
+[一个草根前端人的焦虑：如此内卷，我该怎么办？](https://mp.weixin.qq.com/s/y1TVvjyM1zPeULkXl2tkUw)
+
+[从0开始实现一个合成大西瓜](https://mp.weixin.qq.com/s/i9B5mcB-2yZsfPir0_VQNA)
+
 [「多图预警」那些年，被blob虐过的程序猿觉醒了！](https://mp.weixin.qq.com/s/oXc31L5PJSplOdYhC7d0jA)
 
 [设计灵感：12组玻璃拟物化风格APP设计](https://mp.weixin.qq.com/s/dji0KI42KBFaZf1nrXWpTg)

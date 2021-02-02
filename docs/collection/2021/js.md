@@ -1,5 +1,7 @@
 # javascript
 
+[这些一行 JS 实现功能的代码，让你看起来像一个前端专家](https://mp.weixin.qq.com/s/1hPzg1P2YrZZhWo4lSn_Jg)
+
 [JavaScript两个快速调试的技巧](https://mp.weixin.qq.com/s/GcoQj_M9kI-RRgzbCqyMzQ)
 
 [了不起的 JavaScript 内存学习指南](https://mp.weixin.qq.com/s/9yibACTP1sTAn16jeWueOQ)
