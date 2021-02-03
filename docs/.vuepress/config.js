@@ -349,6 +349,7 @@ module.exports = {
             ["/notes/lagou/07", "综合能力提升(下)"],
           ]
         },
+        ["/notes/lagou/webpack", "Webpack"],
         {
           title: "vue源码初步学习",
           collapsable: true,
