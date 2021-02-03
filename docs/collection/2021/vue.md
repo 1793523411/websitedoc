@@ -1,5 +1,11 @@
 # vue
 
+[基于 Vue 的两层吸顶踩坑总结](https://mp.weixin.qq.com/s/NmEAQz5c7C7sXJrQ7OiPhg)
+
+[揭秘 Vue.js 九个性能优化技巧](https://mp.weixin.qq.com/s/a3V4kmgKuY3tkMrdw_SOLw)
+
+[使用 Vue3 实现 Web 端自定义截屏](https://mp.weixin.qq.com/s/WDVeH-WnpPdoAmi_BpItdA)
+
 [在Vue里用Throttle居然这么黑盒？](https://mp.weixin.qq.com/s/if6bearX6LJPgfbJVXamKA)
 
 [Vue实现原理+前端性能优化](https://mp.weixin.qq.com/s/vQlqQqXhARS_8EKa1qEaDg)

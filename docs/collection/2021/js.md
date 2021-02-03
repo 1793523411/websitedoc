@@ -1,5 +1,11 @@
 # javascript
 
+[10个JavaScript 优化小技巧](https://mp.weixin.qq.com/s/MtP1FeXLgR9oMEQlUe8WZg)
+
+[再学一遍 try...catch](https://mp.weixin.qq.com/s/t0YCFt3pHDc6AIJEBPnSlw)
+
+[字节跳动最爱考的前端面试题：JavaScript 基础](https://mp.weixin.qq.com/s/tQVVS8B-xwp8G-vp0lndWw)
+
 [这些一行 JS 实现功能的代码，让你看起来像一个前端专家](https://mp.weixin.qq.com/s/1hPzg1P2YrZZhWo4lSn_Jg)
 
 [JavaScript两个快速调试的技巧](https://mp.weixin.qq.com/s/GcoQj_M9kI-RRgzbCqyMzQ)

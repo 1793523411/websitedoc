@@ -1,5 +1,9 @@
 # other
 
+[如何开发一款 H5 小程序直播？](https://mp.weixin.qq.com/s/xB_fadZC_MPa7w90pxre4g)
+
+[收好这份 Git 应急手册，关键时刻可保你一命](https://mp.weixin.qq.com/s/tV6so3KoVs8z5GCJ0Y5HSw)
+
 [2020 年的 JavaScript 后起之秀](https://mp.weixin.qq.com/s/w7ByOnIdZogAUs0ln6AROw)
 
 [漫画 | Bug是如何产生的？](https://mp.weixin.qq.com/s/Vh8Qc2yUbduxkVelovAztg)

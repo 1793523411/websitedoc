@@ -1,5 +1,9 @@
 # nodejs
 
+[加密解密之 crypto-js 知识](https://mp.weixin.qq.com/s/fBf1HikWSNLtltGCPyB9pQ)
+
+[Node.js 中如何收集和解析命令行参数](https://mp.weixin.qq.com/s/b63Cvvor-GpIGicRIF_Oqg)
+
 [前端 CLI 脚手架思路解析](https://mp.weixin.qq.com/s/Rfov1ZMwS2g_2p-aOMEHbQ)
 
 [新来的妹纸问我 AJAX 请求为什么不安全？没有回答出来。。。](https://mp.weixin.qq.com/s/VVbi7mFhGdsmom-kraq_bg)

@@ -1,5 +1,7 @@
 ## 性能优化
 
+[如何让你的网页“看起来”展现地更快 —— 骨架屏二三事](https://mp.weixin.qq.com/s/Cvx8ixR4wrc_TxvWbuOcXg)
+
 [拯救你的年底 KPI：前端性能优化](https://mp.weixin.qq.com/s/oituAksNyhTUQ76FSgkFiQ)
 
 [解读新一代 Web 性能体验和质量指标](https://mp.weixin.qq.com/s/xv7mWi3ApCfETqC6Kl-B9A)
