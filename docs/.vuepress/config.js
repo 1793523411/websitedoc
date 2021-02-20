@@ -308,6 +308,7 @@ module.exports = {
             ["/mian/base/select", "选择题"],
             ["/mian/base/shim", "兼容性问题"],
             ["/mian/base/niu", "牛客刷题"],
+            ["/mian/base/qun", "群聊"],
           ]
         },
         {
