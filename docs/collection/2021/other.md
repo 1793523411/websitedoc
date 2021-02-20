@@ -1,5 +1,7 @@
 # other
 
+[分析diff算法与虚拟dom（理解现代前端框架）](https://juejin.cn/post/6927556136652668942)
+
 [如何开发一款 H5 小程序直播？](https://mp.weixin.qq.com/s/xB_fadZC_MPa7w90pxre4g)
 
 [收好这份 Git 应急手册，关键时刻可保你一命](https://mp.weixin.qq.com/s/tV6so3KoVs8z5GCJ0Y5HSw)

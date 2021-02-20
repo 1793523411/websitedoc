@@ -2983,3 +2983,8 @@ function instance_of(L, R) {
   }
 }
 ```
+
+## 使用XMLHttpRequest或fetch封装ajax
+
+[使用fetch封装ajax](/mian/base/Ajax.html#使用fetch封装ajax)
+[使用XMLHttpRequest封装ajax](/mian/base/Ajax.html#使用xmlhttprequest封装ajax)

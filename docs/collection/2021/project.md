@@ -1,5 +1,7 @@
 # project
 
+[使用 Webpack5 从 0 搭建 React开发环境(详细篇)](https://mp.weixin.qq.com/s/WcxFMooHxxStFP4VORl5GQ)
+
 [一套标准的前端代码工作流](https://mp.weixin.qq.com/s/YI5_E4JJAb6Xu0kZgkjabQ)
 
 [前端搞工程化：从零打造性能检测库](https://mp.weixin.qq.com/s/PBxjJngZu5iLYxKlUzII7Q)
