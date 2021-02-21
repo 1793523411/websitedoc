@@ -19,13 +19,13 @@ module.exports = {
       }
     ],
     '@vuepress/nprogress',
-    [
-      'vuepress-plugin-copyright',
-      {
-        noCopy: true, // the selected text will be uncopiable
-        minLength: 100, // if its length is greater than 100
-      },
-    ],
+    // [
+    //   'vuepress-plugin-copyright',
+    //   {
+    //     noCopy: true, // the selected text will be uncopiable
+    //     minLength: 100, // if its length is greater than 100
+    //   },
+    // ],
     ['vuepress-plugin-code-copy', {
       // selector: String,
       align: 'bottom',

@@ -69,3 +69,24 @@ ctrl+f5是pragma: no-cache 加 cache-control:no-cache
 + s-maxage：这和max-age长得比较像，但是区别在于s-maxage是针对代理服务器的缓存时间。
 
 我用edge试了一下就是带的no-cache，chrome不知道为什么完全没有缓存
+
+## 关于vite使用的打包工具
+
+Vite 是 Vue 框架的作者尤雨溪最新推出的基于 Native-ESM 的 Web 构建工具。它在开发环境下基于 Native-ESM 处理构建过程，只编译不打包，在生产环境下则基于 Rollup 打包
+
++ 多框架：除了在默认的 Vue 中使用外，还支持在 React 和 Preact 项目中使用。工具默认提供了 Vue、React 和 Preact 对应的脚手架模板
++ 热更新（HMR）：默认提供的 3 种框架的脚手架模板中都内置了 HMR 功能，同时也提供了 HMR 的 API 供第三方插件或项目代码使用。
++ 自定义配置文件：支持使用自定义配置文件来细化构建配置
++ HTTPS 与 HTTP/2：支持使用 --https 启动参数来开启使用 HTTPS 和 HTTP/2 协议的开发服务器
++ 服务代理：在自定义配置中支持配置代理，将部分请求代理到第三方服务
++ 模式与环境变量：支持通过 mode 来指定构建模式为 development 或 production。相应模式下自动读取 dotenv 类型的环境变量配置文件，例如 .env.production.local
++ 生产环境打包：生产环境使用 Rollup 进行打包，支持传入自定义配置
+
+Vite 的使用限制如下
+
++ 面向支持 ES6 的现代浏览器，在生产环境下，编译目标参数 esBuildTarget 的默认值为 es2019，最低支持版本为 es2015（因为内部会使用 esbuild 处理编译压缩，用来获得最快的构建速度）
+
+
+::: tip 为什么不使用esbuild打包
+虽然esbuild快的惊人，并且已经是一个在构建库方面比较出色的工具，但针对一些构建应用的重要功能仍然还在持续开发中---特别是代码分割和css处理方面，就目前来说，Rollup在应用打包方面更加成熟和灵活，尽管如此，当未来这些功能稳定后，我们也不排除使用esbuild作为生产构建器的可能
+:::
