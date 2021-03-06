@@ -122,7 +122,7 @@ module.exports = {
       { text: "面试", link: "/mian/index" },
       { text: "Demo", link: "/Demo/index" },
       { text: "收集", link: "/collection/index" },
-      { text: "笔记", link: "/notes/index" },
+      // { text: "笔记", link: "/notes/index" },
       {
         text: "其他",
         items: [
@@ -219,6 +219,20 @@ module.exports = {
           children: [
             ["/Demo/other/workbench/one", "社团管理后台示例"],
             ["/Demo/other/workbench/two", "云开发征文活动：使用Antv"],
+          ]
+        },
+        {
+          title: "消息订阅脚手架",
+          collapsable: true, //是否展开
+          children: [
+            ["/Demo/other/alert/one", "消息订阅"],
+          ]
+        },
+        {
+          title: "闲云博客",
+          collapsable: true, //是否展开
+          children: [
+            ["/Demo/other/xianyun/one", "闲云博客前端"],
           ]
         },
         {

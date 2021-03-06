@@ -2,45 +2,49 @@
 
 ## 前端
 
-《javascript语言精粹》（蝴蝶书）
+《javascript 语言精粹》（蝴蝶书）
 
-《vue.js实战》
+《vue.js 实战》
 
-《es6标准入门第三版》
+《es6 标准入门第三版》
 
-《javascript权威指南第六版》（犀牛书）
+《javascript 权威指南第六版》（犀牛书）
 
-《深入浅出Nodejs》
+《深入浅出 Nodejs》
 
-《nodejs深入浅出》  - infoQ专栏
+《nodejs 深入浅出》 - infoQ 专栏
 
-《你不知道的javascript 上卷》
+《你不知道的 javascript 上卷》
 
-《你不知道的javascript 中卷》
+《你不知道的 javascript 中卷》
 
-《你不知道的javascript 下卷》
+《你不知道的 javascript 下卷》
 
-《深入浅出React和Redux原理》
+《深入浅出 React 和 Redux 原理》
 
-《深入浅出webpack》
+《深入浅出 webpack》
 
-《学习javascript数据结构与算法》
+《学习 javascript 数据结构与算法》
 
-《深入浅出vuejs》
+《深入浅出 vuejs》
 
-《javascript高级语言程序设计》(红宝书)
+《javascript 高级语言程序设计》(红宝书)
+
+《Typescript 入门教程》
+
+《深入理解 Typescript》
 
 ## linux
 
-《LINUX_UNIX设计思想》
+《LINUX_UNIX 设计思想》
 
 ## go
 
-《go语言实战》
+《go 语言实战》
 
-《goweb编程》
+《goweb 编程》
 
-《go语言》
+《go 语言》
 
 ## 算法
 
@@ -50,18 +54,14 @@
 
 ## 数据库
 
-《mysql必知必会》
+《mysql 必知必会》
 
 ## 网络
 
-《图解HTTP》
+《图解 HTTP》
 
-《图解TcpIp协议》
+《图解 TcpIp 协议》
 
 ## 其他
 
-《github入门与实践》
-
-
-
-
+《github 入门与实践》
