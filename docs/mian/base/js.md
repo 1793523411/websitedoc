@@ -3310,6 +3310,31 @@ bind 函数的实现步骤：
 - 创建一个函数返回
 - 函数内部使用 apply 来绑定函数调用，需要判断函数作为构造函数的情况，这个时候需要传入当前函数的 this 给 apply 调用，其余情况都传入指定的上下文对象。
 
+## New 和 Object.create()的区别
+
+**实际new创建对象，就是调用构造函数来实例化，在调用构造函数的时候会执行以下操作：**
+
++ 创建一个新的对象
++ 将新对象执行原型操作，指向构造函数的原型
++ 将this绑定到新对象上（可以使用 call 或者 apply 强制转换执行环境）
++ 构造函数返回的对象就是实例化的结果，如果构造函数没有显示返回一个对象，则返回新的对象
+
+Object.create()是Object的内置方法，可以创建一个新对象，使用现有的对象来提供新创建的对象__proto__
+
+该方法有两个参数，第一个 proto 是一个对象，作为新建对象的原型；第二个参数是一个对象，该对象的属性名称是新创建的对象的属性名称。如果 propertiesObject 参数不是 null 或者一个对象，则会抛错
+
+**使用该方法，创建对象会执行以下步骤：**
+
++ 方法内部定义一个新的空对象obj
++ 将obj.__proto__的对象指向传入的参数proto
++ 将传入的对象属性复制到obj并且返回obj
+
+|比较	|new	|Object.create|
+|:--:|:--:|:--:|
+|构造函数	|保留原构造函数属性	|丢失原构造函数属性|
+|原型链	|原构造函数prototype属性	|原构造函数/（对象）本身|
+|作用对象	|function	|function和object|
+
 ## 函数柯里化的实现
 
 函数柯里化指的是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。
@@ -4925,6 +4950,14 @@ var sum2 = function(num1,num2){
 var sum3 = new Function("num1","num2","return num1+num2");
 ```
 
+## DOM的location对象
+
+window.location 只读属性，返回一个 Location  对象，其中包含有关文档当前位置的信息
+
+尽管 window.location 是一个只读 Location 对象，你仍然可以赋给它一个 DOMString。这意味着您可以在大多数情况下处理 location，就像它是一个字符串一样：window.location = 'http://www.example.com'，是 window.location.href = 'http://www.example.com'的同义词
+
+[window.locatio](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/location)
+
 ## window.location.search() 返回的是什么？
 
 查询(参数)部分。除了给动态语言赋值以外，我们同样可以给静态页面,并使用 javascript 来获得相信应的参数值 返回值：?ver=1.0&id=timlq 也就是问号后面的！
@@ -5013,6 +5046,28 @@ DOM3 具有更多事件类型 DOM3 级事件在 DOM2 级事件的基础上添加
 - createEvent，设置事件类型，是 html 事件还是 鼠标事件
 - initEvent 初始化事件，事件名称，是否允许冒泡，是否阻止自定义事件
 - dispatchEvent 触发事件
+
+## addEventListener和onClick()的区别
+
+**onclick绑定方式**
+
+- 优点： 
+  - 简洁 
+  - 处理事件的this关键字指向当前元素 
+- 缺点： 
+  - 不能对事件捕获或事件冒泡进行控制，只能使用事件冒泡，无法切换成事件捕获 
+  - 一次只能对一个元素绑定一个事件处理程序，当使用window.onload属性时，会覆盖采用相同方法所绑定的事件代码
+
+**addEventListener绑定方式**
+
+- 优点： 
+  - 可以支持事件处理的捕获阶段，也可以支持时间处理的冒泡阶段，两个阶段都是通过addEventListener最后一个参数设置为false(默认值，表示事件冒泡)或者true(表示事件捕获)来切换 
+  - 事件处理 this与onclick一样 
+  - 事件处理函数中，event对象总是作为第一个可用参数 
+  - 你可以为某个元素绑定多个事件而不会覆盖之前绑定的处理程序 （按照顺序执行） 
+- 缺点： 
+  - IE8以下不支持
+
 
 ## target 和 currentTarget 区别
 
