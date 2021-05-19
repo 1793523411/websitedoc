@@ -266,6 +266,7 @@ module.exports = {
             ['/collection/2021/mian', "面试"],
             ['/collection/2021/network', "网络"],
             ['/collection/2021/os', "操作系统"],
+            ['/collection/2021/end', "后端"],
             ['/collection/2021/other', "other"],
           ]
         },

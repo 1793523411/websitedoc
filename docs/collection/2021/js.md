@@ -1,5 +1,13 @@
 # javascript
 
+[「9000字」手摸手教你实现一个新的 JS 语法](https://mp.weixin.qq.com/s/XgLzH0oP6kHVd2amlWnqCw)
+
+[90% 的前端都会使用 ES6 来简化代码，你都用过哪些？](https://mp.weixin.qq.com/s/u0hYZOyDAttrB7QECviVlw)
+
+[js 实现 bind 的这五层，你在第几层？](https://mp.weixin.qq.com/s/yO7KEwzJ-pSP7SgdpimoFw)
+
+[我应该使用 Object 还是 Map？](https://mp.weixin.qq.com/s/TKBEqoULaDkWaHsa25hRVQ)
+
 [10个JavaScript 优化小技巧](https://mp.weixin.qq.com/s/MtP1FeXLgR9oMEQlUe8WZg)
 
 [再学一遍 try...catch](https://mp.weixin.qq.com/s/t0YCFt3pHDc6AIJEBPnSlw)

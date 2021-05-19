@@ -1,5 +1,9 @@
 # other
 
+[比 Vue 更新粒度更细的框架，看看他是怎么做的](https://mp.weixin.qq.com/s/cUUGwMJHFzWrRc2KGyCXGA)
+
+[6 个对所有 Web 开发者都有用的 GitHub 仓库](https://mp.weixin.qq.com/s/9V9d52JL2cOH3Fk6S9pS1Q)
+
 [分析diff算法与虚拟dom（理解现代前端框架）](https://juejin.cn/post/6927556136652668942)
 
 [如何开发一款 H5 小程序直播？](https://mp.weixin.qq.com/s/xB_fadZC_MPa7w90pxre4g)

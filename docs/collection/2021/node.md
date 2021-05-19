@@ -1,5 +1,7 @@
 # nodejs
 
+[大文件上传如何做断点续传？](https://mp.weixin.qq.com/s/j-r3HwvKghRdnKhmV9o5OQ)
+
 [加密解密之 crypto-js 知识](https://mp.weixin.qq.com/s/fBf1HikWSNLtltGCPyB9pQ)
 
 [Node.js 中如何收集和解析命令行参数](https://mp.weixin.qq.com/s/b63Cvvor-GpIGicRIF_Oqg)

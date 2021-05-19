@@ -1,5 +1,28 @@
 # react
 
+[图解 React-router 源码](https://mp.weixin.qq.com/s/NonhHvCg6trpmkNpGpqnow)
+
+[2020 SSR落地开花的三大机遇](https://mp.weixin.qq.com/s/-kNFnc5PDIcGtqehxL-Vig)
+
+[SSR 它到底香不香？细数 SSR 的利与弊](https://mp.weixin.qq.com/s/9bS7E1CO9oUHncS8pf1dvg)
+
+[了解 SSR？那我考考你 hydrate 该怎么翻译？](https://mp.weixin.qq.com/s/AI6CicBRAge9o0O5MGVZmw)
+
+[偷师 Next.js：我学到的 6 个设计技巧](https://mp.weixin.qq.com/s/F_4yg-0hsX0PSQ1oEOopZg)
+
+[鱼和熊掌兼得：Next.js 混合渲染](https://mp.weixin.qq.com/s/98wxchUHZHcIvfK2pT1DFQ)
+
+[从 Next.js 看企业级框架的 SSR 支持](https://mp.weixin.qq.com/s/bS9GHni4ecnz9UFi9RD24Q)
+
+[剖析React SSR源码，看看与fiber的创建有何不同？](https://mp.weixin.qq.com/s/85lUBua1JdxtYu0e8cQa4Q)
+
+[精通 React SSR 之 API 篇](https://mp.weixin.qq.com/s?__biz=MzIwMTM5MTM1NA==&mid=2649473843&idx=1&sn=6f06f5ca12cff5d7e83a42a78040c792&chksm=8ef1cea6b98647b05398fd8fb192e6395303af841d8ac17a5eb672a43f53015b6579dcdff7d3&scene=21#wechat_redirect)
+
+[太阳底下无新鲜事？SSR 与当年的服务端模版有什么区别？](https://mp.weixin.qq.com/s/z7J0nzv7fwapWO8pMNbZhQ)
+
+[我打破了React Hook必须按顺序、不能在条件语句中调用的枷锁！](https://mp.weixin.qq.com/s/RouElY3ny76w-zi8nBAlUw)
+
+
 [跟我一起走进React核心团队](https://mp.weixin.qq.com/s/3F018eGvRkZvFzJbfn5E5w)
 
 [我与hooks的这一年, 万字长文总结](https://juejin.cn/post/6912309761066729485)

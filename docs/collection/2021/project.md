@@ -1,5 +1,11 @@
 # project
 
+[现代前端工程为什么越来越离不开 Monorepo?](https://mp.weixin.qq.com/s/94gODfrTUFYxxnQUXATJaA)
+
+[现代前端工程化-基于 Monorepo 的 lerna 详解(从原理到实战)](https://mp.weixin.qq.com/s/Yl56pLDeVPAF5JbeYPTlOw)
+
+[你不得不知道的webpack性能优化](https://mp.weixin.qq.com/s/PxWRHPFK0sEiv2ivDPHXVg)
+
 [使用 Webpack5 从 0 搭建 React开发环境(详细篇)](https://mp.weixin.qq.com/s/WcxFMooHxxStFP4VORl5GQ)
 
 [一套标准的前端代码工作流](https://mp.weixin.qq.com/s/YI5_E4JJAb6Xu0kZgkjabQ)
